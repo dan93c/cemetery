@@ -13,7 +13,7 @@ public class MainController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView("login");
-		modelAndView.addObject("message","You're the next one! Ha ha ha Mortzy");
+		modelAndView.addObject("message","You're the next one! Ha ha ha Mioriarty");
 		return modelAndView;
 	}
 }

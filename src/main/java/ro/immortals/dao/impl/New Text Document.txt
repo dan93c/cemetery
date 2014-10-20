@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 aDRIANA MODIFICA TOT
+=======
+MODificare facuta de dan
+>>>>>>> branch 'master' of https://github.com/dan93c/cemetery.git

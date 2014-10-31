@@ -24,10 +24,9 @@
 		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
 		p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
 
-
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-		p:packagesToScan="ro.artsoft.model" p:dataSource-ref="dataSource"
+		p:packagesToScan="ro.immortals.model" p:dataSource-ref="dataSource"
 		p:jpaVendorAdapter-ref="hibernateVendor" p:jpaPropertyMap-ref="jpaPropertyMap" />
 
 	<util:map id="jpaPropertyMap">

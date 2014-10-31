@@ -25,5 +25,8 @@
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="properties/messages" />
 	</bean>
+	
+	<!-- Validators classes -->
+	<bean id="cemeteryValidator" class="ro.immortals.validator.CemeteryValidator" />
 
 </beans>

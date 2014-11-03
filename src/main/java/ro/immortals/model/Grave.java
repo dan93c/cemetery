@@ -50,7 +50,7 @@ public class Grave implements java.io.Serializable {
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "grave")
-	private List<ConsessionContract> consessionContracts = new ArrayList<ConsessionContract>();
+	private List<ConcessionContract> concessionContracts = new ArrayList<ConcessionContract>();
 
 	public Grave() {
 	}
@@ -136,12 +136,12 @@ public class Grave implements java.io.Serializable {
 		this.appointments = appointments;
 	}
 
-	public List<ConsessionContract> getConsessionContracts() {
-		return consessionContracts;
+	public List<ConcessionContract> getConsessionContracts() {
+		return concessionContracts;
 	}
 
-	public void setConsessionContracts(List<ConsessionContract> consessionContracts) {
-		this.consessionContracts = consessionContracts;
+	public void setConsessionContracts(List<ConcessionContract> concessionContracts) {
+		this.concessionContracts = concessionContracts;
 	}
 
 }

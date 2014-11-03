@@ -14,34 +14,34 @@ import ro.immortals.model.Cemetery;
 public class CemeteryDAOImpl implements CemeteryDAO {
 
 	@PersistenceContext
-	private EntityManager entityManeger;
+	private EntityManager entityManager;
 
 	@Override
 	public void add(Cemetery cemetery) {
-		entityManeger.persist(cemetery);
+		entityManager.persist(cemetery);
 
 	}
 
 	@Override
 	public void update(Cemetery cemetery) {
-		entityManeger.merge(cemetery);
+		entityManager.merge(cemetery);
 
 	}
 
 	@Override
 	public void delete(Cemetery cemetery) {
-		entityManeger.remove(cemetery);
+		entityManager.remove(cemetery);
 
 	}
 
 	@Override
 	public List<Cemetery> getAll() {
-		return entityManeger.createQuery("SELECT c FROM Cemetery c", Cemetery.class).getResultList();
+		return entityManager.createQuery("SELECT c FROM Cemetery c", Cemetery.class).getResultList();
 	}
 
 	@Override
 	public Cemetery getByCode(String code) {
-		return entityManeger.find(Cemetery.class, code);
+		return entityManager.find(Cemetery.class, code);
 	}
 
 }

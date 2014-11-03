@@ -27,6 +27,15 @@
 	</bean>
 	
 	<!-- Validators classes -->
-	<bean id="cemeteryValidator" class="ro.immortals.validator.CemeteryValidator" />
-
+	<bean id="cemeteryValidator" class="ro.immortals.validator.CemeteryValidator" ></bean>
+	<bean id="appointmentValidator" class="ro.immortals.validator.AppointmentValidator" ></bean>
+	<bean id="claimBookValidator" class="ro.immortals.validator.ClaimBookValidator" ></bean>
+	<bean id="concessionValidator" class="ro.immortals.validator.ConcessionValidator" ></bean>
+	<bean id="deadValidator" class="ro.immortals.validator.DeadValidator" ></bean>
+	<bean id="deadWithoutFamilyValidator" class="ro.immortals.validator.DeadWithoutFamilyValidator" ></bean>
+	<bean id="graveValidator" class="ro.immortals.validator.GraveValidator" ></bean>
+	<bean id="graveRequestValidator" class="ro.immortals.validator.GraveRequestValidator" ></bean>
+	<bean id="historyValidator" class="ro.immortals.validator.HistoryValidator" ></bean>
+	<bean id="plotValidator" class="ro.immortals.validator.PlotValidator" ></bean>
+	<bean id="userValidator" class="ro.immortals.validator.UserValidator" ></bean>
 </beans>

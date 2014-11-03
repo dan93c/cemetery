@@ -20,7 +20,7 @@ public class DeadWithoutFamily implements java.io.Serializable{
 	private int id;
 
 	@Column(name = "funeral_certificate", length = 50)
-	private String feneralCertificate;
+	private String funeralCertificate;
 	
 	@Column(name = "iml_request", length = 50)
 	private String imlRequest;
@@ -34,7 +34,7 @@ public class DeadWithoutFamily implements java.io.Serializable{
 
 	public DeadWithoutFamily(int id, String feneralCertificate, String imlRequest, Grave grave) {
 	    this.id = id;
-	    this.feneralCertificate = feneralCertificate;
+	    this.funeralCertificate = feneralCertificate;
 	    this.imlRequest = imlRequest;
 	    this.grave = grave;
     }
@@ -48,11 +48,11 @@ public class DeadWithoutFamily implements java.io.Serializable{
 	}
 
 	public String getFeneralCertificate() {
-		return feneralCertificate;
+		return funeralCertificate;
 	}
 
 	public void setFeneralCertificate(String feneralCertificate) {
-		this.feneralCertificate = feneralCertificate;
+		this.funeralCertificate = feneralCertificate;
 	}
 
 	public String getImlRequest() {

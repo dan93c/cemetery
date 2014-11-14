@@ -15,8 +15,6 @@ public class DeadWithoutFamilyValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "id",
-				"error.deadWithoutFamily.id.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funeralCertificate",
 				"error.deadWithoutFamily.funeralCertificate.required");
 		
@@ -26,16 +24,12 @@ public class DeadWithoutFamilyValidator implements Validator {
 		if (deadWithoutFamily.getFeneralCertificate().length() >= 50) {
 			errors.rejectValue("funeralCertificate", "longText",
 					new Object[] { "Funeral_Certificate" },
-					"Campul 'Funeral_Certificate' este prea lung.");
+					"Campul 'Adeverinþa de înhumare' este prea lung.");
 		}
 
 		if (deadWithoutFamily.getImlRequest().length() >= 50) {
 			errors.rejectValue("imlRequest", "longText", new Object[] { "Iml_Request" },
-					"Campul 'Iml_Request' este prea lung.");
-		}
-		if (deadWithoutFamily.getId() < 0) {
-			errors.rejectValue("id", "negativeNumber", new Object[] { "Id" },
-					"Campul 'Id' este negativ.");
+					"Campul 'Solicitare IML' este prea lung.");
 		}
 	}
 

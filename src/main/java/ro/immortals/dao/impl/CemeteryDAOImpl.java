@@ -36,12 +36,22 @@ public class CemeteryDAOImpl implements CemeteryDAO {
 
 	@Override
 	public List<Cemetery> getAll() {
-		return entityManager.createQuery("SELECT c FROM Cemetery c", Cemetery.class).getResultList();
+		return entityManager.createQuery("FROM Cemetery c", Cemetery.class).getResultList();
 	}
 
 	@Override
-	public Cemetery getByCode(String code) {
-		return entityManager.find(Cemetery.class, code);
+	public Cemetery getById(Integer id) {
+		return entityManager.find(Cemetery.class, id);
+	}
+
+	@Override
+	public Cemetery getByName(String name) {
+		List<Cemetery> cemeteryList = entityManager.createQuery("from Cemetery c where c.name= :name", Cemetery.class)
+		        .setParameter("name", name).getResultList();
+		if (cemeteryList.size() > 0)
+			return cemeteryList.get(0);
+		else
+			return null;
 	}
 
 }

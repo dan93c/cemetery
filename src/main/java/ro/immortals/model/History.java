@@ -35,13 +35,13 @@ public class History implements java.io.Serializable {
 
 	@DateTimeFormat(iso = ISO.NONE)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "modification_date")
+	@Column(name = "modification_date", nullable = false)
 	private Date modificationDate;
 
-	@Column(name = "modified_object_code", length = 1000, nullable = false)
+	@Column(name = "modified_object_code", length = 500, nullable = false)
 	private String modifiedObjectCode;
 
-	@Column(name = "details", length = 1000)
+	@Column(name = "details", length = 500)
 	private String details;
 
 	public History() {

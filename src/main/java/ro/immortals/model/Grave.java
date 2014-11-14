@@ -27,14 +27,14 @@ public class Grave implements java.io.Serializable {
 	@Column(name = "nr_grave", length = 45)
 	private String nrGrave;
 
-	@Column(name = "observations", length = 45)
+	@Column(name = "observations", length = 100)
 	private String observations;
 
 	@Column(name = "grave_type", length = 45)
 	private String graveType;
 
-	@Column(name = "photo_scanned", columnDefinition = "LONGBLOB")
-	private byte[] photoScanned;
+	@Column(name = "photo_scanned", length = 200)
+	private String photoScanned;
 
 	@ManyToOne(targetEntity = Plot.class)
 	@JoinColumn(name = "plot_id")
@@ -55,7 +55,7 @@ public class Grave implements java.io.Serializable {
 	public Grave() {
 	}
 
-	public Grave(int id, String nrGrave, String observations, String graveType, byte[] photoScanned, Plot plot) {
+	public Grave(int id, String nrGrave, String observations, String graveType, String photoScanned, Plot plot) {
 		this.id = id;
 		this.nrGrave = nrGrave;
 		this.observations = observations;
@@ -96,11 +96,11 @@ public class Grave implements java.io.Serializable {
 		this.graveType = graveType;
 	}
 
-	public byte[] getPhotoScanned() {
+	public String getPhotoScanned() {
 		return photoScanned;
 	}
 
-	public void setPhotoScanned(byte[] photoScanned) {
+	public void setPhotoScanned(String photoScanned) {
 		this.photoScanned = photoScanned;
 	}
 

@@ -15,21 +15,19 @@ public class ClaimBookValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "id",
-				"error.claimBook.id.required");
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "claims",
 				"error.claimBook.claims.required");
 
 		ClaimBook claimBook = (ClaimBook) target;
 
-		if (claimBook.getId() < 0) {
-			errors.rejectValue("id", "negativeValue", new Object[] { "Id" },
-					"Campul 'Id' este negativ.");
+		if (claimBook.getComplainer().length() >= 100) {
+			errors.rejectValue("complainer", "longText", new Object[] { "Reclamant" },
+					"Campul 'Reclamant' este prea lung.");
 		}
-
-		if (claimBook.getClaims().length() >= 1000) {
-			errors.rejectValue("claims", "longText", new Object[] { "Claims" },
-					"Campul 'Claims' este prea lung.");
+		if (claimBook.getClaims().length() >= 500) {
+			errors.rejectValue("claims", "longText", new Object[] { "Reclamatii" },
+					"Campul 'Reclamatii' este prea lung.");
 		}
 
 	}

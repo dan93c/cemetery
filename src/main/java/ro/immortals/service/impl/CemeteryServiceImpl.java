@@ -34,8 +34,8 @@ public class CemeteryServiceImpl implements CemeteryService {
 
 	@Override
 	@Transactional
-	public void delete(String code) {
-		Cemetery cemetery = cemeteryDAO.getByCode(code);
+	public void delete(Integer id) {
+		Cemetery cemetery = cemeteryDAO.getById(id);
 		if (cemetery != null) {
 			cemeteryDAO.delete(cemetery);
 		}
@@ -49,18 +49,22 @@ public class CemeteryServiceImpl implements CemeteryService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Cemetery getByCode(String code) {
-		return cemeteryDAO.getByCode(code);
+	public Cemetery getById(Integer id) {
+		return cemeteryDAO.getById(id);
+	}
+
+	public Cemetery getByName(String name) {
+		return cemeteryDAO.getByName(name);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public boolean checkDuplicate(Cemetery cemetery) {
-		Cemetery c = getByCode(cemetery.getCode());
-		if (c == null) {
-			return true;
+		Cemetery existingCemetery = cemeteryDAO.getByName(cemetery.getName());
+		if (existingCemetery != null && (existingCemetery.getId() != cemetery.getId())) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 }

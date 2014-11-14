@@ -68,16 +68,16 @@ public class CemeteryController extends MainController {
 			ModelAndView modelAndView = new ModelAndView(ADD_CEMETERY_JSP);
 			modelAndView.addObject(CEMETERY, cemetery);
 			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage("message.cemetery.already.exists",
-			        new Object[] { cemetery.getCode() }, Locale.getDefault()));
+			        new Object[] { cemetery.getId() }, Locale.getDefault()));
 			return modelAndView;
 		}
 		return list();
 	}
 
-	@RequestMapping(value = "/edit/{code}", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable String code) {
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView edit(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView(EDIT_CEMETERY_JSP);
-		modelAndView.addObject(CEMETERY, cemeteryService.getByCode(code));
+		modelAndView.addObject(CEMETERY, cemeteryService.getById(id));
 		return modelAndView;
 	}
 
@@ -92,9 +92,9 @@ public class CemeteryController extends MainController {
 		return list();
 	}
 
-	@RequestMapping(value = "/delete/{code}", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable String code, HttpServletRequest request) {
-		cemeteryService.delete(code);
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable Integer id, HttpServletRequest request) {
+		cemeteryService.delete(id);
 		return list();
 	}
 }

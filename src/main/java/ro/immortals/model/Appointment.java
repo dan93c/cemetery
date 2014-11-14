@@ -3,6 +3,7 @@ package ro.immortals.model;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,8 +23,8 @@ public class Appointment implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
 	@DateTimeFormat(iso = ISO.NONE)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -31,7 +32,7 @@ public class Appointment implements java.io.Serializable {
 	private Date funeralDate;
 
 	@ManyToOne(targetEntity = Dead.class)
-	@JoinColumn(name = "cnp_dead")
+	@JoinColumn(name = "dead_id")
 	private Dead dead;
 
 	@ManyToOne(targetEntity = Grave.class)

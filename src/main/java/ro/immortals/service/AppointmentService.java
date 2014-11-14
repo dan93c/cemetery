@@ -10,11 +10,11 @@ public interface AppointmentService {
 
 	public void update(Appointment appointment);
 
-	public void delete(String code);
+	public void delete(Integer id);
 
 	public List<Appointment> getAll();
 
-	public Appointment getByCode(String code);
+	public Appointment getById(Integer id);
 
 	public boolean checkDuplicate(Appointment appointment);
 }

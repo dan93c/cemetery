@@ -26,11 +26,11 @@
 		<property name="basename" value="properties/messages" />
 	</bean>
 	
-	<!-- Validators classes -->
+	<!-- Validator classes -->
 	<bean id="cemeteryValidator" class="ro.immortals.validator.CemeteryValidator" ></bean>
 	<bean id="appointmentValidator" class="ro.immortals.validator.AppointmentValidator" ></bean>
 	<bean id="claimBookValidator" class="ro.immortals.validator.ClaimBookValidator" ></bean>
-	<bean id="concessionValidator" class="ro.immortals.validator.ConcessionValidator" ></bean>
+	<bean id="concessionContractValidator" class="ro.immortals.validator.ConcessionContractValidator" ></bean>
 	<bean id="deadValidator" class="ro.immortals.validator.DeadValidator" ></bean>
 	<bean id="deadWithoutFamilyValidator" class="ro.immortals.validator.DeadWithoutFamilyValidator" ></bean>
 	<bean id="graveValidator" class="ro.immortals.validator.GraveValidator" ></bean>

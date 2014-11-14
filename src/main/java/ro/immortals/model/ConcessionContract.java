@@ -1,9 +1,12 @@
 package ro.immortals.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,13 +19,14 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "concession_contracts")
-public class ConcessionContract implements java.io.Serializable{
+public class ConcessionContract implements java.io.Serializable {
 
 	@Id
-	@Column(name = "current_nr", length = 45, nullable = false)
-	private String currentNr;
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-	@Column(name = "receipt_nr", length = 45, nullable = false)
+	@Column(name = "receipt_number", length = 45, nullable = false)
 	private String receiptNr;
 
 	@DateTimeFormat(iso = ISO.NONE)
@@ -33,14 +37,17 @@ public class ConcessionContract implements java.io.Serializable{
 	@Column(name = "cnp", length = 15, nullable = false)
 	private String cnp;
 
-	@Column(name = "name", length = 45)
-	private String name;
+	@Column(name = "first_name", length = 100)
+	private String firstName;
 
-	@Column(name = "surname", length = 45)
-	private String surname;
+	@Column(name = "last_name", length = 100)
+	private String lastName;
 
 	@Column(name = "address", length = 100)
 	private String address;
+
+	@Column(name = "email_address", length = 100)
+	private String emailAddress;
 
 	@ManyToOne(targetEntity = Grave.class)
 	@JoinColumn(name = "grave_id")
@@ -49,25 +56,25 @@ public class ConcessionContract implements java.io.Serializable{
 	public ConcessionContract() {
 	}
 
-	public ConcessionContract(String currentNr, String receiptNr, Date realeaseDate, String cnp, String name,
-	        String surname, String address, Grave grave) {
-		super();
-		this.currentNr = currentNr;
+	public ConcessionContract(Integer id, String receiptNr, Date realeaseDate, String cnp, String firstName,
+	        String lastName, String address, String emailAddress, Grave grave) {
+		this.id = id;
 		this.receiptNr = receiptNr;
 		this.realeaseDate = realeaseDate;
 		this.cnp = cnp;
-		this.name = name;
-		this.surname = surname;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.address = address;
+		this.emailAddress = emailAddress;
 		this.grave = grave;
 	}
 
-	public String getCurrentNr() {
-		return currentNr;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCurrentNr(String currentNr) {
-		this.currentNr = currentNr;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getReceiptNr() {
@@ -94,20 +101,20 @@ public class ConcessionContract implements java.io.Serializable{
 		this.cnp = cnp;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getAddress() {
@@ -116,6 +123,14 @@ public class ConcessionContract implements java.io.Serializable{
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
 	public Grave getGrave() {

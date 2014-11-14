@@ -1,11 +1,14 @@
 package ro.immortals.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,8 +18,9 @@ import javax.persistence.Table;
 public class Cemetery implements java.io.Serializable {
 
 	@Id
-	@Column(name = "code", length = 45, nullable = false)
-	private String code;
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
 	@Column(name = "name", length = 100)
 	private String name;
@@ -30,18 +34,18 @@ public class Cemetery implements java.io.Serializable {
 	public Cemetery() {
 	}
 
-	public Cemetery(String code, String name, String address) {
-		this.code = code;
+	public Cemetery(Integer id, String name, String address) {
+		this.id = id;
 		this.name = name;
 		this.address = address;
 	}
 
-	public String getCode() {
-		return code;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {

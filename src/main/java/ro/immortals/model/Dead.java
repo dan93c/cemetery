@@ -1,10 +1,13 @@
 package ro.immortals.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,17 +16,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "deads")
-public class Dead implements java.io.Serializable{
+public class Dead implements java.io.Serializable {
 
 	@Id
-	@Column(name = "cnp", length = 15, nullable = false)
-	private String cnp;
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
-	@Column(name = "name", length = 45)
-	private String name;
+	@Column(name = "first_name", length = 100)
+	private String firstName;
 
-	@Column(name = "surname", length = 45)
-	private String surname;
+	@Column(name = "last_name", length = 100)
+	private String lastName;
 
 	@Column(name = "religion", length = 45)
 	private String religion;
@@ -38,36 +42,36 @@ public class Dead implements java.io.Serializable{
 	public Dead() {
 	}
 
-	public Dead(String cnp, String name, String surname, String religion, Grave grave) {
-		this.cnp = cnp;
-		this.name = name;
-		this.surname = surname;
+	public Dead(Integer id, String firstName, String lastName, String religion, Grave grave) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.religion = religion;
 		this.grave = grave;
 	}
 
-	public String getCnp() {
-		return cnp;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCnp(String cnp) {
-		this.cnp = cnp;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getReligion() {

@@ -14,6 +14,8 @@ public interface CemeteryDAO {
 
 	public List<Cemetery> getAll();
 
-	public Cemetery getByCode(String code);
+	public Cemetery getById(Integer id);
+
+	public Cemetery getByName(String name);
 
 }

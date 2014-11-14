@@ -31,7 +31,7 @@ public class Plot implements java.io.Serializable {
 	private String surface;
 
 	@ManyToOne(targetEntity = Cemetery.class)
-	@JoinColumn(name = "cemetery_code")
+	@JoinColumn(name = "cemetery_id")
 	private Cemetery cemetery;
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "plot")

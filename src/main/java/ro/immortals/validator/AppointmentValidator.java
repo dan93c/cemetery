@@ -18,15 +18,10 @@ public class AppointmentValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "id",
-				"error.appointment.id.required");
+		ValidationUtils.rejectIfEmpty(errors, "funeralDate",
+				"error.appointment.funeralDate.required");
 
 		Appointment appointment = (Appointment) target;
-
-		if (appointment.getId() < 0) {
-			errors.rejectValue("id", "negativeValue", new Object[] { "Id" },
-					"Campul 'Id' este negativ.");
-		}
 
 		Calendar calendar1 = Calendar.getInstance();
 		Calendar calendar2 = Calendar.getInstance();

@@ -1,9 +1,12 @@
 package ro.immortals.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,8 +20,9 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 public class GraveRequest implements java.io.Serializable {
 
 	@Id
-	@Column(name = "current_nr", length = 45, nullable = false)
-	private String currentNr;
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", nullable = false)
+	private Integer id;
 
 	@Column(name = "nr_infocet", length = 100)
 	private String nrInfocet;
@@ -34,19 +38,19 @@ public class GraveRequest implements java.io.Serializable {
 	public GraveRequest() {
 	}
 
-	public GraveRequest(String currentNr, String nrInfocet, Date registrationDate, String solvingStage) {
-		this.currentNr = currentNr;
+	public GraveRequest(Integer id, String nrInfocet, Date registrationDate, String solvingStage) {
+		this.id = id;
 		this.nrInfocet = nrInfocet;
 		this.registrationDate = registrationDate;
 		this.solvingStage = solvingStage;
 	}
 
-	public String getCurrentNr() {
-		return currentNr;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setCurrentNr(String currentNr) {
-		this.currentNr = currentNr;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNrInfocet() {

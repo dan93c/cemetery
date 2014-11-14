@@ -17,10 +17,10 @@ USE `cemeterydb` ;
 DROP TABLE IF EXISTS `cemeterydb`.`cemeteries` ;
 
 CREATE TABLE IF NOT EXISTS `cemeterydb`.`cemeteries` (
-  `code` VARCHAR(45) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NULL DEFAULT NULL,
   `address` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`code`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -34,12 +34,12 @@ CREATE TABLE IF NOT EXISTS `cemeterydb`.`plots` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `surface` VARCHAR(45) NULL DEFAULT NULL,
-  `cemetery_code` VARCHAR(45) NOT NULL,
+  `cemetery_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_cemetery_code_idx` (`cemetery_code` ASC),
-  CONSTRAINT `fk_cemetery_code`
-    FOREIGN KEY (`cemetery_code`)
-    REFERENCES `cemeterydb`.`cemeteries` (`code`)
+  INDEX `fk_cemetery_id_idx` (`cemetery_id` ASC),
+  CONSTRAINT `fk_cemetery_id`
+    FOREIGN KEY (`cemetery_id`)
+    REFERENCES `cemeterydb`.`cemeteries` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -54,9 +54,9 @@ DROP TABLE IF EXISTS `cemeterydb`.`graves` ;
 CREATE TABLE IF NOT EXISTS `cemeterydb`.`graves` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nr_grave` VARCHAR(45) NULL DEFAULT NULL,
-  `observations` VARCHAR(45) NULL DEFAULT NULL,
+  `observations` VARCHAR(100) NULL DEFAULT NULL,
   `grave_type` VARCHAR(45) NULL DEFAULT NULL,
-  `photo_scanned` LONGBLOB NULL DEFAULT NULL,
+  `photo_scanned` VARCHAR(200) NULL DEFAULT NULL,
   `plot_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_plot_grave_idx` (`plot_id` ASC),
@@ -75,12 +75,12 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `cemeterydb`.`deads` ;
 
 CREATE TABLE IF NOT EXISTS `cemeterydb`.`deads` (
-  `cnp` VARCHAR(15) NOT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `surname` VARCHAR(45) NULL DEFAULT NULL,
+   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(100) NULL DEFAULT NULL,
+  `last_name` VARCHAR(100) NULL DEFAULT NULL,
   `religion` VARCHAR(45) NULL DEFAULT NULL,
   `grave_id` INT(11) NOT NULL,
-  PRIMARY KEY (`cnp`),
+  PRIMARY KEY (`id`),
   INDEX `fk_grave_deads_idx` (`grave_id` ASC),
   CONSTRAINT `fk_grave_deads`
     FOREIGN KEY (`grave_id`)
@@ -99,14 +99,14 @@ DROP TABLE IF EXISTS `cemeterydb`.`appointments` ;
 CREATE TABLE IF NOT EXISTS `cemeterydb`.`appointments` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `funeral_date` TIMESTAMP NULL DEFAULT NULL,
-  `cnp_dead` VARCHAR(15) NULL DEFAULT NULL,
+  `dead_id` INT(11) NULL DEFAULT NULL,
   `grave_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_dead_idx` (`cnp_dead` ASC),
+  INDEX `fk_dead_idx` (`dead_id` ASC),
   INDEX `fk_grave_app_idx` (`grave_id` ASC),
   CONSTRAINT `fk_dead`
-    FOREIGN KEY (`cnp_dead`)
-    REFERENCES `cemeterydb`.`deads` (`cnp`)
+    FOREIGN KEY (`dead_id`)
+    REFERENCES `cemeterydb`.`deads` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_grave_app`
@@ -124,8 +124,9 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `cemeterydb`.`claims_book` ;
 
 CREATE TABLE IF NOT EXISTS `cemeterydb`.`claims_book` (
- `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `claims` VARCHAR(1000) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+   `complainer` VARCHAR(100) NULL DEFAULT 'Anonim',
+  `claims` VARCHAR(500) NOT NULL,
    PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -137,15 +138,16 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `cemeterydb`.`concession_contracts` ;
 
 CREATE TABLE IF NOT EXISTS `cemeterydb`.`concession_contracts` (
-  `current_nr` VARCHAR(45) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `receipt_number` VARCHAR(45) NOT NULL,
   `release_date` DATETIME NULL DEFAULT NULL,
   `cnp` VARCHAR(15) NOT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `surname` VARCHAR(45) NULL DEFAULT NULL,
+  `first_name` VARCHAR(100) NULL DEFAULT NULL,
+  `last_name` VARCHAR(100) NULL DEFAULT NULL,
   `address` VARCHAR(100) NULL DEFAULT NULL,
+  `email_address` VARCHAR(100) NULL DEFAULT NULL,
   `grave_id` INT(11) NOT NULL,
-  PRIMARY KEY (`current_nr`),
+  PRIMARY KEY (`id`),
   INDEX `fk_grave_cc_idx` (`grave_id` ASC),
   CONSTRAINT `fk_grave_cc`
     FOREIGN KEY (`grave_id`)
@@ -183,11 +185,11 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `cemeterydb`.`grave_requests` ;
 
 CREATE TABLE IF NOT EXISTS `cemeterydb`.`grave_requests` (
-  `current_nr` VARCHAR(45) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nr_infocet` VARCHAR(100) NULL DEFAULT NULL,
   `registration_date` TIMESTAMP NULL DEFAULT NULL,
   `solving_stage` VARCHAR(45) NULL DEFAULT 'Intern',
-  PRIMARY KEY (`current_nr`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -214,8 +216,8 @@ CREATE TABLE IF NOT EXISTS `cemeterydb`.`history` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `action_name` VARCHAR(100) NOT NULL,
   `modification_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modified_object_code` VARCHAR(1000) NOT NULL,
-  `details` VARCHAR(1000) NULL DEFAULT NULL,
+  `modified_object_code` VARCHAR(500) NOT NULL,
+  `details` VARCHAR(500) NULL DEFAULT NULL,
   `username` VARCHAR(45) NOT NULL,
    PRIMARY KEY (`id`),
   INDEX `fk_username_idx` (`username` ASC),

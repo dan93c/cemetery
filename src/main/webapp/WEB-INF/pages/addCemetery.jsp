@@ -11,44 +11,46 @@
 <title>Adauga cimitir</title>
 </head>
 <body>
-	<h2>Date despre cimitir</h2>
-	<form:form name="addCemetery" modelAttribute="cemetery"
-		action="${CONTEXT_PATH}/cemetery/add" method="POST">
-		<s:bind path="*">
-			<c:if test="${status.error}">
-				<div id="message" class="error">
-					Error.Invalid data.
-					<form:errors />
-				</div>
-			</c:if>
-			<c:if test="${not empty errorMessage}">
-				<span>${errorMessage}</span>
-			</c:if>
-		</s:bind>
-		<table>
-			<tr>
-				<td><label>Cod</label></td>
-				<td><form:input type="text" path="code" required="required"
-						placeholder="Cod cimitr"></form:input></td>
-				<td><form:errors path="code" cssClass="error" /></td>
-			</tr>
-			<tr>
-				<td><label>Nume</label></td>
-				<td><form:input type="text" path="name" required="required"
-						placeholder="Nume cimitir"></form:input></td>
-				<td><form:errors path="name" cssClass="error" /></td>
-			</tr>
-			<tr>
-				<td><label>Adresa</label></td>
-				<td><form:input type="text" path="address" required="required"
-						placeholder="Adresa completa"></form:input></td>
-				<td><form:errors path="address" cssClass="error" /></td>
-			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="Adauga cimitir" /></td>
-				<td></td>
-			</tr>
-		</table>
-	</form:form>
+	<div id="container">
+		<%@include file="menu.jsp"%>
+		<div id="center">
+			<h2>Date despre cimitir</h2>
+			<form:form name="addCemetery" modelAttribute="cemetery"
+				action="${CONTEXT_PATH}/cemetery/add" method="POST">
+				<s:bind path="*">
+					<c:if test="${status.error}">
+						<div id="message" class="error">
+							Error.Invalid data.
+							<form:errors />
+						</div>
+					</c:if>
+					<c:if test="${not empty errorMessage}">
+						<span>${errorMessage}</span>
+					</c:if>
+				</s:bind>
+				<table>
+					<tr>
+						<td><form:input type="hidden" path="id"></form:input></td>
+					</tr>
+					<tr>
+						<td><label>Nume</label></td>
+						<td><form:input type="text" path="name" required="required"
+								placeholder="Nume cimitir"></form:input></td>
+						<td><form:errors path="name" cssClass="error" /></td>
+					</tr>
+					<tr>
+						<td><label>Adresa</label></td>
+						<td><form:input type="text" path="address"
+								required="required" placeholder="Adresa completa"></form:input></td>
+						<td><form:errors path="address" cssClass="error" /></td>
+					<tr>
+						<td colspan="2" align="center"><input type="submit"
+							value="Adauga cimitir" /></td>
+						<td></td>
+					</tr>
+				</table>
+			</form:form>
+		</div>
+	</div>
 </body>
 </html>

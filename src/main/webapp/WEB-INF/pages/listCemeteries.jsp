@@ -9,28 +9,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="1">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Cod</th>
-				<th>Nume</th>
-				<th>Adresa</th>
-				<th></th>
-			</tr>
-		</thead>
-		<c:forEach var="cemetery" items="${cemeteries}" varStatus="lineInfo">
-			<tr>
-				<td>${lineInfo.count}</td>
-				<td>${cemetery.code}</td>
-				<td>${cemetery.name}</td>
-				<td>${cemetery.address}</td>
-				<td><a href="${CONTEXT_PATH}/cemetery/edit/${cemetery.code}"><button>Modifica</button></a>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-	<a href="${CONTEXT_PATH}/cemetery/add"><button>Adauga
-			cimitir</button></a>
+	<div id="container">
+		<%@include file="menu.jsp"%>
+		<div id="center">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Cod</th>
+						<th>Nume</th>
+						<th>Adresa</th>
+						<th></th>
+					</tr>
+				</thead>
+				<c:forEach var="cemetery" items="${cemeteries}" varStatus="lineInfo">
+					<tr>
+						<td>${lineInfo.count}</td>
+						<td>${cemetery.id}</td>
+						<td>${cemetery.name}</td>
+						<td>${cemetery.address}</td>
+						<td><a href="${CONTEXT_PATH}/cemetery/edit/${cemetery.id}"><button>Modifica</button></a>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

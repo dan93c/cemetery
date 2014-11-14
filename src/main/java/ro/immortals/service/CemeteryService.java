@@ -10,11 +10,11 @@ public interface CemeteryService {
 
 	public void update(Cemetery cemetery);
 
-	public void delete(String code);
+	public void delete(Integer id);
 
 	public List<Cemetery> getAll();
 
-	public Cemetery getByCode(String code);
+	public Cemetery getById(Integer id);
 
 	public boolean checkDuplicate(Cemetery cemetery);
 }

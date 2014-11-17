@@ -26,8 +26,7 @@ import ro.immortals.service.CemeteryService;
 @RequestMapping("/cemetery")
 public class CemeteryController extends MainController {
 
-	@Autowired
-	private CemeteryService cemeteryService;
+	
 
 	@Autowired
 	@Qualifier("cemeteryValidator")

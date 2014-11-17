@@ -34,10 +34,7 @@ public class PlotValidator implements Validator {
 		}
 		
 	
-		if (plot.getId() <= 0) {
-			errors.rejectValue("surface", "negativeValue", new Object[] { "Suprafata" },
-					"Suprafata nu poate fi negativa.");
-		}
+		
 	}
 
 }

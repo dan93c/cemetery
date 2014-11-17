@@ -14,6 +14,8 @@ public interface GraveRequestDAO {
 
 	public List<GraveRequest> getAll();
 
-	public GraveRequest getByCode(String code);
+	public GraveRequest getById(Integer id);
+	
+	public GraveRequest getByNrInfocet(String nr);
 
 }

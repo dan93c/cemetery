@@ -39,7 +39,7 @@ public class DeadWithoutFamilyDAOImpl implements DeadWithoutFamilyDAO{
 	}
 
 	@Override
-	public DeadWithoutFamily getByCode(String code) {
-		return entityManager.find(DeadWithoutFamily.class, code);
+	public DeadWithoutFamily getById(Integer id) {
+		return entityManager.find(DeadWithoutFamily.class, id);
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ro.immortals.dao.PlotDAO;
 import ro.immortals.model.Plot;
+import ro.immortals.model.Plot;
 
 @Repository
 public class PlotDAOImpl implements PlotDAO{
@@ -39,7 +40,17 @@ public class PlotDAOImpl implements PlotDAO{
 	}
 
 	@Override
-	public Plot getByCode(String code) {
-		return entityManager.find(Plot.class, code);
+	public Plot getById(Integer id) {
+		return entityManager.find(Plot.class, id);
+	}
+	
+	@Override
+	public Plot getByNameAndCemetery(String name,Integer cId) {
+		List<Plot> plotList = entityManager.createQuery("from plots p where p.name= :name and p.cemetery_id=:cId", Plot.class)
+		        .setParameter("name", name).setParameter("cId", cId).getResultList();
+		if (plotList.size() > 0)
+			return plotList.get(0);
+		else
+			return null;
 	}
 }

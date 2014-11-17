@@ -41,8 +41,18 @@ public class AppointmentDAOImpl implements AppointmentDAO {
 	}
 
 	@Override
-	public Appointment getByCode(String code) {
-		return entityManager.find(Appointment.class, code);
+	public Appointment getById(Integer id) {
+		return entityManager.find(Appointment.class, id);
+	}
+
+	@Override
+	public Appointment getByDeadId(Integer id) {
+		List<Appointment> appointmentList = entityManager.createQuery("from appointments a where a.dead_id= :id", Appointment.class)
+		        .setParameter("id"	, id).getResultList();
+		if (appointmentList.size() > 0)
+			return appointmentList.get(0);
+		else
+			return null;
 	}
 
 }

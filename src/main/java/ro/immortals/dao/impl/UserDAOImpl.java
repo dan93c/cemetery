@@ -40,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User getByCode(String code) {
-		return entityManager.find(User.class, code);
+	public User getByUsername(String username) {
+		return entityManager.find(User.class, username);
 	}
 }

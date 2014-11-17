@@ -1,16 +1,16 @@
-package ro.immortals.dao;
+package ro.immortals.service;
 
 import java.util.List;
 
 import ro.immortals.model.History;
 
-public interface HistoryDAO {
+public interface HistoryService {
 
-	public void add(History history);
+	public int add(History history);
 
 	public void update(History history);
 
-	public void delete(History history);
+	public void delete(Integer id);
 
 	public List<History> getAll();
 

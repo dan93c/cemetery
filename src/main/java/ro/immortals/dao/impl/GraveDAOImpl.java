@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ro.immortals.dao.GraveDAO;
 import ro.immortals.model.Grave;
+import ro.immortals.model.Grave;
 
 @Repository
 public class GraveDAOImpl implements GraveDAO {
@@ -40,7 +41,17 @@ public class GraveDAOImpl implements GraveDAO {
 	}
 
 	@Override
-	public Grave getByCode(String code) {
-		return entityManager.find(Grave.class, code);
+	public Grave getById(Integer id) {
+		return entityManager.find(Grave.class, id);
+	}
+	
+	@Override
+	public Grave getByNumberAndPlot(String number,Integer plotId) {
+		List<Grave> graveList = entityManager.createQuery("from graves g where g.number= :number and g.plot_id=:id", Grave.class)
+		        .setParameter("number", number).setParameter("plot_id", plotId).getResultList();
+		if (graveList.size() > 0)
+			return graveList.get(0);
+		else
+			return null;
 	}
 }

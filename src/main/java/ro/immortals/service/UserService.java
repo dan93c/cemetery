@@ -1,20 +1,20 @@
-package ro.immortals.dao;
+package ro.immortals.service;
 
 import java.util.List;
 
 import ro.immortals.model.User;
 
-public interface UserDAO {
+public interface UserService {
 
-	public void add(User user);
+	public int add(User user);
 
 	public void update(User user);
 
-	public void delete(User user);
+	public void delete(String username);
 
 	public List<User> getAll();
 
 	public User getByUsername(String username);
 
-	
+	public boolean checkDuplicate(User user);
 }

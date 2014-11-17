@@ -40,7 +40,17 @@ public class ConcessionContractDAOImpl implements ConcessionContractDAO {
 	}
 
 	@Override
-	public ConcessionContract getByCode(String code) {
-		return entityManager.find(ConcessionContract.class, code);
+	public ConcessionContract getById(Integer id) {
+		return entityManager.find(ConcessionContract.class, id);
+	}
+	
+	@Override
+	public ConcessionContract getByCnp(String cnp) {
+		List<ConcessionContract> concessionContractList = entityManager.createQuery("from concession_contracts c where c.cnp= :cnp", ConcessionContract.class)
+		        .setParameter("cnp"	, cnp).getResultList();
+		if (concessionContractList.size() > 0)
+			return concessionContractList.get(0);
+		else
+			return null;
 	}
 }

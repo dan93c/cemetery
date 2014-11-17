@@ -1,16 +1,16 @@
-package ro.immortals.dao;
+package ro.immortals.service;
 
 import java.util.List;
 
 import ro.immortals.model.DeadWithoutFamily;
 
-public interface DeadWithoutFamilyDAO {
+public interface DeadWithoutFamilyService {
 
-	public void add(DeadWithoutFamily deadWithoutFamily);
+	public int add(DeadWithoutFamily deadWithoutFamily);
 
 	public void update(DeadWithoutFamily deadWithoutFamily);
 
-	public void delete(DeadWithoutFamily deadWithoutFamily);
+	public void delete(Integer id);
 
 	public List<DeadWithoutFamily> getAll();
 

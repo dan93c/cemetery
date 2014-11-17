@@ -1,16 +1,16 @@
-package ro.immortals.dao;
+package ro.immortals.service;
 
 import java.util.List;
 
 import ro.immortals.model.Dead;
 
-public interface DeadDAO {
+public interface DeadService {
 
-	public void add(Dead dead);
+	public int add(Dead dead);
 
 	public void update(Dead dead);
 
-	public void delete(Dead dead);
+	public void delete(Integer id);
 
 	public List<Dead> getAll();
 

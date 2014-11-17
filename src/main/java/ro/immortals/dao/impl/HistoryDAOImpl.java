@@ -39,7 +39,7 @@ public class HistoryDAOImpl implements HistoryDAO{
 	}
 
 	@Override
-	public History getByCode(String code) {
-		return entityManager.find(History.class, code);
+	public History getById(Integer id) {
+		return entityManager.find(History.class, id);
 	}
 }

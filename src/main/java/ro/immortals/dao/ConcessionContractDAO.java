@@ -14,5 +14,7 @@ public interface ConcessionContractDAO {
 
 	public List<ConcessionContract> getAll();
 
-	public ConcessionContract getByCode(String code);
+	public ConcessionContract getById(Integer id);
+	
+	public ConcessionContract getByCnp(String cnp);
 }

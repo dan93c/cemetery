@@ -40,7 +40,7 @@ public class DeadDAOImpl implements DeadDAO {
 	}
 
 	@Override
-	public Dead getByCode(String code) {
-		return entityManager.find(Dead.class, code);
+	public Dead getById(Integer id) {
+		return entityManager.find(Dead.class, id);
 	}
 }

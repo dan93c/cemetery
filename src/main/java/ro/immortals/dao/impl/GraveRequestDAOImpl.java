@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ro.immortals.dao.GraveRequestDAO;
 import ro.immortals.model.GraveRequest;
+import ro.immortals.model.GraveRequest;
 
 @Repository
 public class GraveRequestDAOImpl implements GraveRequestDAO{
@@ -40,7 +41,17 @@ public class GraveRequestDAOImpl implements GraveRequestDAO{
 	}
 
 	@Override
-	public GraveRequest getByCode(String code) {
-		return entityManager.find(GraveRequest.class, code);
+	public GraveRequest getById(Integer id) {
+		return entityManager.find(GraveRequest.class, id);
+	}
+	
+	@Override
+	public GraveRequest getByNrInfocet(String nr) {
+		List<GraveRequest> graveRequestList = entityManager.createQuery("from grave_requests g where g.nr_infocet= :nr", GraveRequest.class)
+		        .setParameter("nr", nr).getResultList();
+		if (graveRequestList.size() > 0)
+			return graveRequestList.get(0);
+		else
+			return null;
 	}
 }

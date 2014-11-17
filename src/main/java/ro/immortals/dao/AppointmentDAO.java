@@ -14,6 +14,7 @@ public interface AppointmentDAO {
 
 	public List<Appointment> getAll();
 
-	public Appointment getByCode(String code);
+	public Appointment getById(Integer id);
 
+	public Appointment getByDeadId(Integer id);
 }

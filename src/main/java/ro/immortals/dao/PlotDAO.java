@@ -14,6 +14,8 @@ public interface PlotDAO {
 
 	public List<Plot> getAll();
 
-	public Plot getByCode(String code);
+	public Plot getById(Integer id);
+
+	public Plot getByNameAndCemetery(String name, Integer cId);
 
 }

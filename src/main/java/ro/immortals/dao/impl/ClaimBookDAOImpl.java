@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import ro.immortals.dao.ClaimBookDAO;
 import ro.immortals.model.ClaimBook;
+import ro.immortals.model.ClaimBook;
 
 @Repository
 public class ClaimBookDAOImpl implements ClaimBookDAO {
@@ -41,8 +42,7 @@ public class ClaimBookDAOImpl implements ClaimBookDAO {
 	}
 
 	@Override
-	public ClaimBook getByCode(String code) {
-		return entityManager.find(ClaimBook.class, code);
+	public ClaimBook getById(Integer id) {
+		return entityManager.find(ClaimBook.class, id);
 	}
-
 }

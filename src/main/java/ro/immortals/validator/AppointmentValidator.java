@@ -32,9 +32,14 @@ public class AppointmentValidator implements Validator {
 				&& calendar1.get(Calendar.DAY_OF_YEAR) == calendar2
 						.get(Calendar.DAY_OF_YEAR);
 		if (!sameDay) {
+			System.out.println("modificare");
 			errors.rejectValue("funeralDate", "IsNotcurrentDate",
 					new Object[] { "Funeral_Date" },
+<<<<<<< HEAD
 					"Campul 'Funeral_Date' nu este data curenta.!!?");
+=======
+					"Campul 'Funeral_Date' nu este data curenta.");
+>>>>>>> master
 		}
 
 	}

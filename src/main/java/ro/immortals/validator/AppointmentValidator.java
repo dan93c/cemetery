@@ -34,7 +34,7 @@ public class AppointmentValidator implements Validator {
 		if (!sameDay) {
 			errors.rejectValue("funeralDate", "IsNotcurrentDate",
 					new Object[] { "Funeral_Date" },
-					"Campul 'Funeral_Date' nu este data curenta.");
+					"Campul 'Funeral_Date' nu este data curenta.!!");
 		}
 
 	}

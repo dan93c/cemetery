@@ -48,18 +48,16 @@
 						<td><label>Cimitirul</label></td>
 						<td><select name="cemeterySelect">
 								<c:forEach var="cemetery" items="${cemeteries}">
-									<option value="${cemetery}">
+									<option value="${cemetery.id}">
 										<c:out value="${cemetery.name}" />
 									</option>
 								</c:forEach>
 							</select>
 						</td>
-						<td><form:errors path="cemetery" cssClass="error" /></td>
-					<tr>
+					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="submit"
 							value="Adauga parcela" /></td>
-						<td></td>
 					</tr>
 				</table>
 			</form:form>

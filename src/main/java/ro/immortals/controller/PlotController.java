@@ -71,6 +71,7 @@ public class PlotController extends MainController {
 		if (errorCode == 1) {
 			ModelAndView modelAndView = new ModelAndView(ADD_PLOT_JSP);
 			modelAndView.addObject(PLOT, plot);
+			modelAndView.addObject(CEMETERIES,cemeteryService.getAll());
 			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
 					"message.plot.already.exists",
 					new Object[] { plot.getId() }, Locale.getDefault()));

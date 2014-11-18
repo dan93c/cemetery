@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import ro.immortals.dao.PlotDAO;
 import ro.immortals.model.Plot;
-import ro.immortals.model.Plot;
 
 @Repository
 public class PlotDAOImpl implements PlotDAO{

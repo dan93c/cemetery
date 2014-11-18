@@ -19,11 +19,11 @@ public class PlotServiceImpl implements PlotService {
 	@Override
 	@Transactional
 	public int add(Plot plot) {
-		//if (checkDuplicate(plot)) {
+		if (checkDuplicate(plot)) {
 			plotDAO.add(plot);
 			return 0;
-		//}
-		//return 1;
+		}
+		return 1;
 	}
 
 	@Override

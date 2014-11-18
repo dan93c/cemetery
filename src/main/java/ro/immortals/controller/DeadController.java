@@ -88,8 +88,8 @@ public class DeadController extends MainController {
 	public ModelAndView doEdit(@ModelAttribute @Validated Dead dead,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			ModelAndView modelAndView = new ModelAndView(EDIT_PLOT_JSP);
-			modelAndView.addObject(PLOT, dead);
+			ModelAndView modelAndView = new ModelAndView(EDIT_DEAD_JSP);
+			modelAndView.addObject(DEAD, dead);
 			return modelAndView;
 		}
 		deadService.update(dead);

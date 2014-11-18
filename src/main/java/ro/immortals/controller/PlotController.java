@@ -21,14 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ro.immortals.model.Cemetery;
 import ro.immortals.model.Plot;
-import ro.immortals.service.CemeteryService;
-import ro.immortals.service.PlotService;
 
 @Controller
 @RequestMapping("/plot")
 public class PlotController extends MainController {
-	@Autowired
-	private PlotService plotService;
 
 	@Autowired
 	@Qualifier("plotValidator")

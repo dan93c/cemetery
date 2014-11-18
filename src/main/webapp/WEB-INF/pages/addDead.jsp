@@ -8,7 +8,7 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Adauga parcela</title>
+<title>Adauga decedat</title>
 </head>
 <body>
 	<div id="container">
@@ -34,21 +34,15 @@
 					</tr>
 					<tr>
 						<td><label>Nume</label></td>
-						<td><form:input type="text" path="lastName" required="required"
-								placeholder="Nume decedat"></form:input></td>
-						<td><form:errors path="lastName" cssClass="error" /></td>
-					</tr>
-					<tr>
-						<td><label>Prenume</label></td>
-						<td><form:input type="text" path="firstName" required="required"
-								placeholder="Prenume decedat"></form:input></td>
+						<td><form:input type="text" path="firstName"
+								required="required" placeholder="Nume decedat" maxLengh="45"></form:input></td>
 						<td><form:errors path="firstName" cssClass="error" /></td>
 					</tr>
 					<tr>
-						<td><label>Religia</label></td>
-						<td><form:input type="text" path="religion"
-								required="required" placeholder="Religia"></form:input></td>
-						<td><form:errors path="religion" cssClass="error" /></td>
+						<td><label>Prenume</label></td>
+						<td><form:input type="text" path="lastName"
+								required="required" placeholder="Prenume decedat" maxLengh="45"></form:input></td>
+						<td><form:errors path="lastName" cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
@@ -58,8 +52,27 @@
 										<c:out value="${cemetery.name}" />
 									</option>
 								</c:forEach>
-							</select>
-						</td>
+						</select></td>
+					</tr>
+					<tr>
+						<td><label>Parcela</label></td>
+						<td><select name="plotSelect">
+								<c:forEach var="plot" items="${plots}">
+									<option value="${plot.id}">
+										<c:out value="${plot.name}" />
+									</option>
+								</c:forEach>
+						</select></td>
+					</tr>
+					<tr>
+						<td><label>Mormantul</label></td>
+						<td><form:select path="grave.id">
+								<c:forEach var="grave" items="${graves}">
+									<option value="${grave.id}">
+										<c:out value="${grave.name}" />
+									</option>
+								</c:forEach>
+							</form:select></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="submit"

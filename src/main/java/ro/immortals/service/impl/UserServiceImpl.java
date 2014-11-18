@@ -1,5 +1,6 @@
 package ro.immortals.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,22 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<User> simulateSearchResult(String username) {
+
+		List<User> result = new ArrayList<User>();
+		List<User> users = userDAO.getAll();
+
+		for (User user : users) {
+			if (user.getUsername().contains(username)) {
+				result.add(user);
+			}
+		}
+
+		return result;
 	}
 
 }

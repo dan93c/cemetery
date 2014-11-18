@@ -17,4 +17,6 @@ public interface UserService {
 	public User getByUsername(String username);
 
 	public boolean checkDuplicate(User user);
+
+	public List<User> simulateSearchResult(String username);
 }

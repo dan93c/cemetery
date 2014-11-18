@@ -56,7 +56,8 @@ public class PlotServiceImpl implements PlotService {
 	@Override
 	@Transactional(readOnly = true)
 	public boolean checkDuplicate(Plot plot) {
-		Plot existingPlot = plotDAO.getByNameAndCemetery(plot.getName(), plot.getCemetery().getId());
+		Plot existingPlot = plotDAO.getByNameAndCemetery(plot.getName(), plot
+				.getCemetery().getId());
 		if (existingPlot != null && (existingPlot.getId() != plot.getId())) {
 			return false;
 		}

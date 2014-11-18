@@ -29,7 +29,7 @@ import ro.immortals.service.PlotService;
 public class PlotController extends MainController {
 	@Autowired
 	private PlotService plotService;
-	
+
 	@Autowired
 	@Qualifier("plotValidator")
 	private Validator plotValidator;
@@ -71,10 +71,10 @@ public class PlotController extends MainController {
 		if (errorCode == 1) {
 			ModelAndView modelAndView = new ModelAndView(ADD_PLOT_JSP);
 			modelAndView.addObject(PLOT, plot);
-			modelAndView.addObject(CEMETERIES,cemeteryService.getAll());
+			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
 					"message.plot.already.exists",
-					new Object[] { plot.getId() }, Locale.getDefault()));
+					new Object[] { plot.getName() }, Locale.getDefault()));
 			return modelAndView;
 		}
 		return list();
@@ -84,6 +84,7 @@ public class PlotController extends MainController {
 	public ModelAndView edit(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView(EDIT_PLOT_JSP);
 		modelAndView.addObject(PLOT, plotService.getById(id));
+		modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 		return modelAndView;
 	}
 

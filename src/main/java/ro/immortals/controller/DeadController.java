@@ -28,7 +28,7 @@ import ro.immortals.service.DeadService;
 public class DeadController extends MainController {
 	@Autowired
 	private DeadService deadService;
-	
+
 	@Autowired
 	@Qualifier("deadValidator")
 	private Validator deadValidator;
@@ -55,8 +55,7 @@ public class DeadController extends MainController {
 		} else {
 			modelAndView.addObject(DEAD, dead);
 		}
-		List<Cemetery> cemeteries = cemeteryService.getAll();
-		modelAndView.addObject(CEMETERIES, cemeteries);
+
 		return modelAndView;
 	}
 
@@ -68,9 +67,8 @@ public class DeadController extends MainController {
 		}
 		Integer errorCode = deadService.add(dead);
 		if (errorCode == 1) {
-			ModelAndView modelAndView = new ModelAndView(ADD_PLOT_JSP);
-			modelAndView.addObject(PLOT, dead);
-			modelAndView.addObject(CEMETERIES,cemeteryService.getAll());
+			ModelAndView modelAndView = new ModelAndView(ADD_DEAD_JSP);
+			modelAndView.addObject(DEAD, dead);
 			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
 					"message.dead.already.exists",
 					new Object[] { dead.getId() }, Locale.getDefault()));
@@ -81,8 +79,8 @@ public class DeadController extends MainController {
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable Integer id) {
-		ModelAndView modelAndView = new ModelAndView(EDIT_PLOT_JSP);
-		modelAndView.addObject(PLOT, deadService.getById(id));
+		ModelAndView modelAndView = new ModelAndView(EDIT_DEAD_JSP);
+		modelAndView.addObject(DEAD, deadService.getById(id));
 		return modelAndView;
 	}
 

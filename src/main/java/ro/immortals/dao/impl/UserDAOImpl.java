@@ -35,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<User> getAll() {
-		return entityManager.createQuery("SELECT u FROM users u", User.class)
+		return entityManager.createQuery("SELECT u FROM User u", User.class)
 				.getResultList();
 	}
 

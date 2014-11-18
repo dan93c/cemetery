@@ -36,7 +36,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
 
 	@Override
 	public List<Appointment> getAll() {
-		return entityManager.createQuery("SELECT a FROM Appointments a",
+		return entityManager.createQuery("SELECT a FROM Appointment a",
 				Appointment.class).getResultList();
 	}
 
@@ -47,7 +47,7 @@ public class AppointmentDAOImpl implements AppointmentDAO {
 
 	@Override
 	public Appointment getByDeadId(Integer id) {
-		List<Appointment> appointmentList = entityManager.createQuery("from appointments a where a.dead_id= :id", Appointment.class)
+		List<Appointment> appointmentList = entityManager.createQuery("from Appointment a where a.dead.id= :id", Appointment.class)
 		        .setParameter("id"	, id).getResultList();
 		if (appointmentList.size() > 0)
 			return appointmentList.get(0);

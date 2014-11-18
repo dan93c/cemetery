@@ -35,7 +35,7 @@ public class DeadWithoutFamilyDAOImpl implements DeadWithoutFamilyDAO{
 
 	@Override
 	public List<DeadWithoutFamily> getAll() {
-		return entityManager.createQuery("SELECT d FROM deads_without_family d", DeadWithoutFamily.class).getResultList();
+		return entityManager.createQuery("SELECT d FROM DeadWithoutFamily d", DeadWithoutFamily.class).getResultList();
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class ConcessionContractDAOImpl implements ConcessionContractDAO {
 
 	@Override
 	public List<ConcessionContract> getAll() {
-		return entityManager.createQuery("SELECT c FROM concession_contracts c",
+		return entityManager.createQuery("SELECT c FROM ConcessionContract c",
 				ConcessionContract.class).getResultList();
 	}
 
@@ -46,7 +46,7 @@ public class ConcessionContractDAOImpl implements ConcessionContractDAO {
 	
 	@Override
 	public ConcessionContract getByCnp(String cnp) {
-		List<ConcessionContract> concessionContractList = entityManager.createQuery("from concession_contracts c where c.cnp= :cnp", ConcessionContract.class)
+		List<ConcessionContract> concessionContractList = entityManager.createQuery("from ConcessionContract c where c.cnp= :cnp", ConcessionContract.class)
 		        .setParameter("cnp"	, cnp).getResultList();
 		if (concessionContractList.size() > 0)
 			return concessionContractList.get(0);

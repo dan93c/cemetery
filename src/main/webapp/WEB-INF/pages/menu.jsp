@@ -17,6 +17,8 @@
 	<li><a href="#">Parcele</a>
 		<ul>
 			<li><a href="${CONTEXT_PATH}/plot/add">Adauga</a></li>
+			<li><a href="${CONTEXT_PATH}/plot/list">Vizualizeaza
+					lista</a></li>
 		</ul>
 	</li>
 	<li><a href="#">Sign In</a></li>

@@ -8,24 +8,21 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Adauga parcela</title>
+<title>Modifica parcela</title>
 </head>
 <body>
 	<div id="container">
 		<%@include file="menu.jsp"%>
 		<div id="center">
 			<h2>Date despre parcela</h2>
-			<form:form name="addPlot" modelAttribute="plot"
-				action="${CONTEXT_PATH}/plot/add" method="POST">
+			<form:form name="editPlot" modelAttribute="plot"
+				action="${CONTEXT_PATH}/plot/edit" method="POST">
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div id="message" class="error">
 							Error.Invalid data.
 							<form:errors />
 						</div>
-					</c:if>
-					<c:if test="${not empty errorMessage}">
-						<span>${errorMessage}</span>
 					</c:if>
 				</s:bind>
 				<table>
@@ -61,7 +58,8 @@
 
 					<tr>
 						<td colspan="2" align="center"><input type="submit"
-							value="Adauga parcela" /></td>
+							value="Modifica parcela" /></td>
+						<td></td>
 					</tr>
 				</table>
 			</form:form>

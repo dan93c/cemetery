@@ -36,7 +36,7 @@ public class GraveRequestDAOImpl implements GraveRequestDAO{
 
 	@Override
 	public List<GraveRequest> getAll() {
-		return entityManager.createQuery("SELECT g FROM grave_requests g",
+		return entityManager.createQuery("SELECT g FROM GraveRequest g",
 				GraveRequest.class).getResultList();
 	}
 
@@ -47,7 +47,7 @@ public class GraveRequestDAOImpl implements GraveRequestDAO{
 	
 	@Override
 	public GraveRequest getByNrInfocet(String nr) {
-		List<GraveRequest> graveRequestList = entityManager.createQuery("from grave_requests g where g.nr_infocet= :nr", GraveRequest.class)
+		List<GraveRequest> graveRequestList = entityManager.createQuery("from GraveRequest g where g.nrInfocet= :nr", GraveRequest.class)
 		        .setParameter("nr", nr).getResultList();
 		if (graveRequestList.size() > 0)
 			return graveRequestList.get(0);

@@ -36,7 +36,7 @@ public class PlotDAOImpl implements PlotDAO{
 
 	@Override
 	public List<Plot> getAll() {
-		return entityManager.createQuery("SELECT p FROM plots p", Plot.class).getResultList();
+		return entityManager.createQuery("SELECT p FROM Plot p", Plot.class).getResultList();
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class PlotDAOImpl implements PlotDAO{
 	
 	@Override
 	public Plot getByNameAndCemetery(String name,Integer cId) {
-		List<Plot> plotList = entityManager.createQuery("from plots p where p.name= :name and p.cemetery_id=:cId", Plot.class)
+		List<Plot> plotList = entityManager.createQuery("from Plot p where p.name= :name and p.cemetery.id=:cId", Plot.class)
 		        .setParameter("name", name).setParameter("cId", cId).getResultList();
 		if (plotList.size() > 0)
 			return plotList.get(0);

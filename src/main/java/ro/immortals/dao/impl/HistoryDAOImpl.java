@@ -35,7 +35,7 @@ public class HistoryDAOImpl implements HistoryDAO{
 
 	@Override
 	public List<History> getAll() {
-		return entityManager.createQuery("SELECT h FROM history h", History.class).getResultList();
+		return entityManager.createQuery("SELECT h FROM History h", History.class).getResultList();
 	}
 
 	@Override

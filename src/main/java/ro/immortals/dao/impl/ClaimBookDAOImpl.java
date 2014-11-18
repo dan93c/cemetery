@@ -37,7 +37,7 @@ public class ClaimBookDAOImpl implements ClaimBookDAO {
 
 	@Override
 	public List<ClaimBook> getAll() {
-		return entityManager.createQuery("SELECT c FROM claims_book c",
+		return entityManager.createQuery("SELECT c FROM ClaimBook c",
 				ClaimBook.class).getResultList();
 	}
 

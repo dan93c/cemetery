@@ -35,7 +35,7 @@ public class DeadDAOImpl implements DeadDAO {
 
 	@Override
 	public List<Dead> getAll() {
-		return entityManager.createQuery("SELECT d FROM deads d", Dead.class)
+		return entityManager.createQuery("SELECT d FROM Dead d", Dead.class)
 				.getResultList();
 	}
 

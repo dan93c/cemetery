@@ -25,6 +25,8 @@ public class MainController {
 	public static final String CEMETERY_CODE = "cemetery_code";
 	public static final String PLOT = "plot";
 	public static final String PLOTS = "plots";
+	public static final String DEAD = "dead";
+	public static final String DEADS = "deads";
 	
 	/* PAGES */
 	public static final String LIST_CEMETERIES_JSP = "listCemeteries";
@@ -33,7 +35,11 @@ public class MainController {
 	public static final String LIST_PLOTS_JSP = "listPlots";
 	public static final String ADD_PLOT_JSP = "addPlot";
 	public static final String EDIT_PLOT_JSP = "editPlot";
+	public static final String LIST_DEADS_JSP = "listDeads";
+	public static final String ADD_DEAD_JSP = "addDead";
+	public static final String EDIT_DEAD_JSP = "editDead";
 
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
 

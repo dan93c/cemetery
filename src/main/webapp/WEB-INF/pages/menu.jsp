@@ -2,10 +2,14 @@
 <ul id="menu">
 	<li><a href="#">Home</a></li>
 	<li><a href="#">Programari</a>
+	</li>
+	<li><a href='#'>Decedati</a>
 		<ul>
 			<li><a href="${CONTEXT_PATH}/dead/add">Adauga decedat</a></li>
-		</ul></li>
-	<li><a href="#">Vizualizare morminte</a>
+			<li><a href="${CONTEXT_PATH}/dead/list">Vizualizeaza decedati</a></li>
+		</ul>
+	</li>
+	<li><a href="#">Morminte</a>
 		<ul>
 			<li><a href="#">Platite</a></li>
 			<li><a href="#">Contract expirat</a></li>

@@ -67,7 +67,7 @@ public class CemeteryController extends MainController {
 			ModelAndView modelAndView = new ModelAndView(ADD_CEMETERY_JSP);
 			modelAndView.addObject(CEMETERY, cemetery);
 			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage("message.cemetery.already.exists",
-			        new Object[] { cemetery.getId() }, Locale.getDefault()));
+			        new Object[] { cemetery.getName() }, Locale.getDefault()));
 			return modelAndView;
 		}
 		return list();

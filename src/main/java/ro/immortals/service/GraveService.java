@@ -17,4 +17,6 @@ public interface GraveService {
 	public Grave getById(Integer id);
 
 	public boolean checkDuplicate(Grave grave);
+
+	boolean checkGraveExistence(Grave grave, Integer plotId, Integer cemeteryId);
 }

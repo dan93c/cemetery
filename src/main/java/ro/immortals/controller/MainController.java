@@ -37,6 +37,7 @@ public class MainController {
 	public static final String GRAVES = "graves";
 	public static final String USERNAME = "username";
 	public static final String DEAD = "dead";
+	public static final String DEADS = "deads";
 	
 	/* PAGES */
 	public static final String LOGIN_JSP = "login";
@@ -48,5 +49,7 @@ public class MainController {
 	public static final String ADD_PLOT_JSP = "addPlot";
 	public static final String EDIT_PLOT_JSP = "editPlot";
 	public static final String ADD_DEAD_JSP = "addDead";
+	public static final String EDIT_DEAD_JSP = "editDead";
+	public static final String LIST_DEADS_JSP = "listDeads";
 	
 }

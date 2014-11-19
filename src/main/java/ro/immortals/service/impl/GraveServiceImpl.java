@@ -63,4 +63,16 @@ public class GraveServiceImpl implements GraveService {
 		return true;
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public boolean checkGraveExistence(Grave grave, Integer plotId, Integer cemeteryId) {
+		List<Grave> graves = graveDAO.getAll();
+		for (Grave g : graves) {
+			if (g.getId() == grave.getId() && g.getPlot().getId() == plotId
+					&& g.getPlot().getCemetery().getId() == cemeteryId) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

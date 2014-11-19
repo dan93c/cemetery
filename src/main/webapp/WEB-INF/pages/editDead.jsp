@@ -8,15 +8,15 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Adauga decedat</title>
+<title>Modifica decedat</title>
 </head>
 <body>
 	<div id="container">
 		<%@include file="menu.jsp"%>
 		<div id="center">
 			<h2>Date despre decedat</h2>
-			<form:form name="addDead" modelAttribute="dead"
-				action="${CONTEXT_PATH}/dead/add" method="POST">
+			<form:form name="editDead" modelAttribute="dead"
+				action="${CONTEXT_PATH}/dead/edit" method="POST">
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div id="message" class="error">
@@ -43,12 +43,6 @@
 						<td><form:input type="text" path="lastName"
 								required="required" placeholder="Prenume decedat" maxLengh="45"></form:input></td>
 						<td><form:errors path="lastName" cssClass="error" /></td>
-					</tr>
-					<tr>
-						<td><label>Religia</label></td>
-						<td><form:input type="text" path="religion"
-								required="required" placeholder="Religia" maxLengh="45"></form:input></td>
-						<td><form:errors path="religion" cssClass="error" /></td>
 					</tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
@@ -82,7 +76,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="submit"
-							value="Adauga decedat" /></td>
+							value="Modifica decedat" /></td>
 					</tr>
 				</table>
 			</form:form>

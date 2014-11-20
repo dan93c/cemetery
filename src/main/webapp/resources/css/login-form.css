@@ -7,10 +7,11 @@
 
 body {
 	margin: 0;
+	width: 100%;
 	padding: 0;
 	background: url('../../resources/img/login_background.png');
-	-webkit-background-size: cover cover;
-	background-size: cover cover;
+	-webkit-background-size: 100%;
+	background-size: 100%;
 	font-family: "helvetica neue", sans-serif;
 }
 
@@ -58,7 +59,7 @@ body {
 	height: 300px;
 	background-color: #dfdfdf;
 	background-image: url('../../resources/img/data_img.png');
-	background-repeat : repeat-y;
+	background-repeat: repeat-y;
 	z-index: 999;
 	background-repeat: repeat-y;
 }
@@ -70,7 +71,16 @@ h2 {
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
 	color: #fff;
 	font-size: 16px;
-	margin-bottom: 42px;
+	margin-bottom: 42px; /*initial 42px  */
+}
+#error {
+	position: relative;
+	text-align: center;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+	color: #fff;
+	font-size: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #login_el form {

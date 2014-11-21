@@ -32,7 +32,7 @@ public class ConcessionContract implements java.io.Serializable {
 	@DateTimeFormat(iso = ISO.NONE)
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "release_date")
-	private Date realeaseDate;
+	private Date releaseDate;
 
 	@Column(name = "cnp", length = 15, nullable = false)
 	private String cnp;
@@ -56,11 +56,11 @@ public class ConcessionContract implements java.io.Serializable {
 	public ConcessionContract() {
 	}
 
-	public ConcessionContract(Integer id, String receiptNr, Date realeaseDate, String cnp, String firstName,
+	public ConcessionContract(Integer id, String receiptNr, Date releaseDate, String cnp, String firstName,
 	        String lastName, String address, String emailAddress, Grave grave) {
 		this.id = id;
 		this.receiptNr = receiptNr;
-		this.realeaseDate = realeaseDate;
+		this.releaseDate = releaseDate;
 		this.cnp = cnp;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -85,12 +85,12 @@ public class ConcessionContract implements java.io.Serializable {
 		this.receiptNr = receiptNr;
 	}
 
-	public Date getRealeaseDate() {
-		return realeaseDate;
+	public Date getReleaseDate() {
+		return releaseDate;
 	}
 
-	public void setRealeaseDate(Date realeaseDate) {
-		this.realeaseDate = realeaseDate;
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 
 	public String getCnp() {

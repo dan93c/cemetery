@@ -1,13 +1,17 @@
 package ro.immortals.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sun.jmx.snmp.Timestamp;
+
 import ro.immortals.dao.ConcessionContractDAO;
 import ro.immortals.model.ConcessionContract;
+import ro.immortals.model.Grave;
 import ro.immortals.service.ConcessionContractService;
 
 @Service
@@ -20,6 +24,7 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	@Transactional
 	public int add(ConcessionContract concessionContract) {
 		if (checkDuplicate(concessionContract)) {
+			concessionContract.setReleaseDate(new Date());
 			concessionContractDAO.add(concessionContract);
 			return 0;
 		}

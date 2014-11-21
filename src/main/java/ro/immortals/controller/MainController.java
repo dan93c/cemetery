@@ -5,6 +5,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 
 import ro.immortals.service.CemeteryService;
+import ro.immortals.service.ConcessionContractService;
 import ro.immortals.service.DeadService;
 import ro.immortals.service.GraveService;
 import ro.immortals.service.PlotService;
@@ -26,6 +27,9 @@ public class MainController {
 	
 	@Autowired
 	protected GraveService graveService;
+	
+	@Autowired
+	protected ConcessionContractService contractService;
 
 
 	public static final String ERROR_MESSAGE = "errorMessage";
@@ -38,6 +42,8 @@ public class MainController {
 	public static final String USERNAME = "username";
 	public static final String DEAD = "dead";
 	public static final String DEADS = "deads";
+	public static final String CONTRACT = "contract";
+	public static final String CONTRACTS = "contracts";
 	
 	/* PAGES */
 	public static final String LOGIN_JSP = "login";
@@ -51,5 +57,8 @@ public class MainController {
 	public static final String ADD_DEAD_JSP = "addDead";
 	public static final String EDIT_DEAD_JSP = "editDead";
 	public static final String LIST_DEADS_JSP = "listDeads";
+	public static final String ADD_CONTRACT_JSP = "addContract";
+	public static final String EDIT_CONTRACT_JSP = "editContract";
+	public static final String LIST_CONTRACTS_JSP = "listContracts";
 	
 }

@@ -3,6 +3,7 @@ package ro.immortals.service;
 import java.util.List;
 
 import ro.immortals.model.ConcessionContract;
+import ro.immortals.model.Grave;
 
 public interface ConcessionContractService {
 

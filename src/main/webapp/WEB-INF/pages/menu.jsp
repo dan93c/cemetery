@@ -11,6 +11,8 @@
 	</li>
 	<li><a href="#">Morminte</a>
 		<ul>
+			<li><a href="${CONTEXT_PATH}/contract/add">Adauga contract</a></li>
+			<li><a href="${CONTEXT_PATH}/contract/list">Vizualizare contracte</a></li>
 			<li><a href="#">Platite</a></li>
 			<li><a href="#">Contract expirat</a></li>
 			<li><a href="#">Contract aproape expirat</a></li>

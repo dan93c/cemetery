@@ -45,6 +45,12 @@
 						<td><form:errors path="lastName" cssClass="error" /></td>
 					</tr>
 					<tr>
+						<td><label>Religie</label></td>
+						<td><form:input type="text" path="religion"
+								required="required" placeholder="Religie" maxLengh="45"></form:input></td>
+						<td><form:errors path="religion" cssClass="error" /></td>
+					</tr>					
+					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><select name="cemeterySelect">
 								<c:forEach var="cemetery" items="${cemeteries}">

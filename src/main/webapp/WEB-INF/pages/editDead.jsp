@@ -8,6 +8,7 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href='<c:url value="/resources/css/bootstrap.min.css" />' rel="stylesheet">
 <title>Modifica decedat</title>
 </head>
 <body>
@@ -82,7 +83,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="submit"
-							value="Modifica decedat" /></td>
+							value="Modifica decedat" class="btn btn-primary" /></td>
 					</tr>
 				</table>
 			</form:form>

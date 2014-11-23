@@ -14,14 +14,11 @@ body {
 }
 
 #container {
-	background-image: url('../../resources/img/back.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
 	width: 90%;
 	min-width: 50em;
 	margin-left: 5%;
 	margin-right: 5%;
-
+	background: white;
 	height: 100vh;
 }
 
@@ -260,3 +257,5 @@ body {
 .blue {
     background-color: #6fc6ff;
 }
+
+

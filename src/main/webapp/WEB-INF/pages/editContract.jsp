@@ -8,7 +8,7 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href='<c:url value="/resources/css/bootstrap.min.css" />' rel="stylesheet">
+<link href='<c:url value="/resources/css/bootstrap.css" />' rel="stylesheet">
 <title>Modifica decedat</title>
 </head>
 <body>
@@ -100,8 +100,8 @@
 							</form:select></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="Modifica contract" class="btn btn-primary"/></td>
+						<td colspan="2" align="left"><input type="submit"
+							value="Modifica contract" class="button medium square blue"/></td>
 					</tr>
 				</table>
 			</form:form>

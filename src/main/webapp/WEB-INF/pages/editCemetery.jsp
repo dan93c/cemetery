@@ -8,7 +8,7 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href='<c:url value="/resources/css/bootstrap.min.css" />' rel="stylesheet">
+<link href='<c:url value="/resources/css/bootstrap.css" />' rel="stylesheet">
 <title>Modifica cimitir</title>
 </head>
 <body>
@@ -42,8 +42,8 @@
 								required="required" placeholder="Adresa completa"></form:input></td>
 						<td><form:errors path="address" cssClass="error" /></td>
 					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="Modifica cimitir" class="btn btn-primary"/></td>
+						<td colspan="2" align="left"><input type="submit"
+							value="Modifica cimitir" class="button medium square blue"/></td>
 						<td></td>
 					</tr>
 				</table>

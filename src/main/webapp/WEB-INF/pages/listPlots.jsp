@@ -6,7 +6,6 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href='<c:url value="/resources/css/bootstrap.css" />' rel="stylesheet"> 
 <title>Insert title here</title>
 </head>
 <body>
@@ -17,21 +16,18 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Id</th>
 						<th>Nume</th>
 						<th>Suprafata</th>
-						<th>Cimitir</th>
-						<th></th>
+						<th colspan="2">Cimitir</th>
 					</tr>
 				</thead>
 				<c:forEach var="plot" items="${plots}" varStatus="lineInfo">
 					<tr>
 						<td>${lineInfo.count}</td>
-						<td>${plot.id}</td>
 						<td>${plot.name}</td>
 						<td>${plot.surface}</td>
-						<td>${plot.cemetery.name}</td>
-						<td><a href="${CONTEXT_PATH}/plot/edit/${plot.id}"><button>Modifica</button></a>
+						<td>${plot.cemetery.name}
+						<a href="${CONTEXT_PATH}/plot/edit/${plot.id}"><button style="float:right;">Modifica</button></a>
 						</td>
 					</tr>
 				</c:forEach>

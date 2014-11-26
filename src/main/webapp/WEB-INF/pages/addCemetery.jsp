@@ -8,7 +8,6 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href='<c:url value="/resources/css/bootstrap.css" />' rel="stylesheet">
 <title>Adauga cimitir</title>
 </head>
 <body>
@@ -16,7 +15,7 @@
 		<%@include file="menu.jsp"%>
 		<div id="center">
 			<h2>Date despre cimitir</h2>
-			<form:form name="addCemetery" modelAttribute="cemetery"
+			<form:form class="addcemetery_form" name="addCemetery" modelAttribute="cemetery"
 				action="${CONTEXT_PATH}/cemetery/add" method="POST">
 				<s:bind path="*">
 					<c:if test="${status.error}">
@@ -26,7 +25,11 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
-						<span>${errorMessage}</span>
+					<div class="alert alert-danger" role="alert">
+						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+						<span class="sr-only">Error:</span>
+							${errorMessage}
+					</div>
 					</c:if>
 				</s:bind>
 				<table>
@@ -39,6 +42,7 @@
 								placeholder="Nume cimitir"></form:input></td>
 						<td><form:errors path="name" cssClass="error" /></td>
 					</tr>
+				  	<tr height="10px"></tr> 
 					<tr>
 						<td><label>Adresa</label></td>
 						<td><form:input type="text" path="address"

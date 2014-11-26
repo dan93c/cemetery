@@ -6,7 +6,6 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href='<c:url value="/resources/css/bootstrap.css" />' rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -36,8 +35,8 @@
 						<td>${dead.religion}</td>
 						<td>${dead.grave.nrGrave}</td>
 						<td>${dead.grave.plot.name}</td>
-						<td>${dead.grave.plot.cemetery.name}</td>
-						<td><a href="${CONTEXT_PATH}/dead/edit/${dead.id}"><button>Modifica</button></a></td>
+						<td>${dead.grave.plot.cemetery.name}
+						<a href="${CONTEXT_PATH}/dead/edit/${dead.id}"><button style="float:right;">Modifica</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>

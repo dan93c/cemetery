@@ -4,3 +4,5 @@
 <!-- doar cele ce vor fi folosite pt majoritatea paginilor -->
 <link rel="stylesheet" type="text/css"
 	href="${CONTEXT_PATH}/resources/css/menu.css">
+<link rel="stylesheet" type="text/css"
+	href="${CONTEXT_PATH}/resources/css/bootstrap.css">

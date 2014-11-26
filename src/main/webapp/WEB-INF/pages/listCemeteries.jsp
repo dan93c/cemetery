@@ -6,7 +6,6 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href='<c:url value="/resources/css/bootstrap.css" />' rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
@@ -16,20 +15,15 @@
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>#</th>
-						<th>Cod</th>
 						<th>Nume</th>
-						<th>Adresa</th>
-						<th></th>
+						<th colspan="2">Adresa</th>
 					</tr>
 				</thead>
 				<c:forEach var="cemetery" items="${cemeteries}" varStatus="lineInfo">
 					<tr>
-						<td>${lineInfo.count}</td>
-						<td>${cemetery.id}</td>
 						<td>${cemetery.name}</td>
-						<td>${cemetery.address}</td>
-						<td><a href="${CONTEXT_PATH}/cemetery/edit/${cemetery.id}"><button>Modifica</button></a>
+						<td>${cemetery.address}
+						<a href="${CONTEXT_PATH}/cemetery/edit/${cemetery.id}"><button style="float:right;">Modifica</button></a>
 						</td>
 					</tr>
 				</c:forEach>

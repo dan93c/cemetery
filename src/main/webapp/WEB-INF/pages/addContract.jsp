@@ -8,7 +8,6 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href='<c:url value="/resources/css/bootstrap.css" />' rel="stylesheet">
 <title>Adauga contract concesiune</title>
 </head>
 <body>
@@ -39,36 +38,42 @@
 								required="required" placeholder="Numar" maxLengh="45"></form:input></td>
 						<td><form:errors path="receiptNr" cssClass="error" /></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>CNP</label></td>
 						<td><form:input type="text" path="cnp"
 								required="required" placeholder="CNP" maxLengh="45"></form:input></td>
 						<td><form:errors path="cnp" cssClass="error" /></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>Nume</label></td>
 						<td><form:input type="text" path="lastName"
 								required="required" placeholder="Nume" maxLengh="45"></form:input></td>
 						<td><form:errors path="lastName" cssClass="error" /></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>Prenume</label></td>
 						<td><form:input type="text" path="firstName"
 								required="required" placeholder="Prenume" maxLengh="45"></form:input></td>
 						<td><form:errors path="firstName" cssClass="error" /></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>Adresa</label></td>
 						<td><form:input type="text" path="address"
 								required="required" placeholder="Adresa" maxLengh="45"></form:input></td>
 						<td><form:errors path="address" cssClass="error" /></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>E-mail</label></td>
 						<td><form:input type="text" path="emailAddress"
 								required="required" placeholder="E-mail" maxLengh="45"></form:input></td>
 						<td><form:errors path="emailAddress" cssClass="error" /></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><select name="cemeterySelect">
@@ -79,6 +84,7 @@
 								</c:forEach>
 						</select></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>Parcela</label></td>
 						<td><select name="plotSelect">
@@ -89,6 +95,7 @@
 								</c:forEach>
 						</select></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>Mormantul</label></td>
 						<td><form:select path="grave.id">

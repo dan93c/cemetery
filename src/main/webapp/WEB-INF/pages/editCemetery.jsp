@@ -8,7 +8,6 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href='<c:url value="/resources/css/bootstrap.css" />' rel="stylesheet">
 <title>Modifica cimitir</title>
 </head>
 <body>
@@ -36,11 +35,14 @@
 								placeholder="Nume cimitir"></form:input></td>
 						<td><form:errors path="name" cssClass="error" /></td>
 					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>Adresa</label></td>
 						<td><form:input type="text" path="address"
 								required="required" placeholder="Adresa completa"></form:input></td>
 						<td><form:errors path="address" cssClass="error" /></td>
+					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td colspan="2" align="left"><input type="submit"
 							value="Modifica cimitir" class="button medium square blue"/></td>

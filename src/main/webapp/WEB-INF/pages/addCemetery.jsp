@@ -15,7 +15,7 @@
 		<%@include file="menu.jsp"%>
 		<div id="center">
 			<h2>Date despre cimitir</h2>
-			<form:form class="addcemetery_form" name="addCemetery" modelAttribute="cemetery"
+			<form:form name="addCemetery" modelAttribute="cemetery"
 				action="${CONTEXT_PATH}/cemetery/add" method="POST">
 				<s:bind path="*">
 					<c:if test="${status.error}">

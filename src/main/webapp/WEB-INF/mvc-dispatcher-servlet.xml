@@ -28,7 +28,7 @@
 	
 	<!-- Validator classes -->
 	<bean id="cemeteryValidator" class="ro.immortals.validator.CemeteryValidator" ></bean>
-	<bean id="appointmentValidator" class="ro.immortals.validator.AppointmentValidator" ></bean>
+	<bean id="funeralFileValidator" class="ro.immortals.validator.FuneralFileValidator" ></bean>
 	<bean id="claimBookValidator" class="ro.immortals.validator.ClaimBookValidator" ></bean>
 	<bean id="concessionContractValidator" class="ro.immortals.validator.ConcessionContractValidator" ></bean>
 	<bean id="deadValidator" class="ro.immortals.validator.DeadValidator" ></bean>

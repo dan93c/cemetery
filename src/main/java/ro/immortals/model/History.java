@@ -24,7 +24,7 @@ public class History implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name = "username")
@@ -38,7 +38,10 @@ public class History implements java.io.Serializable {
 	@Column(name = "modification_date", nullable = false)
 	private Date modificationDate;
 
-	@Column(name = "modified_object_code", length = 500, nullable = false)
+	@Column(name = "modified_object", length = 50, nullable = false)
+	private String modifiedObject;
+
+	@Column(name = "modified_object_id", length = 50, nullable = false)
 	private String modifiedObjectCode;
 
 	@Column(name = "details", length = 500)
@@ -47,21 +50,22 @@ public class History implements java.io.Serializable {
 	public History() {
 	}
 
-	public History(int id, User user, String actionName, Date modificationDate, String modifiedObjectCode,
-	        String details) {
+	public History(Integer id, User user, String actionName, Date modificationDate, String modifiedObject,
+	        String modifiedObjectCode, String details) {
 		this.id = id;
 		this.user = user;
 		this.actionName = actionName;
 		this.modificationDate = modificationDate;
+		this.modifiedObject = modifiedObject;
 		this.modifiedObjectCode = modifiedObjectCode;
 		this.details = details;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -89,6 +93,14 @@ public class History implements java.io.Serializable {
 		this.modificationDate = modificationDate;
 	}
 
+	public String getModifiedObject() {
+		return modifiedObject;
+	}
+
+	public void setModifiedObject(String modifiedObject) {
+		this.modifiedObject = modifiedObject;
+	}
+
 	public String getModifiedObjectCode() {
 		return modifiedObjectCode;
 	}
@@ -104,4 +116,5 @@ public class History implements java.io.Serializable {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+
 }

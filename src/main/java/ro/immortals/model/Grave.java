@@ -22,7 +22,7 @@ public class Grave implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@Column(name = "nr_grave", length = 45)
 	private String nrGrave;
@@ -30,8 +30,11 @@ public class Grave implements java.io.Serializable {
 	@Column(name = "observations", length = 100)
 	private String observations;
 
-	@Column(name = "grave_type", length = 45)
-	private String graveType;
+	@Column(name = "type", length = 45)
+	private String type;
+
+	@Column(name = "surface", length = 45)
+	private String surface;
 
 	@Column(name = "photo_scanned", length = 200)
 	private String photoScanned;
@@ -41,13 +44,10 @@ public class Grave implements java.io.Serializable {
 	private Plot plot;
 
 	@OneToMany(mappedBy = "grave")
-	private List<Dead> deads = new ArrayList<Dead>();
-
-	@OneToMany(mappedBy = "grave")
 	private List<DeadWithoutFamily> deadsWithoutFamily = new ArrayList<DeadWithoutFamily>();
 
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "grave")
-	private List<Appointment> appointments = new ArrayList<Appointment>();
+	@OneToMany(mappedBy = "grave")
+	private List<FuneralFile> funeralFiles = new ArrayList<FuneralFile>();
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "grave")
 	private List<ConcessionContract> concessionContracts = new ArrayList<ConcessionContract>();
@@ -55,20 +55,22 @@ public class Grave implements java.io.Serializable {
 	public Grave() {
 	}
 
-	public Grave(int id, String nrGrave, String observations, String graveType, String photoScanned, Plot plot) {
+	public Grave(Integer id, String nrGrave, String observations, String graveType, String surface,
+	        String photoScanned, Plot plot) {
 		this.id = id;
 		this.nrGrave = nrGrave;
 		this.observations = observations;
-		this.graveType = graveType;
+		this.type = graveType;
+		this.surface = surface;
 		this.photoScanned = photoScanned;
 		this.plot = plot;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -88,12 +90,20 @@ public class Grave implements java.io.Serializable {
 		this.observations = observations;
 	}
 
-	public String getGraveType() {
-		return graveType;
+	public String getType() {
+		return type;
 	}
 
-	public void setGraveType(String graveType) {
-		this.graveType = graveType;
+	public void setType(String graveType) {
+		this.type = graveType;
+	}
+
+	public String getSurface() {
+		return surface;
+	}
+
+	public void setSurface(String surface) {
+		this.surface = surface;
 	}
 
 	public String getPhotoScanned() {
@@ -112,14 +122,6 @@ public class Grave implements java.io.Serializable {
 		this.plot = plot;
 	}
 
-	public List<Dead> getDeads() {
-		return deads;
-	}
-
-	public void setDeads(List<Dead> deads) {
-		this.deads = deads;
-	}
-
 	public List<DeadWithoutFamily> getDeadsWithoutFamily() {
 		return deadsWithoutFamily;
 	}
@@ -128,19 +130,19 @@ public class Grave implements java.io.Serializable {
 		this.deadsWithoutFamily = deadsWithoutFamily;
 	}
 
-	public List<Appointment> getAppointments() {
-		return appointments;
+	public List<FuneralFile> getFuneralFiles() {
+		return funeralFiles;
 	}
 
-	public void setAppointments(List<Appointment> appointments) {
-		this.appointments = appointments;
+	public void setFuneralFiles(List<FuneralFile> funeralFiles) {
+		this.funeralFiles = funeralFiles;
 	}
 
-	public List<ConcessionContract> getConsessionContracts() {
+	public List<ConcessionContract> getConcessionContracts() {
 		return concessionContracts;
 	}
 
-	public void setConsessionContracts(List<ConcessionContract> concessionContracts) {
+	public void setConcessionContracts(List<ConcessionContract> concessionContracts) {
 		this.concessionContracts = concessionContracts;
 	}
 

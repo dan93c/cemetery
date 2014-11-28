@@ -20,13 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ro.immortals.model.Cemetery;
-import ro.immortals.service.CemeteryService;
 
 @Controller
 @RequestMapping("/cemetery")
 public class CemeteryController extends MainController {
-
-	
 
 	@Autowired
 	@Qualifier("cemeteryValidator")

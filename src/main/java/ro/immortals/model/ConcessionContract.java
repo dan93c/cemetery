@@ -49,6 +49,19 @@ public class ConcessionContract implements java.io.Serializable {
 	@Column(name = "email_address", length = 100)
 	private String emailAddress;
 
+	@DateTimeFormat(iso = ISO.NONE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "signed_date")
+	private Date signedDate;
+
+	@DateTimeFormat(iso = ISO.NONE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated_date")
+	private Date updatedDate;
+
+	@Column(name = "period", nullable = false)
+	private Integer period;
+
 	@ManyToOne(targetEntity = Grave.class)
 	@JoinColumn(name = "grave_id")
 	private Grave grave;
@@ -57,7 +70,8 @@ public class ConcessionContract implements java.io.Serializable {
 	}
 
 	public ConcessionContract(Integer id, String receiptNr, Date releaseDate, String cnp, String firstName,
-	        String lastName, String address, String emailAddress, Grave grave) {
+	        String lastName, String address, String emailAddress, Date signedDate, Date updatedDate, Integer period,
+	        Grave grave) {
 		this.id = id;
 		this.receiptNr = receiptNr;
 		this.releaseDate = releaseDate;
@@ -66,6 +80,9 @@ public class ConcessionContract implements java.io.Serializable {
 		this.lastName = lastName;
 		this.address = address;
 		this.emailAddress = emailAddress;
+		this.signedDate = signedDate;
+		this.updatedDate = updatedDate;
+		this.period = period;
 		this.grave = grave;
 	}
 
@@ -131,6 +148,30 @@ public class ConcessionContract implements java.io.Serializable {
 
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
+	}
+
+	public Date getSignedDate() {
+		return signedDate;
+	}
+
+	public void setSignedDate(Date signedDate) {
+		this.signedDate = signedDate;
+	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public Integer getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(Integer period) {
+		this.period = period;
 	}
 
 	public Grave getGrave() {

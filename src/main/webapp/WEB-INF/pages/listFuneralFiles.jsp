@@ -17,38 +17,34 @@
 				<thead>
 					<tr>
 						<th rowspan="2">#</th>
-						<th rowspan="2">Numar</th>
-						<th rowspan="2">Data creare</th>
-						<th rowspan="2">CNP</th>
 						<th rowspan="2">Nume</th>
 						<th rowspan="2">Prenume</th>
-						<th rowspan="2">Adresa</th>
-						<th rowspan="2">E-mail</th>
-						<th colspan="3">Mormant</th>
-						<th rowspan="2"></th>
+						<th rowspan="2">Religie</th>
+						<th rowspan="2">Data mortii</th>
+						<th rowspan="2">Data inmormantarii</th>
+						<th colspan="4">Mormant</th>
 					</tr>
 					<tr>
 						<th>Numar</th>
 						<th>Parcela</th>
 						<th>Cimitir</th>
+						<th></th>
 					</tr>
 				</thead>
-				<c:forEach var="contract" items="${contracts}" varStatus="lineInfo">
+				<c:forEach var="funeralFile" items="${funeralFiles}"
+					varStatus="lineInfo">
 					<tr>
 						<td>${lineInfo.count}</td>
-						<td>${contract.receiptNr}</td>
-						<td><fmt:formatDate value="${contract.releaseDate}"
+						<td>${funeralFile.dead.lastName}</td>
+						<td>${funeralFile.dead.firstName}</td>
+						<td>${funeralFile.dead.religion}</td>
+						<td><fmt:formatDate value="${funeralFile.dead.deathDate}"
 								pattern="yyyy-MM-dd" /></td>
-						<td>${contract.cnp}</td>
-						<td>${contract.lastName}</td>
-						<td>${contract.firstName}</td>
-						<td>${contract.address}</td>
-						<td>${contract.emailAddress}</td>
-						<td>${contract.grave.nrGrave}</td>
-						<td>${contract.grave.plot.name}</td>
-						<td>${contract.grave.plot.cemetery.name}</td>
-						<td><a href="${CONTEXT_PATH}/contract/edit/${contract.id}"><button
-									style="float: right;">Modifica</button></a></td>
+						<td><fmt:formatDate value="${funeralFile.funeralDate}" pattern="yyyy-MM-dd HH:MM:SS" /></td>
+						<td>${funeralFile.grave.nrGrave}</td>
+						<td>${funeralFile.grave.plot.name}</td>
+						<td>${funeralFile.grave.plot.cemetery.name}</td>
+						<td><a href="${CONTEXT_PATH}/funeral/edit/${funeralFile.id}"><button>Modifica</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>

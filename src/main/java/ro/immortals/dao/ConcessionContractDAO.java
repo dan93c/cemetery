@@ -3,7 +3,6 @@ package ro.immortals.dao;
 import java.util.List;
 
 import ro.immortals.model.ConcessionContract;
-import ro.immortals.model.Grave;
 
 public interface ConcessionContractDAO {
 	

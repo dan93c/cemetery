@@ -17,7 +17,7 @@ public class DeadWithoutFamily implements java.io.Serializable{
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@Column(name = "funeral_certificate", length = 50)
 	private String funeralCertificate;
@@ -32,18 +32,18 @@ public class DeadWithoutFamily implements java.io.Serializable{
 	public DeadWithoutFamily() {
     }
 
-	public DeadWithoutFamily(int id, String feneralCertificate, String imlRequest, Grave grave) {
+	public DeadWithoutFamily(Integer id, String feneralCertificate, String imlRequest, Grave grave) {
 	    this.id = id;
 	    this.funeralCertificate = feneralCertificate;
 	    this.imlRequest = imlRequest;
 	    this.grave = grave;
     }
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

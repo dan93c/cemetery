@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,17 +17,28 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Nume</th>
-						<th colspan="2">Cimitir</th>
+						<th>Nr</th>
+						<th>Observatii</th>
+						<th>Tip</th>
+						<th>Suprafata</th>
+						<th>Fotografia</th>
+						<th>Parcela</th>
+						<th>Cimitir</th>
+						<th></th>
 					</tr>
 				</thead>
-				<c:forEach var="plot" items="${plots}" varStatus="lineInfo">
+				<c:forEach var="grave" items="${graves}"
+					varStatus="lineInfo">
 					<tr>
 						<td>${lineInfo.count}</td>
-						<td>${plot.name}</td>
-						<td>${plot.cemetery.name}
-						<a href="${CONTEXT_PATH}/plot/edit/${plot.id}"><button style="float:right;">Modifica</button></a>
-						</td>
+						<td>${grave.nrGrave}</td>
+						<td>${grave.observations}</td>
+						<td>${grave.type}</td>
+						<td>${grave.surface}</td>
+						<td>${grave.photoScanned}</td>
+						<td>${grave.plot.name}</td>
+						<td>${grave.plot.cemetery.name}</td>
+						<td><a href="${CONTEXT_PATH}/grave/edit/${grave.id}"><button>Modifica</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>

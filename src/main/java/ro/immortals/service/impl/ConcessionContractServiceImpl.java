@@ -7,11 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.jmx.snmp.Timestamp;
-
 import ro.immortals.dao.ConcessionContractDAO;
 import ro.immortals.model.ConcessionContract;
-import ro.immortals.model.Grave;
 import ro.immortals.service.ConcessionContractService;
 
 @Service

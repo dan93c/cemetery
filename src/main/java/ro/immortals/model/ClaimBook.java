@@ -32,11 +32,11 @@ public class ClaimBook {
 		this.claims = claims;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -49,10 +49,6 @@ public class ClaimBook {
 			this.complainer = "Anonim";
 		}
 		this.complainer = complainer;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getClaims() {

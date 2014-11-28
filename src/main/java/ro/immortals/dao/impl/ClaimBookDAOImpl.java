@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import ro.immortals.dao.ClaimBookDAO;
 import ro.immortals.model.ClaimBook;
-import ro.immortals.model.ClaimBook;
 
 @Repository
 public class ClaimBookDAOImpl implements ClaimBookDAO {

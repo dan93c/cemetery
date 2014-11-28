@@ -25,11 +25,11 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
-					<div class="alert alert-danger" role="alert">
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
+						<div class="alert alert-danger" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
 							${errorMessage}
-					</div>
+						</div>
 					</c:if>
 				</s:bind>
 				<table>
@@ -45,8 +45,8 @@
 					<tr height="10px"></tr>
 					<tr>
 						<td><label>CNP</label></td>
-						<td><form:input type="text" path="cnp"
-								required="required" placeholder="CNP" maxLengh="45"></form:input></td>
+						<td><form:input type="text" path="cnp" required="required"
+								placeholder="CNP" maxLengh="45"></form:input></td>
 						<td><form:errors path="cnp" cssClass="error" /></td>
 					</tr>
 					<tr height="10px"></tr>
@@ -73,9 +73,16 @@
 					<tr height="10px"></tr>
 					<tr>
 						<td><label>E-mail</label></td>
-						<td><form:input type="text" path="emailAddress"
+						<td><form:input type="email" path="emailAddress"
 								required="required" placeholder="E-mail" maxLengh="45"></form:input></td>
 						<td><form:errors path="emailAddress" cssClass="error" /></td>
+					</tr>
+					<tr height="10px"></tr>
+					<tr>
+						<td><label>Perioada</label></td>
+						<td><form:input type="number" path="period"
+								required="required" placeholder="Perioada"></form:input></td>
+						<td><form:errors path="period" cssClass="error" /></td>
 					</tr>
 					<tr height="10px"></tr>
 					<tr>
@@ -113,7 +120,7 @@
 					<tr height="10px"></tr>
 					<tr>
 						<td colspan="2" align="left"><input type="submit"
-							value="Modifica contract" class="button medium square blue"/></td>
+							value="Modifica contract" class="button medium square blue" /></td>
 					</tr>
 				</table>
 			</form:form>

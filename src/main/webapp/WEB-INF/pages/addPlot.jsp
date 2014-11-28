@@ -44,13 +44,6 @@
 					</tr>
 					<tr height="10px"></tr>
 					<tr>
-						<td><label>Suprafata</label></td>
-						<td><form:input type="text" path="surface"
-								required="required" placeholder="Suprafata"></form:input></td>
-						<td><form:errors path="surface" cssClass="error" /></td>
-					</tr>
-					<tr height="10px"></tr>
-					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><form:select path="cemetery.id">
 								<c:forEach var="cemetery" items="${cemeteries}">

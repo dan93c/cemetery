@@ -4,12 +4,15 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,8 +21,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name = "appointments")
-public class Appointment implements java.io.Serializable {
+@Table(name = "funeral_files")
+public class FuneralFile implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -31,29 +34,28 @@ public class Appointment implements java.io.Serializable {
 	@Column(name = "funeral_date")
 	private Date funeralDate;
 
-	@ManyToOne(targetEntity = Dead.class)
-	@JoinColumn(name = "dead_id")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "funeralFile", cascade = CascadeType.ALL)
 	private Dead dead;
 
 	@ManyToOne(targetEntity = Grave.class)
 	@JoinColumn(name = "grave_id")
 	private Grave grave;
 
-	public Appointment() {
+	public FuneralFile() {
 	}
 
-	public Appointment(int id, Date funeralDate, Dead dead, Grave grave) {
+	public FuneralFile(Integer id, Date funeralDate, Dead dead, Grave grave) {
 		this.id = id;
 		this.funeralDate = funeralDate;
 		this.dead = dead;
 		this.grave = grave;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

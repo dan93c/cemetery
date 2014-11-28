@@ -22,13 +22,10 @@ public class Plot implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@Column(name = "name", length = 45)
 	private String name;
-
-	@Column(name = "surface", length = 45)
-	private String surface;
 
 	@ManyToOne(targetEntity = Cemetery.class)
 	@JoinColumn(name = "cemetery_id")
@@ -40,18 +37,17 @@ public class Plot implements java.io.Serializable {
 	public Plot() {
 	}
 
-	public Plot(int id, String name, String surface, Cemetery cemetery) {
+	public Plot(Integer id, String name, Cemetery cemetery) {
 		this.id = id;
 		this.name = name;
-		this.surface = surface;
 		this.cemetery = cemetery;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -61,14 +57,6 @@ public class Plot implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getSurface() {
-		return surface;
-	}
-
-	public void setSurface(String surface) {
-		this.surface = surface;
 	}
 
 	public Cemetery getCemetery() {

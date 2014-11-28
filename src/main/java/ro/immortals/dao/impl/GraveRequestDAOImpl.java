@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import ro.immortals.dao.GraveRequestDAO;
 import ro.immortals.model.GraveRequest;
-import ro.immortals.model.GraveRequest;
 
 @Repository
 public class GraveRequestDAOImpl implements GraveRequestDAO{

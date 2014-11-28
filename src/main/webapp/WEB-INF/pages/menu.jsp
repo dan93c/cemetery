@@ -2,20 +2,27 @@
 <ul id="menu">
 	<li><a href="#">Home</a></li>
 	<li><a href="#">Programari</a>
-	</li>
-	<li><a href='#'>Decedati</a>
+		<ul>
+			<li><a href="${CONTEXT_PATH}/funeral/add">Progreameaza
+					inmormantare</a></li>
+			<li><a href="${CONTEXT_PATH}/funeral/list">Vizualizeaza
+					decedati</a></li>
+		</ul></li>
+	<%-- <li><a href='#'>Decedati</a>
 		<ul>
 			<li><a href="${CONTEXT_PATH}/dead/add">Adauga decedat</a></li>
-			<li><a href="${CONTEXT_PATH}/dead/list">Vizualizeaza decedati</a></li>
-		</ul>
-	</li>
+			<li><a href="${CONTEXT_PATH}/dead/list">Vizualizeaza
+					decedati</a></li>
+		</ul></li> --%>
 	<li><a href="#">Morminte</a>
 		<ul>
 			<li><a href="${CONTEXT_PATH}/contract/add">Adauga contract</a></li>
-			<li><a href="${CONTEXT_PATH}/contract/list">Vizualizare contracte</a></li>
-			<li><a href="#">Platite</a></li>
+			<li><a href="${CONTEXT_PATH}/contract/list">Vizualizare
+					contracte</a></li>
+			<li><a href="${CONTEXT_PATH}/grave/add">Adauga mormant</a></li>
+			<li><a href="${CONTEXT_PATH}/grave/list">Vizualizare
+					morminte</a></li>
 			<li><a href="#">Contract expirat</a></li>
-			<li><a href="#">Contract aproape expirat</a></li>
 		</ul></li>
 	<li><a href="">Cimitire</a>
 		<ul>

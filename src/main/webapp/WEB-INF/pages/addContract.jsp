@@ -74,7 +74,7 @@
 					<tr>
 						<td><label>E-mail</label></td>
 						<td><form:input type="email" path="emailAddress"
-								required="required" placeholder="E-mail" maxLengh="45"></form:input></td>
+								placeholder="E-mail" maxLengh="45"></form:input></td>
 						<td><form:errors path="emailAddress" cssClass="error" /></td>
 					</tr>
 					<tr height="10px"></tr>

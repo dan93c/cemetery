@@ -1,5 +1,6 @@
 package ro.immortals.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ro.immortals.model.Dead;
@@ -15,5 +16,7 @@ public interface DeadDAO {
 	public List<Dead> getAll();
 
 	public Dead getById(Integer id);
+	
+	public Dead getByGraveAndFuneralDate(String nrGrave, Date funeralDate);
 
 }

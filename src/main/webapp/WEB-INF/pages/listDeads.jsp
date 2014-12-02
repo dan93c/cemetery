@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,12 +20,15 @@
 						<th rowspan="2">Nume</th>
 						<th rowspan="2">Prenume</th>
 						<th rowspan="2">Religie</th>
-						<th colspan="3">Mormant</th>
+						<th rowspan="2">Data mortii</th>
+						<th rowspan="2">Data inmormantarii</th>
+						<th colspan="4">Mormant</th>
 					</tr>
 					<tr>
 						<th>Numar</th>
 						<th>Parcela</th>
 						<th>Cimitir</th>
+						<th></th>
 					</tr>
 				</thead>
 				<c:forEach var="dead" items="${deads}" varStatus="lineInfo">
@@ -33,10 +37,15 @@
 						<td>${dead.lastName}</td>
 						<td>${dead.firstName}</td>
 						<td>${dead.religion}</td>
+						<td><fmt:formatDate value="${dead.deathDate}"
+								pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${dead.funeralDate}"
+								pattern="yyyy-MM-dd HH:mm " /></td>
 						<td>${dead.grave.nrGrave}</td>
 						<td>${dead.grave.plot.name}</td>
-						<td>${dead.grave.plot.cemetery.name}
-						<a href="${CONTEXT_PATH}/dead/edit/${dead.id}"><button style="float:right;">Modifica</button></a></td>
+						<td>${dead.grave.plot.cemetery.name}</td>
+						<td><a href="${CONTEXT_PATH}/dead/edit/${dead.id}"><button
+									style="float: right;">Modifica</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>

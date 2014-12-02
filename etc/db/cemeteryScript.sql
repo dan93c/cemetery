@@ -113,26 +113,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `cemeterydb`.`funeral_files`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `cemeterydb`.`funeral_files` ;
-
-CREATE TABLE IF NOT EXISTS `cemeterydb`.`funeral_files` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `funeral_date` DATETIME NULL,
-  `grave_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_grave_app_idx` (`grave_id` ASC),
-  CONSTRAINT `fk_grave_app`
-    FOREIGN KEY (`grave_id`)
-    REFERENCES `cemeterydb`.`graves` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `cemeterydb`.`deads`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `cemeterydb`.`deads` ;
@@ -143,13 +123,15 @@ CREATE TABLE IF NOT EXISTS `cemeterydb`.`deads` (
   `last_name` VARCHAR(100) NULL DEFAULT NULL,
   `religion` VARCHAR(45) NULL DEFAULT NULL,
   `death_date` DATETIME NOT NULL,
+ `funeral_date` DATETIME NULL,
+  `grave_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_funeral_idx` (`id` ASC),
-  CONSTRAINT `fk_funeral`
-    FOREIGN KEY (`id`)
-    REFERENCES `cemeterydb`.`funeral_files` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+  INDEX `fk_grave_app_idx` (`grave_id` ASC),
+  CONSTRAINT `fk_grave_app`
+    FOREIGN KEY (`grave_id`)
+    REFERENCES `cemeterydb`.`graves` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -231,4 +213,4 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-insert into cemeterydb.users values('admin','admin');
+insert into users values ('admin','admin');

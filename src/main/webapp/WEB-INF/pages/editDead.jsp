@@ -38,25 +38,38 @@
 					</tr>
 					<tr>
 						<td><label>Nume</label></td>
-						<td><form:input type="text" path="firstName"
-								required="required" placeholder="Nume decedat" maxLengh="45"></form:input></td>
-						<td><form:errors path="firstName" cssClass="error" /></td>
-					</tr>
-					<tr height="10px"></tr>
-					<tr>
-						<td><label>Prenume</label></td>
 						<td><form:input type="text" path="lastName"
-								required="required" placeholder="Prenume decedat" maxLengh="45"></form:input></td>
+								required="required" placeholder="Nume decedat" maxLengh="45"></form:input></td>
 						<td><form:errors path="lastName" cssClass="error" /></td>
 					</tr>
 					<tr height="10px"></tr>
 					<tr>
-						<td><label>Religie</label></td>
+						<td><label>Prenume</label></td>
+						<td><form:input type="text" path="firstName"
+								required="required" placeholder="Prenume decedat" maxLengh="45"></form:input></td>
+						<td><form:errors path="firstName" cssClass="error" /></td>
+					</tr>
+					<tr height="10px"></tr>
+					<tr>
+						<td><label>Religia</label></td>
 						<td><form:input type="text" path="religion"
-								required="required" placeholder="Religie" maxLengh="45"></form:input></td>
+								required="required" placeholder="Religia" maxLengh="45"></form:input></td>
 						<td><form:errors path="religion" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>				
+					<tr height="10px"></tr>
+					<tr>
+						<td><label>Data mortii</label></td>
+						<td><form:input type="date" path="deathDate"></form:input></td>
+						<td><form:errors path="deathDate" cssClass="error" /></td>
+					</tr>
+					<tr height="10px"></tr>
+					<tr>
+						<td><label>Data inmormantarii</label></td>
+						<td><form:input type="datetime-local" path="funeralDate"
+								pattern="yyyy-MM-dd hh:mm a"></form:input></td>
+						<td><form:errors path="funeralDate" cssClass="error" /></td>
+					</tr>
+					<tr height="10px"></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><select name="cemeterySelect">

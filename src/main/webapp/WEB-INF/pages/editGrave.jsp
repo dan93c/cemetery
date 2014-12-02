@@ -66,9 +66,14 @@
 						<td><label>Cimitirul</label></td>
 						<td><select name="cemeterySelect">
 								<c:forEach var="cemetery" items="${cemeteries}">
-									<option value="${cemetery.id}">
-										<c:out value="${cemetery.name}" />
-									</option>
+									<c:choose>
+										<c:when test="${cemetery.id eq grave.plot.cemetery.id}">
+											<option value="${cemetery.id}" selected="selected">${cemetery.name}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${cemetery.id}">${cemetery.name}</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 						</select></td>
 					</tr>
@@ -76,9 +81,14 @@
 						<td><label>Parcela</label></td>
 						<td><form:select path="plot.id">
 								<c:forEach var="plot" items="${plots}">
-									<option value="${plot.id}">
-										<c:out value="${plot.name}" />
-									</option>
+									<c:choose>
+										<c:when test="${plot.id eq grave.plot.id}">
+											<option value="${plot.id}" selected="selected">${plot.name}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${plot.id}">${plot.name}</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</form:select></td>
 						<td><form:errors path="plot" cssClass="error" /></td>

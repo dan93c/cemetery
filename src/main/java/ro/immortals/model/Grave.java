@@ -47,7 +47,7 @@ public class Grave implements java.io.Serializable {
 	private List<DeadWithoutFamily> deadsWithoutFamily = new ArrayList<DeadWithoutFamily>();
 
 	@OneToMany(mappedBy = "grave")
-	private List<FuneralFile> funeralFiles = new ArrayList<FuneralFile>();
+	private List<Dead> deads = new ArrayList<Dead>();
 
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "grave")
 	private List<ConcessionContract> concessionContracts = new ArrayList<ConcessionContract>();
@@ -130,12 +130,12 @@ public class Grave implements java.io.Serializable {
 		this.deadsWithoutFamily = deadsWithoutFamily;
 	}
 
-	public List<FuneralFile> getFuneralFiles() {
-		return funeralFiles;
+	public List<Dead> getDeads() {
+		return deads;
 	}
 
-	public void setFuneralFiles(List<FuneralFile> funeralFiles) {
-		this.funeralFiles = funeralFiles;
+	public void setDeads(List<Dead> deads) {
+		this.deads = deads;
 	}
 
 	public List<ConcessionContract> getConcessionContracts() {

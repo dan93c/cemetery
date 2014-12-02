@@ -15,5 +15,7 @@ public interface DeadService {
 	public List<Dead> getAll();
 
 	public Dead getById(Integer id);
+	
+	public boolean checkDuplicate(Dead dead);
 
 }

@@ -7,7 +7,6 @@
 <html>
 <head>
 <jsp:include page="sources.jsp" />
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Adauga decedat</title>
 </head>
 <body>
@@ -25,11 +24,11 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
-					<div class="alert alert-danger" role="alert">
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
+						<div class="alert alert-danger" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
 							${errorMessage}
-					</div>
+						</div>
 					</c:if>
 				</s:bind>
 				<table>
@@ -55,6 +54,19 @@
 						<td><form:input type="text" path="religion"
 								required="required" placeholder="Religia" maxLengh="45"></form:input></td>
 						<td><form:errors path="religion" cssClass="error" /></td>
+					</tr>
+					<tr height="10px"></tr>
+					<tr>
+						<td><label>Data mortii</label></td>
+						<td><form:input type="text" path="deathDate" id="deathDate"></form:input></td>
+						<td><form:errors path="deathDate" cssClass="error" /></td>
+					</tr>
+					<tr height="10px"></tr>
+					<tr>
+						<td><label>Data inmormantarii</label></td>
+						<td><form:input type="text" path="funeralDate"
+								id="funeralDate"></form:input></td>
+						<td><form:errors path="funeralDate" cssClass="error" /></td>
 					</tr>
 					<tr height="10px"></tr>
 					<tr>
@@ -99,4 +111,17 @@
 		</div>
 	</div>
 </body>
+<link rel="stylesheet" type="text/css"
+	href="${CONTEXT_PATH}/resources/css/jquery.datetimepicker.css" />
+<script src="${CONTEXT_PATH}/resources/js/jquery.js"></script>
+<script src="${CONTEXT_PATH}/resources/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+	$('#funeralDate').datetimepicker({
+		formatDate:'Y/m/d'
+	});
+	$('#deathDate').datetimepicker({
+		defaultTime:'00:00',
+		formatDate:'Y/m/d'
+	});
+</script>
 </html>

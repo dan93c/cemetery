@@ -50,5 +50,14 @@ public class DeadServiceImpl implements DeadService {
 		return deadDAO.getById(id);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public boolean checkDuplicate(Dead dead) {
+		Dead existingDead = deadDAO.getByGraveAndFuneralDate(dead.getGrave().getNrGrave(), dead.getFuneralDate());
+		if (existingDead != null && (existingDead.getId() != dead.getId())) {
+			return false;
+		}
+		return true;
+	}
 
 }

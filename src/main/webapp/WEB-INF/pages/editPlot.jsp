@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@	taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <jsp:include page="sources.jsp" />
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Modifica parcela</title>
 </head>
 <body>
@@ -25,11 +24,11 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
-					<div class="alert alert-danger" role="alert">
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
+						<div class="alert alert-danger" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
 							${errorMessage}
-					</div>
+						</div>
 					</c:if>
 				</s:bind>
 				<table>
@@ -47,12 +46,16 @@
 						<td><label>Cimitirul</label></td>
 						<td><form:select path="cemetery.id">
 								<c:forEach var="cemetery" items="${cemeteries}">
-									<option value="${cemetery.id}">
-										<c:out value="${cemetery.name}" />
-									</option>
+									<c:choose>
+										<c:when test="${cemetery.id eq plot.cemetery.id}">
+											<option value="${cemetery.id}" selected="selected">${cemetery.name}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${cemetery.id}">${cemetery.name}</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
-							</form:select>
-						</td>
+							</form:select></td>
 						<td><form:errors path="cemetery" cssClass="error" /></td>
 					</tr>
 
@@ -60,7 +63,7 @@
 
 					<tr>
 						<td colspan="2" align="left"><input type="submit"
-							value="Modifica parcela" class="button medium square blue"/></td>
+							value="Modifica parcela" class="button medium square blue" /></td>
 						<td></td>
 					</tr>
 				</table>

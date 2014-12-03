@@ -25,7 +25,7 @@
 						<td>${lineInfo.count}</td>
 						<td>${plot.name}</td>
 						<td>${plot.cemetery.name}
-						<a href="${CONTEXT_PATH}/plot/edit/${plot.id}"><button style="float:right;">Modifica</button></a>
+						<a href="${CONTEXT_PATH}/plot/edit/${plot.id}"><button class="btn-table">Modifica</button></a>
 						</td>
 					</tr>
 				</c:forEach>

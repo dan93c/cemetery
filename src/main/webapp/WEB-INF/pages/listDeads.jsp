@@ -27,8 +27,7 @@
 					<tr>
 						<th>Numar</th>
 						<th>Parcela</th>
-						<th>Cimitir</th>
-						<th></th>
+						<th colspan="2">Cimitir</th>
 					</tr>
 				</thead>
 				<c:forEach var="dead" items="${deads}" varStatus="lineInfo">
@@ -43,9 +42,9 @@
 								pattern="yyyy-MM-dd HH:mm " /></td>
 						<td>${dead.grave.nrGrave}</td>
 						<td>${dead.grave.plot.name}</td>
-						<td>${dead.grave.plot.cemetery.name}</td>
-						<td><a href="${CONTEXT_PATH}/dead/edit/${dead.id}"><button
-									style="float: right;">Modifica</button></a></td>
+						<td>${dead.grave.plot.cemetery.name}
+						<a href="${CONTEXT_PATH}/dead/edit/${dead.id}"><button
+									class="btn-table">Modifica</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>

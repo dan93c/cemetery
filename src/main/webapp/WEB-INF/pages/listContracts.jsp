@@ -24,13 +24,12 @@
 						<th rowspan="2">Prenume</th>
 						<th rowspan="2">Adresa</th>
 						<th rowspan="2">E-mail</th>
-						<th colspan="3">Mormant</th>
-						<th rowspan="2"></th>
+						<th colspan="4">Mormant</th>
 					</tr>
 					<tr>
 						<th>Numar</th>
 						<th>Parcela</th>
-						<th>Cimitir</th>
+						<th colspan="2">Cimitir</th>
 					</tr>
 				</thead>
 				<c:forEach var="contract" items="${contracts}" varStatus="lineInfo">
@@ -46,9 +45,9 @@
 						<td>${contract.emailAddress}</td>
 						<td>${contract.grave.nrGrave}</td>
 						<td>${contract.grave.plot.name}</td>
-						<td>${contract.grave.plot.cemetery.name}</td>
-						<td><a href="${CONTEXT_PATH}/contract/edit/${contract.id}"><button
-									style="float: right;">Modifica</button></a></td>
+						<td >${contract.grave.plot.cemetery.name}
+						<a href="${CONTEXT_PATH}/contract/edit/${contract.id}"><button
+									class="btn-table">Modifica</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>

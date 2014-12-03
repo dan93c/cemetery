@@ -23,8 +23,7 @@
 						<th>Suprafata</th>
 						<th>Fotografia</th>
 						<th>Parcela</th>
-						<th>Cimitir</th>
-						<th></th>
+						<th colspan="2">Cimitir</th>
 					</tr>
 				</thead>
 				<c:forEach var="grave" items="${graves}"
@@ -37,8 +36,8 @@
 						<td>${grave.surface}</td>
 						<td>${grave.photoScanned}</td>
 						<td>${grave.plot.name}</td>
-						<td>${grave.plot.cemetery.name}</td>
-						<td><a href="${CONTEXT_PATH}/grave/edit/${grave.id}"><button>Modifica</button></a></td>
+						<td>${grave.plot.cemetery.name}
+						<a href="${CONTEXT_PATH}/grave/edit/${grave.id}"><button class="btn-table">Modifica</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -23,7 +23,7 @@
 					<tr>
 						<td>${cemetery.name}</td>
 						<td>${cemetery.address}
-						<a href="${CONTEXT_PATH}/cemetery/edit/${cemetery.id}"><button style="float:right;">Modifica</button></a>
+						<a href="${CONTEXT_PATH}/cemetery/edit/${cemetery.id}"><button class="btn-table">Modifica</button></a>
 						</td>
 					</tr>
 				</c:forEach>

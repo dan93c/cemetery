@@ -61,6 +61,12 @@ body {
 		rgba(0, 0, 0, 1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d',
 		endColorstr='#000000', GradientType=0); /* IE6-8 */
+		
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	background-color: #000000;
+		
 /* 		  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -248,7 +254,8 @@ body {
 	padding-right: 5%;
 	padding-bottom: 20px;
 	padding-left: 5%;
-	width: 90%;
+	width: 100%;
+	background-color: white;
 }
 
 .button {
@@ -334,4 +341,7 @@ body {
 	float:right;
 }
 
+.full-table{
+	width: 100% !important;
+}
 

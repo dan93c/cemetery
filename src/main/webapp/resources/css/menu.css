@@ -325,3 +325,9 @@ body {
 	/* background-color: #6fc6ff; */
 	background-color: #111;
 }
+
+.height-tr tr{
+	height:10px;
+}
+
+

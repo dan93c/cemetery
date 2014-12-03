@@ -32,7 +32,7 @@
 					</div>
 					</c:if>
 				</s:bind>
-				<table>
+				<table class="height-tr">
 					<tr>
 						<td><form:input type="hidden" path="id"></form:input></td>
 					</tr>
@@ -42,14 +42,14 @@
 								placeholder="Nume cimitir"></form:input></td>
 						<td><form:errors path="name" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Adresa</label></td>
 						<td><form:input type="text" path="address"
 								required="required" placeholder="Adresa completa"></form:input></td>
 						<td><form:errors path="address" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td colspan="2" align="left"><input type="submit"
 							value="Modifica cimitir" class="button medium square blue"/></td>

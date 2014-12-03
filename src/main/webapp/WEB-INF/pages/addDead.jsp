@@ -31,7 +31,7 @@
 						</div>
 					</c:if>
 				</s:bind>
-				<table>
+				<table class="height-tr">
 					<tr>
 						<td><form:input type="hidden" path="id"></form:input></td>
 					</tr>
@@ -41,34 +41,34 @@
 								required="required" placeholder="Nume decedat" maxLengh="45"></form:input></td>
 						<td><form:errors path="lastName" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Prenume</label></td>
 						<td><form:input type="text" path="firstName"
 								required="required" placeholder="Prenume decedat" maxLengh="45"></form:input></td>
 						<td><form:errors path="firstName" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Religia</label></td>
 						<td><form:input type="text" path="religion"
 								required="required" placeholder="Religia" maxLengh="45"></form:input></td>
 						<td><form:errors path="religion" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Data mortii</label></td>
 						<td><form:input type="text" path="deathDate" id="deathDate"></form:input></td>
 						<td><form:errors path="deathDate" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Data inmormantarii</label></td>
 						<td><form:input type="text" path="funeralDate"
 								id="funeralDate"></form:input></td>
 						<td><form:errors path="funeralDate" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><select name="cemeterySelect">
@@ -79,7 +79,7 @@
 								</c:forEach>
 						</select></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Parcela</label></td>
 						<td><select name="plotSelect">
@@ -90,7 +90,7 @@
 								</c:forEach>
 						</select></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Mormantul</label></td>
 						<td><form:select path="grave.id">
@@ -101,7 +101,7 @@
 								</c:forEach>
 							</form:select></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td colspan="2" align="left"><input type="submit"
 							value="Adauga decedat" class="button medium square blue" /></td>

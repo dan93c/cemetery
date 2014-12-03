@@ -31,7 +31,7 @@
 						</div>
 					</c:if>
 				</s:bind>
-				<table>
+				<table class="height-tr">
 					<tr>
 						<td><form:input type="hidden" path="id"></form:input></td>
 					</tr>
@@ -41,7 +41,7 @@
 								placeholder="Nume parcela"></form:input></td>
 						<td><form:errors path="name" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><form:select path="cemetery.id">
@@ -59,7 +59,7 @@
 						<td><form:errors path="cemetery" cssClass="error" /></td>
 					</tr>
 
-					<tr height="10px"></tr>
+					<tr></tr>
 
 					<tr>
 						<td colspan="2" align="left"><input type="submit"

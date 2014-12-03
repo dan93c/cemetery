@@ -28,7 +28,7 @@
 						<span>${errorMessage}</span>
 					</c:if>
 				</s:bind>
-				<table>
+				<table class="height-tr">
 					<tr>
 						<td><form:input type="hidden" path="id"></form:input></td>
 					</tr>
@@ -38,30 +38,35 @@
 								required="required" placeholder="Numar mormant" maxLengh="45"></form:input></td>
 						<td><form:errors path="nrGrave" cssClass="error" /></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td><label>Tipul</label></td>
 						<td><form:input type="text" path="type" placeholder="Tipul"
 								maxLengh="45"></form:input></td>
 						<td><form:errors path="type" cssClass="error" /></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td><label>Suprafata</label></td>
 						<td><form:input type="text" path="surface"
 								required="required" placeholder="Suprafata"></form:input></td>
 						<td><form:errors path="surface" cssClass="error" /></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td><label>Poza scanata</label></td>
 						<td><form:input type="text" path="photoScanned"
 								maxLengh="200"></form:input></td>
 						<td><form:errors path="photoScanned" cssClass="error" /></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td><label>Observatii</label></td>
 						<td><form:input type="text" path="observations"
 								placeholder="Observatii" maxLengh="100"></form:input></td>
 						<td><form:errors path="observations" cssClass="error" /></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><select name="cemeterySelect">
@@ -77,6 +82,7 @@
 								</c:forEach>
 						</select></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td><label>Parcela</label></td>
 						<td><form:select path="plot.id">
@@ -93,6 +99,7 @@
 							</form:select></td>
 						<td><form:errors path="plot" cssClass="error" /></td>
 					</tr>
+					<tr></tr>
 					<tr>
 						<td colspan="2" align="left"><input type="submit"
 							value="Modifica mormant" class="button medium square blue" /></td>

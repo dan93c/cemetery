@@ -32,7 +32,7 @@
 					</div>
 					</c:if>
 				</s:bind>
-				<table>
+				<table class="height-tr">
 					<tr>
 						<td><form:input type="hidden" path="id"></form:input></td>
 					</tr>
@@ -42,49 +42,49 @@
 								required="required" placeholder="Numar" maxLengh="45"></form:input></td>
 						<td><form:errors path="receiptNr" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>CNP</label></td>
 						<td><form:input type="text" path="cnp"
 								required="required" placeholder="CNP" maxLengh="45"></form:input></td>
 						<td><form:errors path="cnp" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Nume</label></td>
 						<td><form:input type="text" path="lastName"
 								required="required" placeholder="Nume" maxLengh="45"></form:input></td>
 						<td><form:errors path="lastName" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Prenume</label></td>
 						<td><form:input type="text" path="firstName"
 								required="required" placeholder="Prenume" maxLengh="45"></form:input></td>
 						<td><form:errors path="firstName" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Adresa</label></td>
 						<td><form:input type="text" path="address"
 								required="required" placeholder="Adresa" maxLengh="45"></form:input></td>
 						<td><form:errors path="address" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>E-mail</label></td>
 						<td><form:input type="email" path="emailAddress"
 								placeholder="E-mail" maxLengh="45"></form:input></td>
 						<td><form:errors path="emailAddress" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Perioada</label></td>
 						<td><form:input type="number" path="period"
 								required="required" placeholder="Perioada"></form:input></td>
 						<td><form:errors path="period" cssClass="error" /></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><select name="cemeterySelect">
@@ -95,7 +95,7 @@
 								</c:forEach>
 						</select></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Parcela</label></td>
 						<td><select name="plotSelect">
@@ -106,7 +106,7 @@
 								</c:forEach>
 						</select></td>
 					</tr>
-					<tr height="10px"></tr>
+					<tr></tr>
 					<tr>
 						<td><label>Mormantul</label></td>
 						<td><form:select path="grave.id">

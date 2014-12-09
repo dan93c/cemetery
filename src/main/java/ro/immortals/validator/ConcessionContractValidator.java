@@ -19,38 +19,54 @@ public class ConcessionContractValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receipt_nr", "error.concessionContract.receipt_nr.required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cnp", "error.concessionContract.cnp.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receipt_nr",
+				"error.concessionContract.receipt_nr.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cnp",
+				"error.concessionContract.cnp.required");
 
 		ConcessionContract concessionContract = (ConcessionContract) target;
 
 		if (isValidEmailAddress(concessionContract.getEmailAddress()) == false
-		        && concessionContract.getEmailAddress() != null) {
-			errors.rejectValue("emailAddress", "error.concessionContract.email.invalid", null,
-			        "Adresa de email este invalida");
+				&& concessionContract.getEmailAddress() != null) {
+			errors.rejectValue("emailAddress",
+					"error.concessionContract.email.invalid", null,
+					"Adresa de email este invalida");
 		} else {
 			if (concessionContract.getReceiptNr().length() >= 45) {
-				errors.rejectValue("receipt_nr", "longText", new Object[] { "Receipt_Nr" },
-				        "Campul 'Receipt_Nr' este prea lung.");
+				errors.rejectValue("receipt_nr", "longText",
+						new Object[] { "Receipt_Nr" },
+						"Campul 'Receipt_Nr' este prea lung.");
 			}
 			if (concessionContract.getAddress().length() >= 100) {
-				errors.rejectValue("address", "longText", new Object[] { "Adresa" }, "Campul 'Adresa' este prea lung.");
+				errors.rejectValue("address", "longText",
+						new Object[] { "Adresa" },
+						"Campul 'Adresa' este prea lung.");
 			}
 			if (concessionContract.getFirstName().length() >= 100) {
-				errors.rejectValue("firstName", "longText", new Object[] { "Nume" }, "Campul 'Nume' este prea lung.");
+				errors.rejectValue("firstName", "longText",
+						new Object[] { "Nume" },
+						"Campul 'Nume' este prea lung.");
 			}
 			if (concessionContract.getLastName().length() >= 100) {
-				errors.rejectValue("lastName", "longText", new Object[] { "Prenume" },
-				        "Campul 'Prenume' este prea lung.");
+				errors.rejectValue("lastName", "longText",
+						new Object[] { "Prenume" },
+						"Campul 'Prenume' este prea lung.");
 			}
 
-			if (concessionContract.getCnp().length() >= 15) {
-				errors.rejectValue("cnp", "longText", new Object[] { "Cnp" }, "Campul 'Cnp' este prea lung.");
+			if (concessionContract.getCnp().length() > 13) {
+				errors.rejectValue("cnp", "longText", new Object[] { "Cnp" },
+						"Campul 'Cnp' este prea lung.");
 			}
 
 			if (concessionContract.getEmailAddress().length() >= 100) {
-				errors.rejectValue("emailAddress", "longText", new Object[] { "Email" },
-				        "Campul 'Email' este prea lung.");
+				errors.rejectValue("emailAddress", "longText",
+						new Object[] { "Email" },
+						"Campul 'Email' este prea lung.");
+			}
+
+			if (containsOnlyNumbers(concessionContract.getCnp())==false) {
+				errors.rejectValue("cnp", "message.contract.error.invalid.field.number", new Object[] { "Cnp" },
+						"Campul 'Cnp' trebuie sa fie format doar din cifre!");
 			}
 		}
 	}
@@ -64,6 +80,21 @@ public class ConcessionContractValidator implements Validator {
 			result = false;
 		}
 		return result;
+	}
+
+	public boolean containsOnlyNumbers(String str) {
+
+		if (str == null || str.length() == 0)
+			return false;
+
+		for (int i = 0; i < str.length(); i++) {
+
+			// If we find a non-digit character we return false.
+			if (!Character.isDigit(str.charAt(i)))
+				return false;
+		}
+
+		return true;
 	}
 
 }

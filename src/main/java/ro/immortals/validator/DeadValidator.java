@@ -1,5 +1,6 @@
 package ro.immortals.validator;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -64,6 +65,17 @@ public class DeadValidator implements Validator {
 				// poate face si peste 2-3 zile
 				// trebuie verificata si data mortii
 				// }
+				
+				
+				if(dead.getFuneralDate().before(new Date())){
+					errors.rejectValue("funeralDate", "message.dead.error.before.current.date", new
+							 Object[] { "Data inmormantarii" },
+							 "Campul 'Data inmormantarii' este inainte de data curenta.");
+				}else if(dead.getFuneralDate().before(dead.getDeathDate())){
+					errors.rejectValue("funeralDate", "message.dead.error.before.funeral.date", new
+							 Object[] { "Data inmormantarii" },
+							 "Campul 'Data inmormantarii' este inainte de data mortii.");
+				}
 			}
 		}
 	}

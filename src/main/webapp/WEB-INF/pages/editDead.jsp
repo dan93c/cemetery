@@ -13,6 +13,13 @@
 <body>
 	<div id="container">
 		<%@include file="menu.jsp"%>
+		
+		<!-- div containing the logout button and the user's name -->
+		<div id="logout_header">
+			<p id="logged_user">&nbsp;Logged User&nbsp;</p>
+			<img id="logout_button" src="<%=request.getContextPath()%>/resources/img/logout3.png" alt="logout">
+		</div>
+		
 		<div id="center">
 			<h2>Date despre decedat</h2>
 			<form:form name="editDead" modelAttribute="dead"

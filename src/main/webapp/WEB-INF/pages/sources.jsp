@@ -6,3 +6,8 @@
 	href="${CONTEXT_PATH}/resources/css/menu.css">
 <link rel="stylesheet" type="text/css"
 	href="${CONTEXT_PATH}/resources/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="${CONTEXT_PATH}/resources/css/pagination.css">
+<link rel="stylesheet" type="text/css" href="${CONTEXT_PATH}/resources/css/logout_button.css">
+<link rel="stylesheet" type="text/css" href="${CONTEXT_PATH}/resources/css/search_filter.css">
+<script type="text/javascript" src="${CONTEXT_PATH}/resources/js/jquery.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/resources/js/pagination.js"></script>

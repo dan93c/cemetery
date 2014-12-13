@@ -29,3 +29,10 @@
 					decedati</a></li>
 		</ul></li>
 </ul>
+<!-- div containing the logout button and the user's name -->
+<div id="logout_header">
+	<p id="logged_user">&nbsp;Logged User&nbsp;</p>
+	<img id="logout_button"
+		src="<%=request.getContextPath()%>/resources/img/logout3.png"
+		alt="logout">
+</div>

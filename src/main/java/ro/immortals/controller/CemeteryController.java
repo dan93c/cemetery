@@ -55,11 +55,13 @@ public class CemeteryController extends MainController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView doAdd(@ModelAttribute @Validated Cemetery cemetery, BindingResult bindingResult) {
+	public ModelAndView doAdd(@ModelAttribute @Validated Cemetery cemetery, BindingResult bindingResult,
+	        HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return add(cemetery);
 		}
-		Integer errorCode = cemeteryService.add(cemetery);
+		String username = request.getUserPrincipal().getName();
+		Integer errorCode = cemeteryService.add(cemetery, username);
 		if (errorCode == 1) {
 			ModelAndView modelAndView = new ModelAndView(ADD_CEMETERY_JSP);
 			modelAndView.addObject(CEMETERY, cemetery);
@@ -78,19 +80,22 @@ public class CemeteryController extends MainController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView doEdit(@ModelAttribute @Validated Cemetery cemetery, BindingResult bindingResult) {
+	public ModelAndView doEdit(@ModelAttribute @Validated Cemetery cemetery, BindingResult bindingResult,
+	        HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_CEMETERY_JSP);
 			modelAndView.addObject(CEMETERY, cemetery);
 			return modelAndView;
 		}
-		cemeteryService.update(cemetery);
+		String username = request.getUserPrincipal().getName();
+		cemeteryService.update(cemetery, username);
 		return list();
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable Integer id, HttpServletRequest request) {
-		cemeteryService.delete(id);
+		String username = request.getUserPrincipal().getName();
+		cemeteryService.delete(id, username);
 		return list();
 	}
 }

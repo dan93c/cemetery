@@ -1,6 +1,6 @@
 <div id="banner"></div>
 <ul id="menu">
-	<li><a href="#">Home</a></li>
+	<li><a href="${CONTEXT_PATH}/history/1">Home</a></li>
 	<li><a href="">Cimitire</a>
 		<ul>
 			<li><a href="${CONTEXT_PATH}/cemetery/add">Adauga</a></li>
@@ -31,8 +31,8 @@
 </ul>
 <!-- div containing the logout button and the user's name -->
 <div id="logout_header">
-	<p id="logged_user">&nbsp;Logged User&nbsp;</p>
+	<p id="logged_user">&nbsp;${username}&nbsp;</p>
 	<img id="logout_button"
-		src="<%=request.getContextPath()%>/resources/img/logout3.png"
+		src="<%=request.getContextPath()%>/resources/img/logout4.png"
 		alt="logout">
 </div>

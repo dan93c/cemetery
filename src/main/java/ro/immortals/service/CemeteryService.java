@@ -6,11 +6,11 @@ import ro.immortals.model.Cemetery;
 
 public interface CemeteryService {
 
-	public int add(Cemetery cemetery);
+	public Integer add(Cemetery cemetery, String username);
 
-	public void update(Cemetery cemetery);
+	public Integer update(Cemetery cemetery, String username);
 
-	public void delete(Integer id);
+	public void delete(Integer id, String username);
 
 	public List<Cemetery> getAll();
 

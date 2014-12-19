@@ -14,7 +14,7 @@ public class SecurityNavigationController extends MainController {
 	public ModelAndView defaultAfterLogin(HttpServletRequest request) {
 		if (request.isUserInRole("ROLE_ADMIN")) {
 			request.getSession().setAttribute(USERNAME, request.getUserPrincipal().getName());
-			return new ModelAndView("redirect:/cemetery/list");
+			return new ModelAndView("redirect:/history/1");
 		}
 		return invalidLogin();
 	}
@@ -33,7 +33,7 @@ public class SecurityNavigationController extends MainController {
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String successLogin(HttpServletRequest request) {
-		return "redirect:/cemetery/list";
+		return "redirect:/history/1";
 	}
 
 }

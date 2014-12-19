@@ -16,4 +16,16 @@ public interface HistoryDAO {
 
 	public History getById(Integer id);
 
+	public List<History> getAllByPage(Integer offset, Integer nrOfRecords);
+
+	public List<History> getByPageSearch(String search, Integer offset,
+			Integer nrOfRecords);
+
+	public Integer getAllSizeSearchBy(String search);
+
+	public Integer getAllSizeFilterBySearch(String criteria, String search);
+
+	public List<History> getByPageFilterBySearch(String criteria,
+			String search, Integer offset, Integer nrOfRecords);
+
 }

@@ -50,4 +50,49 @@ public class HistoryServiceImpl implements HistoryService {
 		return historyDAO.getById(id);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Integer getAllSizeSearchBy(String search) {
+		if (search != null) {
+			return historyDAO.getAllSizeSearchBy(search);
+		}
+		return historyDAO.getAll().size();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<History> getByPageSearch(String search, Integer offset,
+			Integer nrOfRecords) {
+		if (search != null) {
+			return historyDAO.getByPageSearch(search, offset, nrOfRecords);
+		}
+		return historyDAO.getAllByPage(offset, nrOfRecords);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Integer getAllSizeFilterBySearch(String criteria, String search) {
+		if (search == null) {
+			search = "";
+		}
+		if (criteria == null || criteria.contentEquals("0")) {
+			return historyDAO.getAllSizeSearchBy(search);
+		}
+		return historyDAO.getAllSizeFilterBySearch(criteria, search);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<History> getByPageFilterBySearch(String criteria,
+			String search, Integer offset, Integer nrOfRecords) {
+		if (search == null) {
+			search = "";
+		}
+		if (criteria == null || criteria.contentEquals("0")) {
+			return historyDAO.getByPageSearch(search, offset, nrOfRecords);
+		}
+		return historyDAO.getByPageFilterBySearch(criteria, search, offset,
+				nrOfRecords);
+	}
+
 }

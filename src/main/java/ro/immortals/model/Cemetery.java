@@ -72,4 +72,8 @@ public class Cemetery implements java.io.Serializable {
 		this.plots = plots;
 	}
 
+	@Override
+    public String toString() {
+	    return "Denumire:" + name + ", Adresa:" + address;
+    }
 }

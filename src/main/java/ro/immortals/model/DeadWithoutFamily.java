@@ -75,7 +75,7 @@ public class DeadWithoutFamily implements java.io.Serializable{
 	public String toString() {
 		return (funeralCertificate != null ? "Adeverinta inhumare:"
 				+ funeralCertificate + ", " : "")
-				+ (imlRequest != null ? "Solicitare IML:" + imlRequest + ", " : "";
+				+ (imlRequest != null ? "Solicitare IML:" + imlRequest + ", " : "");
 	}
 
 }

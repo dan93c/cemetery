@@ -71,4 +71,11 @@ public class DeadWithoutFamily implements java.io.Serializable{
 		this.grave = grave;
 	}
 
+	@Override
+	public String toString() {
+		return (funeralCertificate != null ? "Adeverinta inhumare:"
+				+ funeralCertificate + ", " : "")
+				+ (imlRequest != null ? "Solicitare IML:" + imlRequest + ", " : "";
+	}
+
 }

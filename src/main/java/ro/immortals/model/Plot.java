@@ -75,4 +75,9 @@ public class Plot implements java.io.Serializable {
 		this.graves = graves;
 	}
 
+	@Override
+	public String toString() {
+		return (name != null ? "Denumire:" + name + ", " : "");
+	}
+
 }

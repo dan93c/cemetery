@@ -59,4 +59,11 @@ public class ClaimBook {
 		this.claims = claims;
 	}
 
+	@Override
+	public String toString() {
+		return (complainer != null ? "autor:" + complainer + ", " : "")
+				+ (claims != null ? "reclamatii:" + claims : "");
+	}
+
+	
 }

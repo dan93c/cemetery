@@ -55,4 +55,9 @@ public class User implements java.io.Serializable {
 		this.history = history;
 	}
 
+	@Override
+	public String toString() {
+		return (username != null ? "username:" + username + ", " : "");
+	}
+
 }

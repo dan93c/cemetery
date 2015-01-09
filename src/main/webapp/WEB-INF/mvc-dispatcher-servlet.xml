@@ -23,8 +23,10 @@
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
+		 <property name="useCodeAsDefaultMessage" value="true"/>
 		<property name="basename" value="properties/messages" />
 	</bean>
+	
 	
 	<!-- Validator classes -->
 	<bean id="cemeteryValidator" class="ro.immortals.validator.CemeteryValidator" ></bean>

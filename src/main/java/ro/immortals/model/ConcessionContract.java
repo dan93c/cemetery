@@ -69,9 +69,10 @@ public class ConcessionContract implements java.io.Serializable {
 	public ConcessionContract() {
 	}
 
-	public ConcessionContract(Integer id, String receiptNr, Date releaseDate, String cnp, String firstName,
-	        String lastName, String address, String emailAddress, Date signedDate, Date updatedDate, Integer period,
-	        Grave grave) {
+	public ConcessionContract(Integer id, String receiptNr, Date releaseDate,
+			String cnp, String firstName, String lastName, String address,
+			String emailAddress, Date signedDate, Date updatedDate,
+			Integer period, Grave grave) {
 		this.id = id;
 		this.receiptNr = receiptNr;
 		this.releaseDate = releaseDate;
@@ -180,6 +181,21 @@ public class ConcessionContract implements java.io.Serializable {
 
 	public void setGrave(Grave grave) {
 		this.grave = grave;
+	}
+
+	@Override
+	public String toString() {
+		return  (receiptNr != null ? "Numar:" + receiptNr + ", " : "")
+				+ (releaseDate != null ? "Data eliberarii:"
+						+ releaseDate.toString() + ", " : "")
+				+ (cnp != null ? "CNP:" + cnp + ", " : "")
+				+ (firstName != null ? "Nume:" + firstName + ", " : "")
+				+ (lastName != null ? "Prenume:" + lastName + ", " : "")
+				+ (address != null ? "Adresa:" + address + ", " : "")
+				+ (emailAddress != null ? "Email:" + emailAddress + ", " : "")
+				+ (updatedDate != null ? "Data reinnoirii:"
+						+ updatedDate.toString() + ", " : "")
+				+ (period != null ? "Perioada:" + period + ", " : "");
 	}
 
 }

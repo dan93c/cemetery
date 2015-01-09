@@ -58,10 +58,11 @@ public class UserController extends MainController {
 
 	@RequestMapping(value = "users/add", method = RequestMethod.POST)
 	public ModelAndView add(@ModelAttribute(USER) @Validated User user,
-			BindingResult bindingResult) {
+			BindingResult bindingResult, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(LIST_USERS_JSP);
 		if (!bindingResult.hasErrors()) {
-			userService.add(user);
+			String username = request.getUserPrincipal().getName();
+			userService.add(user, username);
 			modelAndView.addObject(MESSAGE, messageSource.getMessage(
 					"message.user.added.succes",
 					new Object[] { user.getUsername() }, Locale.getDefault()));
@@ -74,8 +75,10 @@ public class UserController extends MainController {
 	}
 
 	@RequestMapping(value = "users/remove", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam(value = USERNAME) String username) {
-		userService.delete(username);
+	public ModelAndView delete(@RequestParam(value = USERNAME) String username,
+			HttpServletRequest request) {
+		String u = request.getUserPrincipal().getName();
+		userService.delete(username, u);
 		return new ModelAndView("redirect:/users");
 	}
 

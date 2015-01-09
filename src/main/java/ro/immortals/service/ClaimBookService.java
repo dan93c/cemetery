@@ -6,11 +6,11 @@ import ro.immortals.model.ClaimBook;
 
 public interface ClaimBookService {
 
-	public int add(ClaimBook claimBook);
+	public int add(ClaimBook claimBook, String username);
 
-	public void update(ClaimBook claimBook);
+	public void update(ClaimBook claimBook, String username);
 
-	public void delete(Integer id);
+	public void delete(Integer id, String username);
 
 	public List<ClaimBook> getAll();
 

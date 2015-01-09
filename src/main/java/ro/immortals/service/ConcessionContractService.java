@@ -6,11 +6,11 @@ import ro.immortals.model.ConcessionContract;
 
 public interface ConcessionContractService {
 
-	public int add(ConcessionContract concessionContract);
+	public int add(ConcessionContract concessionContract, String username);
 
-	public void update(ConcessionContract concessionContract);
+	public void update(ConcessionContract concessionContract, String username);
 
-	public void delete(Integer id);
+	public void delete(Integer id, String username);
 
 	public List<ConcessionContract> getAll();
 

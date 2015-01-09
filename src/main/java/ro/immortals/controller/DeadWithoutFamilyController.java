@@ -68,7 +68,8 @@ public class DeadWithoutFamilyController extends MainController {
 		if (bindingResult.hasErrors()) {
 			return add(dead);
 		}
-		deadWithoutFamilyService.add(dead);
+		String username = request.getUserPrincipal().getName();
+		deadWithoutFamilyService.add(dead, username);
 		return list(1, null, null, request);
 	}
 
@@ -85,7 +86,8 @@ public class DeadWithoutFamilyController extends MainController {
 		if (bindingResult.hasErrors()) {
 			return edit(dead.getId());
 		}
-		deadWithoutFamilyService.update(dead);
+		String username = request.getUserPrincipal().getName();
+		deadWithoutFamilyService.update(dead, username);
 		return list(1, null, null, request);
 	}
 }

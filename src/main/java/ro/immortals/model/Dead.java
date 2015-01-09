@@ -119,4 +119,14 @@ public class Dead implements java.io.Serializable {
 		this.grave = grave;
 	}
 
+	@Override
+	public String toString() {
+		return (firstName != null ? "Nume:" + firstName + ", " : "")
+				+ (lastName != null ? "Prenume:" + lastName + ", " : "")
+				+ (religion != null ? "Religia:" + religion + ", " : "")
+				+ (deathDate != null ? "Data mortii:" + deathDate + ", " : "")
+				+ (funeralDate != null ? "Data inmormantarii:" + funeralDate + ", "
+						: "");
+	}
+
 }

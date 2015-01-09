@@ -6,11 +6,11 @@ import ro.immortals.model.GraveRequest;
 
 public interface GraveRequestService {
 
-	public int add(GraveRequest graveRequest);
+	public int add(GraveRequest graveRequest, String username);
 
-	public void update(GraveRequest graveRequest);
+	public void update(GraveRequest graveRequest, String username);
 
-	public void delete(Integer id);
+	public void delete(Integer id, String username);
 
 	public List<GraveRequest> getAll();
 
@@ -20,5 +20,6 @@ public interface GraveRequestService {
 
 	public Integer getAllSearchBySize(String search);
 
-	public List<GraveRequest> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
+	public List<GraveRequest> getAllByPageOrderBySearch(String order,
+			String search, Integer offset, Integer nrOfRecords);
 }

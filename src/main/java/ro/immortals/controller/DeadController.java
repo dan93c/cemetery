@@ -109,7 +109,8 @@ public class DeadController extends MainController {
 			modelAndView.addObject(GRAVES, graveService.getAll());
 			return modelAndView;
 		}
-		deadService.add(dead);
+		String username = request.getUserPrincipal().getName();
+		deadService.add(dead,username);
 		return appointmentRegister(1, null, null, request);
 	}
 
@@ -141,7 +142,8 @@ public class DeadController extends MainController {
 			modelAndView.addObject(GRAVES, graveService.getAll());
 			return modelAndView;
 		}
-		deadService.update(dead);
+		String username = request.getUserPrincipal().getName();
+		deadService.update(dead, username);
 		return appointmentRegister(1, null, null, request);
 	}
 }

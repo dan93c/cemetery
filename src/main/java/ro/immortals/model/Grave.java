@@ -55,8 +55,8 @@ public class Grave implements java.io.Serializable {
 	public Grave() {
 	}
 
-	public Grave(Integer id, String nrGrave, String observations, String graveType, String surface,
-	        String photoScanned, Plot plot) {
+	public Grave(Integer id, String nrGrave, String observations,
+			String graveType, String surface, String photoScanned, Plot plot) {
 		this.id = id;
 		this.nrGrave = nrGrave;
 		this.observations = observations;
@@ -142,8 +142,17 @@ public class Grave implements java.io.Serializable {
 		return concessionContracts;
 	}
 
-	public void setConcessionContracts(List<ConcessionContract> concessionContracts) {
+	public void setConcessionContracts(
+			List<ConcessionContract> concessionContracts) {
 		this.concessionContracts = concessionContracts;
+	}
+
+	@Override
+	public String toString() {
+		return (nrGrave != null ? "Numar:" + nrGrave + ", " : "")
+				+ (observations != null ? "Observatii:" + observations + ", "
+						: "") + (type != null ? "Tipul:" + type + ", " : "")
+				+ (surface != null ? "Suprafata:" + surface + ", " : "");
 	}
 
 }

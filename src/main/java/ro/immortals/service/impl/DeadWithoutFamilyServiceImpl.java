@@ -1,5 +1,6 @@
 package ro.immortals.service.impl;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ro.immortals.dao.DeadWithoutFamilyDAO;
+import ro.immortals.dao.HistoryDAO;
+import ro.immortals.dao.UserDAO;
 import ro.immortals.model.DeadWithoutFamily;
+import ro.immortals.model.History;
 import ro.immortals.service.DeadWithoutFamilyService;
 
 @Service
@@ -15,26 +19,75 @@ public class DeadWithoutFamilyServiceImpl implements DeadWithoutFamilyService {
 
 	@Autowired
 	private DeadWithoutFamilyDAO deadWithoutFamilyDAO;
+	@Autowired
+	private HistoryDAO historyDAO;
+	@Autowired
+	private UserDAO userDAO;
+	private static final String MODIFIED_OBJECT = "Decedat fara apartinatori";
 
 	@Override
 	@Transactional
-	public int add(DeadWithoutFamily deadWithoutFamily) {
+	public int add(DeadWithoutFamily deadWithoutFamily, String username) {
 		deadWithoutFamilyDAO.add(deadWithoutFamily);
+		History history = new History();
+		history.setUser(userDAO.getByUsername(username));
+		history.setActionName("Adaugare");
+		history.setModificationDate(Calendar.getInstance().getTime());
+		history.setModifiedObject(MODIFIED_OBJECT);
+		history.setDetails(deadWithoutFamily.toString());
+		history.setModifiedObjectCode(deadWithoutFamily.getId().toString());
+		historyDAO.add(history);
 		return 1;
 	}
 
 	@Override
 	@Transactional
-	public void update(DeadWithoutFamily deadWithoutFamily) {
+	public void update(DeadWithoutFamily deadWithoutFamily, String username) {
+		History history = new History();
+		history.setUser(userDAO.getByUsername(username));
+		history.setActionName("Modificare");
+		history.setModificationDate(Calendar.getInstance().getTime());
+		history.setModifiedObject(MODIFIED_OBJECT);
+		history.setModifiedObjectCode(deadWithoutFamily.getId().toString());
+		String details = setDetailsForHistory(deadWithoutFamily);
+		history.setDetails(details);
 		deadWithoutFamilyDAO.update(deadWithoutFamily);
+		historyDAO.add(history);
+	}
+
+	private String setDetailsForHistory(DeadWithoutFamily deadWithoutFamily) {
+		String details = "";
+		DeadWithoutFamily oldDeadWithoutFamily = deadWithoutFamilyDAO
+				.getById(deadWithoutFamily.getId());
+		if (!oldDeadWithoutFamily.getFeneralCertificate().contentEquals(
+				deadWithoutFamily.getFeneralCertificate())) {
+			details = "Adeverinta de inhumare veche:"
+					+ oldDeadWithoutFamily.getFeneralCertificate()
+					+ ", Adeverinta de inhumare noua:" + deadWithoutFamily.getFeneralCertificate() + "\r\n";
+		}
+		if (!oldDeadWithoutFamily.getImlRequest().contentEquals(
+				deadWithoutFamily.getImlRequest())) {
+			details = details + "Cererea IML veche:"
+					+ oldDeadWithoutFamily.getImlRequest() + ", Cererea IML noua:"
+					+ deadWithoutFamily.getImlRequest() + "\r\n";
+		}
+		return details;
 	}
 
 	@Override
 	@Transactional
-	public void delete(Integer id) {
+	public void delete(Integer id, String username) {
 		DeadWithoutFamily deadWithoutFamily = deadWithoutFamilyDAO.getById(id);
 		if (deadWithoutFamily != null) {
+			History history = new History();
+			history.setUser(userDAO.getByUsername(username));
+			history.setActionName("Stergere");
+			history.setModificationDate(Calendar.getInstance().getTime());
+			history.setModifiedObject(MODIFIED_OBJECT);
+			history.setModifiedObjectCode(deadWithoutFamily.getId().toString());
+			history.setDetails("");
 			deadWithoutFamilyDAO.delete(deadWithoutFamily);
+			historyDAO.add(history);
 		}
 	}
 
@@ -58,9 +111,10 @@ public class DeadWithoutFamilyServiceImpl implements DeadWithoutFamilyService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order, String search, Integer offset,
-	        Integer nrOfRecords) {
-		return deadWithoutFamilyDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
+	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order,
+			String search, Integer offset, Integer nrOfRecords) {
+		return deadWithoutFamilyDAO.getAllByPageOrderBySearch(order, search,
+				offset, nrOfRecords);
 	}
 
 }

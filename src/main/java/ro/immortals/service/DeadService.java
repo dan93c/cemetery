@@ -6,20 +6,21 @@ import ro.immortals.model.Dead;
 
 public interface DeadService {
 
-	public int add(Dead dead);
+	public int add(Dead dead, String username);
 
-	public void update(Dead dead);
+	public void update(Dead dead, String username);
 
-	public void delete(Integer id);
+	public void delete(Integer id, String username);
 
 	public List<Dead> getAll();
 
 	public Dead getById(Integer id);
-	
+
 	public boolean checkDuplicate(Dead dead);
 
 	public Integer getAllSearchBySize(String search);
 
-	public List<Dead> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer recordsPerPage);
+	public List<Dead> getAllByPageOrderBySearch(String order, String search,
+			Integer offset, Integer recordsPerPage);
 
 }

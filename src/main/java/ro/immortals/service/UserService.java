@@ -6,11 +6,11 @@ import ro.immortals.model.User;
 
 public interface UserService {
 
-	public int add(User user);
+	public int add(User user, String username);
 
-	public void update(User user);
+	public void update(User user, String username);
 
-	public void delete(String username);
+	public void delete(String username, String user);
 
 	public List<User> getAll();
 

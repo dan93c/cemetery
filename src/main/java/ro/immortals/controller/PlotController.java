@@ -59,11 +59,12 @@ public class PlotController extends MainController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView doAdd(@ModelAttribute @Validated Plot plot,
-			BindingResult bindingResult) {
+			BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return add(plot);
 		}
-		Integer errorCode = plotService.add(plot);
+		String username = request.getUserPrincipal().getName();
+		Integer errorCode = plotService.add(plot, username);
 		if (errorCode == 1) {
 			ModelAndView modelAndView = new ModelAndView(ADD_PLOT_JSP);
 			modelAndView.addObject(PLOT, plot);
@@ -86,20 +87,22 @@ public class PlotController extends MainController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ModelAndView doEdit(@ModelAttribute @Validated Plot plot,
-			BindingResult bindingResult) {
+			BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_PLOT_JSP);
 			modelAndView.addObject(PLOT, plot);
 			return modelAndView;
 		}
-		plotService.update(plot);
+		String username = request.getUserPrincipal().getName();
+		plotService.update(plot, username);
 		return list();
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable Integer id,
 			HttpServletRequest request) {
-		plotService.delete(id);
+		String username = request.getUserPrincipal().getName();
+		plotService.delete(id, username);
 		return list();
 	}
 }

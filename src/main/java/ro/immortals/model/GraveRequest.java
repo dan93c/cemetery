@@ -38,7 +38,8 @@ public class GraveRequest implements java.io.Serializable {
 	public GraveRequest() {
 	}
 
-	public GraveRequest(Integer id, String nrInfocet, Date registrationDate, String solvingStage) {
+	public GraveRequest(Integer id, String nrInfocet, Date registrationDate,
+			String solvingStage) {
 		this.id = id;
 		this.nrInfocet = nrInfocet;
 		this.registrationDate = registrationDate;
@@ -76,4 +77,14 @@ public class GraveRequest implements java.io.Serializable {
 	public void setSolvingStage(String solvingStage) {
 		this.solvingStage = solvingStage;
 	}
+
+	@Override
+	public String toString() {
+		return (nrInfocet != null ? "Nr infocet:" + nrInfocet + ", " : "")
+				+ (registrationDate != null ? "Data inregistrare:"
+						+ registrationDate + ", " : "")
+				+ (solvingStage != null ? "Stadiu solutionare:" + solvingStage
+						: "");
+	}
+
 }

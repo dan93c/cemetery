@@ -17,4 +17,15 @@ public interface GraveDAO {
 	public Grave getById(Integer id);
 
 	public Grave getByNumberAndPlot (String number ,Integer plotId);
+
+	public List<Grave> getAllByPage(Integer offset, Integer nrOfRecords);
+
+	public List<Grave> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
+
+	public Integer getAllSearchBySize(String search);
+	
+	public List<Grave> getAllMonumentsByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
+
+	public Integer getAllMonumentsSearchBySize(String search);
+
 }

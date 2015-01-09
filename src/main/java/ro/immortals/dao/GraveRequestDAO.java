@@ -15,7 +15,11 @@ public interface GraveRequestDAO {
 	public List<GraveRequest> getAll();
 
 	public GraveRequest getById(Integer id);
-	
+
 	public GraveRequest getByNrInfocet(String nr);
+
+	public Integer getAllSearchBySize(String search);
+
+	public List<GraveRequest> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
 
 }

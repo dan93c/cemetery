@@ -63,4 +63,16 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 		return true;
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Integer getAllSearchBySize(String search) {
+		return graveRequestDAO.getAllSearchBySize(search);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<GraveRequest> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords) {
+		return graveRequestDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
+	}
+
 }

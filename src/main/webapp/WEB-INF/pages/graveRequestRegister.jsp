@@ -7,7 +7,8 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Registrul anual de evidenta a contractelor de concesiune</title>
+<title>Registrul cu evidenta cererilor de atribuire a locurilor
+	de inhumare</title>
 </head>
 <body>
 	<div id="container">
@@ -16,7 +17,7 @@
 		<div id="search_filter_container">
 			<div id="filter_container">
 				<form method="get"
-					action="${CONTEXT_PATH}/contract/list/${currentPage}?order=${order}&sch=${sch}"
+					action="${CONTEXT_PATH}/grave/cereri/${currentPage}?order=${order}&sch=${sch}"
 					name="selectOrderForm">
 					<label id="order_label"> <select name="order"
 						class="input_box" id="order_criteria"
@@ -24,34 +25,27 @@
 							<c:choose>
 								<c:when test="${order eq '0'}">
 									<option value="0" selected="selected">Data
-										eliberarii</option>
+										inregistrarii - Asc</option>
 								</c:when>
 								<c:otherwise>
-									<option value="0">Data eliberarii</option>
+									<option value="0">Data inregistrarii - Asc</option>
 								</c:otherwise>
 							</c:choose>
 							<c:choose>
 								<c:when test="${order eq '1'}">
-									<option value="1" selected="selected">Numar</option>
+									<option value="1" selected="selected">Data
+										inregistrarii - Desc</option>
 								</c:when>
 								<c:otherwise>
-									<option value="1">Numar</option>
+									<option value="1">Data inregistrarii - Desc</option>
 								</c:otherwise>
 							</c:choose>
 							<c:choose>
 								<c:when test="${order eq '2'}">
-									<option value="2" selected="selected">Nume</option>
+									<option value="2" selected="selected">Nr infocet</option>
 								</c:when>
 								<c:otherwise>
-									<option value="2">Nume</option>
-								</c:otherwise>
-							</c:choose>
-							<c:choose>
-								<c:when test="${order eq '3'}">
-									<option value="3" selected="selected">Domiciliu</option>
-								</c:when>
-								<c:otherwise>
-									<option value="3">Domiciliu</option>
+									<option value="2">Nr infocet</option>
 								</c:otherwise>
 							</c:choose>
 					</select>
@@ -60,7 +54,7 @@
 			</div>
 			<div id="search_container">
 				<form method="get"
-					action="${CONTEXT_PATH}/contract/list/${currentPage}?order=${order}&sch=${sch}"
+					action="${CONTEXT_PATH}/grave/cereri/${currentPage}?order=${order}&sch=${sch}"
 					name="searchForm">
 					<input class="input_box" type="text" name="sch" value="${sch}" />
 					<input type="submit" value="Cauta" class="btn">
@@ -72,62 +66,41 @@
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th rowspan="3">#</th>
-						<th rowspan="3">Numar</th>
-						<th rowspan="3">Data eliberarii</th>
-						<th rowspan="3">Nume</th>
-						<th rowspan="3">Prenume</th>
-						<th rowspan="3">Adresa</th>
-						<th colspan="6">Detalii</th>
-					</tr>
-					<tr>
-						<th rowspan="2">CNP</th>
-						<th rowspan="2">E-mail</th>
-						<th colspan="4">Mormant</th>
-					</tr>
-					<tr>
-						<th>Numar</th>
-						<th>Parcela</th>
-						<th colspan="2">Cimitir</th>
+						<th>#</th>
+						<th>Data inregistrarii</th>
+						<th>Nr infocet</th>
+						<th>Stadiu de solutionare</th>
 					</tr>
 				</thead>
-				<c:forEach var="contract" items="${contracts}" varStatus="lineInfo">
+				<c:forEach var="request" items="${requests}" varStatus="lineInfo">
 					<tr>
 						<td>${lineInfo.count}</td>
-						<td>${contract.receiptNr}</td>
-						<td><fmt:formatDate value="${contract.releaseDate}"
-								pattern="yyyy-MM-dd" /></td>
-						<td>${contract.lastName}</td>
-						<td>${contract.firstName}</td>
-						<td>${contract.address}</td>
-						<td>${contract.cnp}</td>
-						<td>${contract.emailAddress}</td>
-						<td>${contract.grave.nrGrave}</td>
-						<td>${contract.grave.plot.name}</td>
-						<td>${contract.grave.plot.cemetery.name}<a
-							href="${CONTEXT_PATH}/contract/edit/${contract.id}"><button
-									class="btn-table">Modifica</button></a></td>
+						<td><fmt:formatDate value="${request.registrationDate}"
+								pattern="yyyy-MM-dd HH:mm " /></td>
+						<td>${request.nrInfocet}</td>
+						<td>${request.solvingStage}</td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
+
 		<div id="footer_container">
 			<ul id="pagin">
 
 				<c:choose>
 					<c:when test="${currentPage != 1}">
 						<li title="First page"><a
-							href="${CONTEXT_PATH}/contract/list/1?order=${order}&sch=${sch}">
+							href="${CONTEXT_PATH}/grave/cereri/1?order=${order}&sch=${sch}">
 								First </a></li>
 						<li title="Previous page"><a
-							href="${CONTEXT_PATH}/contract/list/${currentPage - 1}?order=${order}&sch=${sch}">Previous</a></li>
+							href="${CONTEXT_PATH}/grave/cereri/${currentPage - 1}?order=${order}&sch=${sch}">Previous</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled" title="First page"><a
-							href="${CONTEXT_PATH}/contract/list/1?order=${order}&sch=${sch}">
+							href="${CONTEXT_PATH}/grave/cereri/1?order=${order}&sch=${sch}">
 								First </a></li>
 						<li class="disabled" title="Previous page"><a
-							href="${CONTEXT_PATH}/contract/list/1?order=${order}&sch=${sch}">Previous</a></li>
+							href="${CONTEXT_PATH}/grave/cereri/1?order=${order}&sch=${sch}">Previous</a></li>
 					</c:otherwise>
 				</c:choose>
 				<c:forEach begin="${begin}" end="${end}" var="i">
@@ -137,7 +110,7 @@
 						</c:when>
 						<c:otherwise>
 							<li title="Page ${i}"><a
-								href="${CONTEXT_PATH}/contract/list/${i}?order=${order}&sch=${sch}">${i}</a></li>
+								href="${CONTEXT_PATH}/grave/cereri/${i}?order=${order}&sch=${sch}">${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -145,25 +118,24 @@
 				<c:choose>
 					<c:when test="${currentPage lt nrOfPages}">
 						<li title="Next page"><a
-							href="${CONTEXT_PATH}/contract/list/${currentPage + 1}?order=${order}&sch=${sch}">Next</a></li>
+							href="${CONTEXT_PATH}/grave/cereri/${currentPage + 1}?order=${order}&sch=${sch}">Next</a></li>
 
 						<li title="Last page"><a
-							href="${CONTEXT_PATH}/contract/list/${nrOfPages}?order=${order}&sch=${sch}">
+							href="${CONTEXT_PATH}/grave/cereri/${nrOfPages}?order=${order}&sch=${sch}">
 								Last </a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled" title="Next page"><a
-							href="${CONTEXT_PATH}/contract/list/${nrOfPages}?order=${order}&sch=${sch}">Next</a></li>
+							href="${CONTEXT_PATH}/grave/cereri/${nrOfPages}?order=${order}&sch=${sch}">Next</a></li>
 
 						<li class="disabled" title="Last page"><a
-							href="${CONTEXT_PATH}/contract/list/${nrOfPages}?order=${order}&sch=${sch}">
+							href="${CONTEXT_PATH}/grave/cereri/${nrOfPages}?order=${order}&sch=${sch}">
 								Last </a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
 		</div>
 	</div>
-
 
 </body>
 </html>

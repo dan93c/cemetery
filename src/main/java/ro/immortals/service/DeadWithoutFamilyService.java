@@ -16,4 +16,8 @@ public interface DeadWithoutFamilyService {
 
 	public DeadWithoutFamily getById(Integer id);
 
+	public Integer getAllSearchBySize(String search);
+
+	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
+
 }

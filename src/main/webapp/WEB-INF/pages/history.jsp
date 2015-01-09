@@ -13,64 +13,59 @@
 		<%@include file="menu.jsp"%>
 		<!-- div containing the search and filter elements -->
 		<div id="search_filter_container">
-			<table>
-				<tr>
-					<td>
-						<div id="filter_container">
-							<form method="get"
-								action="${CONTEXT_PATH}/history/${currentPage}?action=${action}&sch=${sch}"
-								name="selectActionForm">
-								<label id="filter_label"> <select name="action"
-									class="input_box" id="filter_criteria"
-									onchange="this.form.submit();">
-										<c:choose>
-											<c:when test="${action eq '0'}">
-												<option value="0" selected="selected">Toate
-													actiunile</option>
-											</c:when>
-											<c:otherwise>
-												<option value="0">Toate actiunile</option>
-											</c:otherwise>
-										</c:choose>
-										<c:choose>
-											<c:when test="${action eq 'Adaugare'}">
-												<option value="Adaugare" selected="selected">Adaugare</option>
-											</c:when>
-											<c:otherwise>
-												<option value="Adaugare">Adaugare</option>
-											</c:otherwise>
-										</c:choose>
-										<c:choose>
-											<c:when test="${action eq 'Modificare'}">
-												<option value="Modificare" selected="selected">Modificare</option>
-											</c:when>
-											<c:otherwise>
-												<option value="Modificare">Modificare</option>
-											</c:otherwise>
-										</c:choose>
-										<c:choose>
-											<c:when test="${action eq 'Stergere'}">
-												<option value="Stergere" selected="selected">Stergere</option>
-											</c:when>
-											<c:otherwise>
-												<option value="Stergere">Stergere</option>
-											</c:otherwise>
-										</c:choose>
-								</select>
-								</label>
-							</form>
-					</td>
-					<div id="search_container">
-						<form method="get"
-							action="${CONTEXT_PATH}/history/${currentPage}?action=${action}&sch=${sch}"
-							name="searchForm">
-							<input class="input_box" type="text" name="sch" value="${sch}"/> <input
-								type="submit" value="Cauta" class="btn">
-						</form>
-					</div>
-				</tr>
-			</table>
+			<div id="filter_container">
+				<form method="get"
+					action="${CONTEXT_PATH}/history/${currentPage}?action=${action}&sch=${sch}"
+					name="selectActionForm">
+					<label id="filter_label"> <select name="action"
+						class="input_box" id="filter_criteria"
+						onchange="this.form.submit();">
+							<c:choose>
+								<c:when test="${action eq '0'}">
+									<option value="0" selected="selected">Toate actiunile</option>
+								</c:when>
+								<c:otherwise>
+									<option value="0">Toate actiunile</option>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${action eq 'Adaugare'}">
+									<option value="Adaugare" selected="selected">Adaugare</option>
+								</c:when>
+								<c:otherwise>
+									<option value="Adaugare">Adaugare</option>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${action eq 'Modificare'}">
+									<option value="Modificare" selected="selected">Modificare</option>
+								</c:when>
+								<c:otherwise>
+									<option value="Modificare">Modificare</option>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${action eq 'Stergere'}">
+									<option value="Stergere" selected="selected">Stergere</option>
+								</c:when>
+								<c:otherwise>
+									<option value="Stergere">Stergere</option>
+								</c:otherwise>
+							</c:choose>
+					</select>
+					</label>
+				</form>
+			</div>
+			<div id="search_container">
+				<form method="get"
+					action="${CONTEXT_PATH}/history/${currentPage}?action=${action}&sch=${sch}"
+					name="searchForm">
+					<input class="input_box" type="text" name="sch" value="${sch}" />
+					<input type="submit" value="Cauta" class="btn">
+				</form>
+			</div>
 		</div>
+
 		<div id="center">
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
@@ -95,21 +90,21 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<center>
+			<div id="footer_container">
 				<ul id="pagin">
-					<%--For displaying First link --%>
+
 					<c:choose>
 						<c:when test="${currentPage != 1}">
 							<li title="First page"><a
 								href="${CONTEXT_PATH}/history/1?action=${action}&sch=${sch}">
-									<< </a></li>
+									First </a></li>
 							<li title="Previous page"><a
 								href="${CONTEXT_PATH}/history/${currentPage - 1}?action=${action}&sch=${sch}">Previous</a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="disabled" title="First page"><a
 								href="${CONTEXT_PATH}/history/1?action=${action}&sch=${sch}">
-									<< </a></li>
+									First </a></li>
 							<li class="disabled" title="Previous page"><a
 								href="${CONTEXT_PATH}/history/1?action=${action}&sch=${sch}">Previous</a></li>
 						</c:otherwise>
@@ -125,27 +120,28 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<%--For displaying Next link --%>
+
 					<c:choose>
 						<c:when test="${currentPage lt nrOfPages}">
 							<li title="Next page"><a
 								href="${CONTEXT_PATH}/history/${currentPage + 1}?action=${action}&sch=${sch}">Next</a></li>
-							<%--For displaying Last link --%>
+
 							<li title="Last page"><a
 								href="${CONTEXT_PATH}/history/${nrOfPages}?action=${action}&sch=${sch}">
-									>> </a></li>
+									Last </a></li>
 						</c:when>
 						<c:otherwise>
 							<li class="disabled" title="Next page"><a
 								href="${CONTEXT_PATH}/history/${nrOfPages}?action=${action}&sch=${sch}">Next</a></li>
-							<%--For displaying Last link --%>
+
 							<li class="disabled" title="Last page"><a
 								href="${CONTEXT_PATH}/history/${nrOfPages}?action=${action}&sch=${sch}">
-									>> </a></li>
+									Last </a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
-			</center>
+			</div>
 		</div>
+	</div>
 </body>
 </html>

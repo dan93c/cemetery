@@ -15,4 +15,8 @@ public interface ClaimBookService {
 	public List<ClaimBook> getAll();
 
 	public ClaimBook getById(Integer id);
+	
+	public Integer getAllSearchBySize(String search);
+
+	public List<ClaimBook> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
 }

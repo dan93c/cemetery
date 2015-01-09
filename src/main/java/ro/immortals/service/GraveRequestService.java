@@ -17,4 +17,8 @@ public interface GraveRequestService {
 	public GraveRequest getById(Integer id);
 
 	public boolean checkDuplicate(GraveRequest graveRequest);
+
+	public Integer getAllSearchBySize(String search);
+
+	public List<GraveRequest> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
 }

@@ -50,5 +50,16 @@ public class ClaimBookServiceImpl implements ClaimBookService {
 		return claimBookDAO.getById(id);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Integer getAllSearchBySize(String search) {
+		return claimBookDAO.getAllSearchBySize(search);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<ClaimBook> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords) {
+		return claimBookDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
+	}
 
 }

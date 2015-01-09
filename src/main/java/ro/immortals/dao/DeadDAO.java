@@ -18,5 +18,9 @@ public interface DeadDAO {
 	public Dead getById(Integer id);
 	
 	public Dead getByGraveAndFuneralDate(String nrGrave, Date funeralDate);
+	
+	public Integer getAllSearchBySize(String search);
+
+	public List<Dead> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer recordsPerPage);
 
 }

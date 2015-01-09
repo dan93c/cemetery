@@ -63,4 +63,66 @@ public class DeadDAOImpl implements DeadDAO {
 			return null;
 
 	}
+
+	@Override
+	public Integer getAllSearchBySize(String search) {
+		if (search == null || search.isEmpty()) {
+			return entityManager.createQuery("select d FROM Dead d", Dead.class).getResultList().size();
+		}
+		return entityManager
+		        .createQuery(
+		                "FROM Dead d where d.firstName like :search or  d.lastName like :search or  d.religion like :search",
+		                Dead.class).setParameter("search", "%" + search + "%").getResultList().size();
+	}
+
+	@Override
+	public List<Dead> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords) {
+		if (search == null || search.isEmpty()) {
+			if (order.equals("1")) {
+				return entityManager
+				        .createQuery("select d FROM Dead d order by d.funeralDate,d.firstName,d.lastName", Dead.class)
+				        .setFirstResult(offset).setMaxResults(nrOfRecords).getResultList();
+			} else if (order.equals("2")) {
+				return entityManager
+				        .createQuery("select d FROM Dead d order by d.funeralDate desc,d.firstName,d.lastName",
+				                Dead.class).setFirstResult(offset).setMaxResults(nrOfRecords).getResultList();
+			} else if (order.equals("3")) {
+				return entityManager.createQuery("select d FROM Dead d order by d.firstName,d.lastName,d.funeralDate", Dead.class)
+				        .setFirstResult(offset).setMaxResults(nrOfRecords).getResultList();
+			} else {
+				return entityManager.createQuery("select d FROM Dead d", Dead.class).setFirstResult(offset)
+				        .setMaxResults(nrOfRecords).getResultList();
+			}
+		} else {
+			if (order.equals("1")) {
+				return entityManager
+				        .createQuery(
+				                "select d FROM Dead d where d.firstName like :search or  d.lastName like :search or"
+				                        + "  d.religion like :search order by d.funeralDate,d.firstName,d.lastName",
+				                Dead.class).setParameter("search", "%" + search + "%").setFirstResult(offset)
+				        .setMaxResults(nrOfRecords).getResultList();
+			} else if (order.equals("2")) {
+				return entityManager
+				        .createQuery(
+				                "select d FROM Dead d where d.firstName like :search or  d.lastName like :search or"
+				                        + "  d.religion like :search order by d.funeralDate desc,d.firstName,d.lastName",
+				                Dead.class).setParameter("search", "%" + search + "%").setFirstResult(offset)
+				        .setMaxResults(nrOfRecords).getResultList();
+			} else if (order.equals("3")) {
+				return entityManager
+				        .createQuery(
+				                "select d FROM Dead d where d.firstName like :search or  d.lastName like :search or"
+				                        + "  d.religion like :search order by d.firstName,d.lastName,d.funeralDate", Dead.class)
+				        .setParameter("search", "%" + search + "%").setFirstResult(offset).setMaxResults(nrOfRecords)
+				        .getResultList();
+			} else {
+				return entityManager
+				        .createQuery(
+				                "select d FROM Dead d where d.firstName like :search or  d.lastName like :search or"
+				                        + " d.religion like :search", Dead.class)
+				        .setParameter("search", "%" + search + "%").setFirstResult(offset).setMaxResults(nrOfRecords)
+				        .getResultList();
+			}
+		}
+	}
 }

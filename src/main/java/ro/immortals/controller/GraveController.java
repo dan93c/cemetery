@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ro.immortals.model.Grave;
@@ -24,8 +25,6 @@ import ro.immortals.model.Grave;
 @Controller
 @RequestMapping("/grave")
 public class GraveController extends MainController {
-
-	
 
 	@Autowired
 	@Qualifier(GRAVE_VALIDATOR)
@@ -44,6 +43,46 @@ public class GraveController extends MainController {
 		modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 		modelAndView.addObject(PLOTS, plotService.getAll());
 		return modelAndView;
+	}
+
+	@RequestMapping(value = { "/morminte/{page}" }, method = RequestMethod.GET)
+	public ModelAndView gravesRegister(@PathVariable Integer page,
+	        @RequestParam(value = ORDER, required = false) String order,
+	        @RequestParam(value = SEARCH, required = false) String search, HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(GRAVE_REGISTER_JSP);
+		order = getOrder(order, request);
+		search = getSearch(search, request);
+		Integer recordsPerPage = DEFAULT_NR_OF_RECORDS;
+		Integer nrOfRecords = graveService.getAllSearchBySize(search);
+		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
+		page = setPagination(modelAndView, page, nrOfPages);
+		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS, recordsPerPage);
+		modelAndView.addObject(ORDER, order);
+		modelAndView.addObject(SEARCH, search);
+		modelAndView.addObject(GRAVES,
+		        graveService.getAllByPageOrderBySearch(order, search, (page - 1) * recordsPerPage, recordsPerPage));
+		return modelAndView;
+
+	}
+
+	@RequestMapping(value = { "/morminte-monumente/{page}" }, method = RequestMethod.GET)
+	public ModelAndView graveMonumentsRegister(@PathVariable Integer page,
+	        @RequestParam(value = ORDER, required = false) String order,
+	        @RequestParam(value = SEARCH, required = false) String search, HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(GRAVE_MONUMENT_REGISTER_JSP);
+		order = getOrder(order, request);
+		search = getSearch(search, request);
+		Integer recordsPerPage = DEFAULT_NR_OF_RECORDS;
+		Integer nrOfRecords = graveService.getAllMonumentsSearchBySize(search);
+		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
+		page = setPagination(modelAndView, page, nrOfPages);
+		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS, recordsPerPage);
+		modelAndView.addObject(ORDER, order);
+		modelAndView.addObject(SEARCH, search);
+		modelAndView.addObject(GRAVES, graveService.getAllMonumentsByPageOrderBySearch(order, search, (page - 1)
+		        * recordsPerPage, recordsPerPage));
+		return modelAndView;
+
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -71,8 +110,10 @@ public class GraveController extends MainController {
 			modelAndView.addObject(GRAVE, grave);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage("message.grave.already.exists",
-			        new Object[] { grave.getNrGrave(), grave.getPlot().getName() }, Locale.getDefault()));
+			modelAndView.addObject(
+			        ERROR_MESSAGE,
+			        messageSource.getMessage("message.grave.already.exists", new Object[] { grave.getNrGrave(),
+			                grave.getPlot().getName() }, Locale.getDefault()));
 			return modelAndView;
 		}
 		return list();

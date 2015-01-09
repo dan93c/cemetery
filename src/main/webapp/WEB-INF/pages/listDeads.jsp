@@ -71,16 +71,59 @@
 			</table>
 		</div>
 		
-		<!-- div that will be populated with pagination links -->
-		<div id="footer_container">
-			<div id="page_navigation">
-			
+	<div id="footer_container">
+				<ul id="pagin">
+
+					<c:choose>
+						<c:when test="${currentPage != 1}">
+							<li title="First page"><a
+								href="${CONTEXT_PATH}/history/1?action=${action}&sch=${sch}">
+									First </a></li>
+							<li title="Previous page"><a
+								href="${CONTEXT_PATH}/history/${currentPage - 1}?action=${action}&sch=${sch}">Previous</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="disabled" title="First page"><a
+								href="${CONTEXT_PATH}/history/1?action=${action}&sch=${sch}">
+									First </a></li>
+							<li class="disabled" title="Previous page"><a
+								href="${CONTEXT_PATH}/history/1?action=${action}&sch=${sch}">Previous</a></li>
+						</c:otherwise>
+					</c:choose>
+					<c:forEach begin="${begin}" end="${end}" var="i">
+						<c:choose>
+							<c:when test="${currentPage eq i}">
+								<li title="Current page"><a class="current">${i}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li title="Page ${i}"><a
+									href="${CONTEXT_PATH}/history/${i}?action=${action}&sch=${sch}">${i}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+
+					<c:choose>
+						<c:when test="${currentPage lt nrOfPages}">
+							<li title="Next page"><a
+								href="${CONTEXT_PATH}/history/${currentPage + 1}?action=${action}&sch=${sch}">Next</a></li>
+
+							<li title="Last page"><a
+								href="${CONTEXT_PATH}/history/${nrOfPages}?action=${action}&sch=${sch}">
+									Last </a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="disabled" title="Next page"><a
+								href="${CONTEXT_PATH}/history/${nrOfPages}?action=${action}&sch=${sch}">Next</a></li>
+
+							<li class="disabled" title="Last page"><a
+								href="${CONTEXT_PATH}/history/${nrOfPages}?action=${action}&sch=${sch}">
+									Last </a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
 			</div>
-		</div>
 	</div>
 	
-	<!-- the input fields that will hold the variables we will use in pagination script -->
-	<input type="hidden" id="current_page" />
-	<input type="hidden" id="show_per_page" />
+	
 </body>
 </html>

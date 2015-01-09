@@ -60,4 +60,16 @@ public class DeadServiceImpl implements DeadService {
 		return true;
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+    public Integer getAllSearchBySize(String search) {
+	    return deadDAO.getAllSearchBySize(search);
+    }
+
+	@Override
+	@Transactional(readOnly = true)
+    public List<Dead> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer recordsPerPage) {
+	    return deadDAO.getAllByPageOrderBySearch(order, search, offset, recordsPerPage);
+    }
+
 }

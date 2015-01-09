@@ -18,4 +18,8 @@ public interface DeadService {
 	
 	public boolean checkDuplicate(Dead dead);
 
+	public Integer getAllSearchBySize(String search);
+
+	public List<Dead> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer recordsPerPage);
+
 }

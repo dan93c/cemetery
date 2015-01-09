@@ -16,4 +16,7 @@ public interface ClaimBookDAO {
 
 	public ClaimBook getById(Integer id);
 
+	public Integer getAllSearchBySize(String search);
+
+	public List<ClaimBook> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
 }

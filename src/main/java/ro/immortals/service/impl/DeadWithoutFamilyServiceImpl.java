@@ -50,4 +50,17 @@ public class DeadWithoutFamilyServiceImpl implements DeadWithoutFamilyService {
 		return deadWithoutFamilyDAO.getById(id);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Integer getAllSearchBySize(String search) {
+		return deadWithoutFamilyDAO.getAllSearchBySize(search);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order, String search, Integer offset,
+	        Integer nrOfRecords) {
+		return deadWithoutFamilyDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
+	}
+
 }

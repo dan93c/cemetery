@@ -2,6 +2,7 @@ package ro.immortals.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,10 +70,65 @@ public class GraveServiceImpl implements GraveService {
 		List<Grave> graves = graveDAO.getAll();
 		for (Grave g : graves) {
 			if (g.getId() == grave.getId() && g.getPlot().getId() == plotId
-					&& g.getPlot().getCemetery().getId() == cemeteryId) {
+			        && g.getPlot().getCemetery().getId() == cemeteryId) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Grave> getAllByPage(Integer offset, Integer nrOfRecords) {
+		return graveDAO.getAllByPage(offset, nrOfRecords);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Grave> getAllByPageWithContractsAndDeads(Integer offset, Integer nrOfRecords) {
+		List<Grave> graves = graveDAO.getAllByPage(offset, nrOfRecords);
+		for (Grave g : graves) {
+			Hibernate.initialize(g.getConcessionContracts());
+			Hibernate.initialize(g.getDeads());
+			Hibernate.initialize(g.getDeadsWithoutFamily());
+		}
+		return graves;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Grave> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords) {
+		List<Grave> graves = graveDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
+		for (Grave g : graves) {
+			Hibernate.initialize(g.getConcessionContracts());
+			Hibernate.initialize(g.getDeads());
+			Hibernate.initialize(g.getDeadsWithoutFamily());
+		}
+		return graves;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Integer getAllSearchBySize(String search) {
+		return graveDAO.getAllSearchBySize(search);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Grave> getAllMonumentsByPageOrderBySearch(String order, String search, Integer offset,
+	        Integer nrOfRecords) {
+		List<Grave> graves = graveDAO.getAllMonumentsByPageOrderBySearch(order, search, offset, nrOfRecords);
+		for (Grave g : graves) {
+			Hibernate.initialize(g.getConcessionContracts());
+			Hibernate.initialize(g.getDeads());
+			Hibernate.initialize(g.getDeadsWithoutFamily());
+		}
+		return graves;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Integer getAllMonumentsSearchBySize(String search) {
+		return graveDAO.getAllMonumentsSearchBySize(search);
 	}
 }

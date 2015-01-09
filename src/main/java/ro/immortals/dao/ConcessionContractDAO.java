@@ -17,4 +17,8 @@ public interface ConcessionContractDAO {
 	public ConcessionContract getById(Integer id);
 	
 	public ConcessionContract getByCnp(String cnp);
+	
+	public Integer getAllSearchBySize(String search);
+
+	public List<ConcessionContract> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
 }

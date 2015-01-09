@@ -65,4 +65,17 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 		return true;
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+    public Integer getAllSearchBySize(String search) {
+	    return concessionContractDAO.getAllSearchBySize(search);
+    }
+
+	@Override
+	@Transactional(readOnly = true)
+    public List<ConcessionContract> getAllByPageOrderBySearch(String order, String search, Integer offset,
+            Integer nrOfRecords) {
+	    return concessionContractDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
+    }
+
 }

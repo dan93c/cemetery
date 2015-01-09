@@ -1,5 +1,7 @@
 package ro.immortals.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ro.immortals.service.CemeteryService;
 import ro.immortals.service.ConcessionContractService;
 import ro.immortals.service.DeadService;
+import ro.immortals.service.DeadWithoutFamilyService;
+import ro.immortals.service.GraveRequestService;
 import ro.immortals.service.GraveService;
 import ro.immortals.service.PlotService;
 
@@ -16,22 +20,27 @@ public class MainController {
 
 	@Autowired
 	protected MessageSource messageSource;
-	
+
 	@Autowired
 	protected CemeteryService cemeteryService;
-	
+
 	@Autowired
 	protected PlotService plotService;
-	
+
 	@Autowired
 	protected DeadService deadService;
-	
+
 	@Autowired
 	protected GraveService graveService;
-	
+
+	@Autowired
+	protected GraveRequestService graveRequestService;
+
 	@Autowired
 	protected ConcessionContractService contractService;
-
+	
+	@Autowired
+	protected DeadWithoutFamilyService deadWithoutFamilyService;
 
 	public static final String ERROR_MESSAGE = "errorMessage";
 	public static final String MESSAGE = "message";
@@ -41,15 +50,20 @@ public class MainController {
 	public static final String PLOTS = "plots";
 	public static final String GRAVES = "graves";
 	public static final String GRAVE = "grave";
+	public static final String GRAVE_REQUEST = "graveRequuest";
+	public static final String GRAVE_REQUEST_VALIDATOR = "graveRequestValidator";
 	public static final String GRAVE_VALIDATOR = "graveValidator";
 	public static final String USERNAME = "username";
 	public static final String DEAD = "dead";
 	public static final String DEADS = "deads";
 	public static final String DEAD_VALIDATOR = "deadValidator";
+	public static final String DEAD_WITHOUT_FAMILY = "deadWithoutFamily";
+	public static final String DEAD_WITHOUT_FAMILY_VALIDATOR = "deadWithoutFamilyValidator";
 	public static final String CONTRACT = "contract";
 	public static final String CONTRACTS = "contracts";
 	public static final String HISTORY = "history";
-	
+	public static final String OBJECTS = "objects";
+
 	public static final String SELECT_NR_OF_RECORDS = "selectNrOfRecords";
 	public static final String CURRENT_PAGE = "currentPage";
 	public static final String PAGE = "page";
@@ -58,7 +72,9 @@ public class MainController {
 	public static final String END = "end";
 	public static final Integer DEFAULT_NR_OF_RECORDS = 10;
 	public static final Integer FIRST_PAGE = 1;
-	
+	public static final String SEARCH = "sch";
+	public static final String ORDER = "order";
+
 	/* PAGES */
 	public static final String LOGIN_JSP = "login";
 	public static final String LIST_USERS_JSP = "listUsers";
@@ -70,7 +86,9 @@ public class MainController {
 	public static final String EDIT_PLOT_JSP = "editPlot";
 	public static final String ADD_DEAD_JSP = "addDead";
 	public static final String EDIT_DEAD_JSP = "editDead";
-	public static final String LIST_DEADS_JSP = "listDeads";
+	public static final String ADD_DEAD_WITHOUT_FAMILY_JSP = "addDeadWithoutFamily";
+	public static final String EDIT_DEAD_WITHOUT_FAMILY_JSP = "editDeadWithoutFamily";
+/*	public static final String LIST_DEADS_JSP = "listDeads";*/
 	public static final String ADD_CONTRACT_JSP = "addContract";
 	public static final String EDIT_CONTRACT_JSP = "editContract";
 	public static final String LIST_CONTRACTS_JSP = "listContracts";
@@ -78,9 +96,13 @@ public class MainController {
 	public static final String EDIT_GRAVE_JSP = "editGrave";
 	public static final String LIST_GRAVES_JSP = "listGraves";
 	public static final String HISTORY_JSP = "history";
-	public static final String SEARCH_HISTORY_JSP = "searchHistory";
+	public static final String APPOINTMENT_REGISTER_JSP = "appointmentRegister";
+	public static final String DEAD_REGISTER_JSP = "deadRegister";
+	public static final String DEAD_WITHOUT_FAMILY_REGISTER_JSP = "deadWithoutFamilyRegister";
+	public static final String GRAVE_REGISTER_JSP = "graveRegister";
+	public static final String GRAVE_MONUMENT_REGISTER_JSP = "graveMonumentRegister";
+	public static final String GRAVE_REQUEST_REGISTER_JSP = "graveRequestRegister";
 
-	
 	/**
 	 * set the nr of the current page and values of pagination format Pagination
 	 * format: show max 7 pages ex: (nrOfPages=9, currentPage=5) << Previous 2 3
@@ -105,5 +127,28 @@ public class MainController {
 		modelAndView.addObject(NR_OF_PAGES, nrOfPages);
 		modelAndView.addObject(CURRENT_PAGE, page);
 		return page;
+	}
+
+	public String getOrder(String order, HttpServletRequest request) {
+		if (order == null) {
+			if (request.getSession().getAttribute(ORDER) == null) {
+				order = "0";
+			} else {
+				order = request.getSession().getAttribute(ORDER).toString();
+			}
+		}
+		request.getSession().setAttribute(ORDER, order);
+		return order;
+	}
+
+	public String getSearch(String search, HttpServletRequest request) {
+		if (search == null) {
+			if (request.getSession().getAttribute(SEARCH) != null) {
+				search = request.getSession().getAttribute(SEARCH).toString();
+			}
+
+		}
+		request.getSession().setAttribute(SEARCH, search);
+		return search;
 	}
 }

@@ -19,4 +19,16 @@ public interface GraveService {
 	public boolean checkDuplicate(Grave grave);
 
 	boolean checkGraveExistence(Grave grave, Integer plotId, Integer cemeteryId);
+	
+	public List<Grave> getAllByPage(Integer offset, Integer nrOfRecords);
+	
+	public List<Grave> getAllByPageWithContractsAndDeads(Integer offset, Integer nrOfRecords);
+	
+	public List<Grave> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
+	
+	public Integer getAllSearchBySize(String search);
+	
+	public List<Grave> getAllMonumentsByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
+
+	public Integer getAllMonumentsSearchBySize(String search);
 }

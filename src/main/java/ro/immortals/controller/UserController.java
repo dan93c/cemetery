@@ -47,7 +47,6 @@ public class UserController extends MainController {
 	private static final String USER = "user";
 	private static final String USERS = "users";
 	public static final String ACTION_SELECT = "action";
-	public static final String HISTORY_SEARCH = "sch";
 
 	@RequestMapping(value = USERS, method = RequestMethod.GET)
 	public ModelAndView list(String errorMessage) {
@@ -91,7 +90,7 @@ public class UserController extends MainController {
 	public ModelAndView getHistory(
 			@PathVariable Integer page,
 			@RequestParam(value = ACTION_SELECT, required = false) String actionSelect,
-			@RequestParam(value = HISTORY_SEARCH, required = false) String historySearch,
+			@RequestParam(value = SEARCH, required = false) String historySearch,
 			HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(HISTORY_JSP);
 		if (actionSelect == null) {
@@ -102,23 +101,17 @@ public class UserController extends MainController {
 						.getAttribute(ACTION_SELECT).toString();
 			}
 		}
-		if (historySearch == null) {
-			if (request.getSession().getAttribute(HISTORY_SEARCH) != null) {
-				historySearch = request.getSession()
-						.getAttribute(HISTORY_SEARCH).toString();
-			}
-		}
-		Integer recordsPerPage = 10;
+		historySearch = getSearch(historySearch, request);
+		Integer recordsPerPage = DEFAULT_NR_OF_RECORDS;
 		Integer nrOfRecords = historyService.getAllSizeFilterBySearch(
 				actionSelect, historySearch);
 		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
 		page = setPagination(modelAndView, page, nrOfPages);
 		request.getSession(false).setAttribute(ACTION_SELECT, actionSelect);
-		request.getSession(false).setAttribute(HISTORY_SEARCH, historySearch);
 		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS,
 				recordsPerPage);
 		modelAndView.addObject(ACTION_SELECT, actionSelect);
-		modelAndView.addObject(HISTORY_SEARCH, historySearch);
+		modelAndView.addObject(SEARCH, historySearch);
 		modelAndView.addObject(HISTORY, historyService.getByPageFilterBySearch(
 				actionSelect, historySearch, (page - 1) * recordsPerPage,
 				recordsPerPage));

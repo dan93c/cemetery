@@ -36,12 +36,34 @@ public class ClaimBookDAOImpl implements ClaimBookDAO {
 
 	@Override
 	public List<ClaimBook> getAll() {
-		return entityManager.createQuery("SELECT c FROM ClaimBook c",
-				ClaimBook.class).getResultList();
+		return entityManager.createQuery("SELECT c FROM ClaimBook c", ClaimBook.class).getResultList();
 	}
 
 	@Override
 	public ClaimBook getById(Integer id) {
 		return entityManager.find(ClaimBook.class, id);
 	}
+
+	@Override
+	public Integer getAllSearchBySize(String search) {
+		if (search == null || search.isEmpty()) {
+			return entityManager.createQuery("select c FROM ClaimBook c", ClaimBook.class).getResultList().size();
+		}
+		return entityManager
+		        .createQuery("FROM ClaimBook c where c.claims like :search or  c.complainer like :search",
+		                ClaimBook.class).setParameter("search", "%" + search + "%").getResultList().size();
+	}
+
+	@Override
+	public List<ClaimBook> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords) {
+		if (search == null || search.isEmpty()) {
+			return entityManager.createQuery("select c FROM ClaimBook c", ClaimBook.class).setFirstResult(offset)
+			        .setMaxResults(nrOfRecords).getResultList();
+		}
+		return entityManager
+		        .createQuery("FROM ClaimBook c where c.claims like :search or  c.complainer like :search",
+		                ClaimBook.class).setParameter("search", "%" + search + "%").setFirstResult(offset)
+		        .setMaxResults(nrOfRecords).getResultList();
+	}
+
 }

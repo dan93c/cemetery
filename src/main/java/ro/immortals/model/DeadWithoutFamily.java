@@ -32,9 +32,9 @@ public class DeadWithoutFamily implements java.io.Serializable{
 	public DeadWithoutFamily() {
     }
 
-	public DeadWithoutFamily(Integer id, String feneralCertificate, String imlRequest, Grave grave) {
+	public DeadWithoutFamily(Integer id, String funeralCertificate, String imlRequest, Grave grave) {
 	    this.id = id;
-	    this.funeralCertificate = feneralCertificate;
+	    this.funeralCertificate = funeralCertificate;
 	    this.imlRequest = imlRequest;
 	    this.grave = grave;
     }
@@ -47,12 +47,12 @@ public class DeadWithoutFamily implements java.io.Serializable{
 		this.id = id;
 	}
 
-	public String getFeneralCertificate() {
+	public String getFuneralCertificate() {
 		return funeralCertificate;
 	}
 
-	public void setFeneralCertificate(String feneralCertificate) {
-		this.funeralCertificate = feneralCertificate;
+	public void setFuneralCertificate(String funeralCertificate) {
+		this.funeralCertificate = funeralCertificate;
 	}
 
 	public String getImlRequest() {

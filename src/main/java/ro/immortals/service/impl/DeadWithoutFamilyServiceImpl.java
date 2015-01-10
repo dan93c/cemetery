@@ -59,11 +59,11 @@ public class DeadWithoutFamilyServiceImpl implements DeadWithoutFamilyService {
 		String details = "";
 		DeadWithoutFamily oldDeadWithoutFamily = deadWithoutFamilyDAO
 				.getById(deadWithoutFamily.getId());
-		if (!oldDeadWithoutFamily.getFeneralCertificate().contentEquals(
-				deadWithoutFamily.getFeneralCertificate())) {
+		if (!oldDeadWithoutFamily.getFuneralCertificate().contentEquals(
+				deadWithoutFamily.getFuneralCertificate())) {
 			details = "Adeverinta de inhumare veche:"
-					+ oldDeadWithoutFamily.getFeneralCertificate()
-					+ ", Adeverinta de inhumare noua:" + deadWithoutFamily.getFeneralCertificate() + "\r\n";
+					+ oldDeadWithoutFamily.getFuneralCertificate()
+					+ ", Adeverinta de inhumare noua:" + deadWithoutFamily.getFuneralCertificate() + "\r\n";
 		}
 		if (!oldDeadWithoutFamily.getImlRequest().contentEquals(
 				deadWithoutFamily.getImlRequest())) {

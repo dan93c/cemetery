@@ -20,17 +20,17 @@
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div class="alert alert-danger" role="alert">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-								Error.Invalid data.
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
+							Error.Invalid data.
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
-					<div class="alert alert-danger" role="alert">
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
+						<div class="alert alert-danger" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
 							${errorMessage}
-					</div>
+						</div>
 					</c:if>
 				</s:bind>
 				<table class="height-tr">
@@ -46,8 +46,8 @@
 					<tr></tr>
 					<tr>
 						<td><label>CNP</label></td>
-						<td><form:input type="text" path="cnp"
-								required="required" placeholder="CNP" maxLengh="45"></form:input></td>
+						<td><form:input type="text" path="cnp" required="required"
+								placeholder="CNP" maxLengh="45"></form:input></td>
 						<td><form:errors path="cnp" cssClass="error" /></td>
 					</tr>
 					<tr></tr>
@@ -120,7 +120,8 @@
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="submit"
-							value="Adauga contract concesiune" class="button medium square blue"/></td>
+							value="Adauga contract concesiune"
+							class="button medium square blue" /></td>
 					</tr>
 				</table>
 			</form:form>

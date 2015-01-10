@@ -21,7 +21,7 @@ public class DeadWithoutFamilyValidator implements Validator {
 
 		DeadWithoutFamily deadWithoutFamily = (DeadWithoutFamily) target;
 
-		if (deadWithoutFamily.getFeneralCertificate().length() >= 50) {
+		if (deadWithoutFamily.getFuneralCertificate().length() >= 50) {
 			errors.rejectValue("funeralCertificate", "longText",
 					new Object[] { "Funeral_Certificate" },
 					"Campul 'Adeverinþa de înhumare' este prea lung.");

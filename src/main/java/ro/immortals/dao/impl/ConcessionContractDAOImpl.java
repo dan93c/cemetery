@@ -82,4 +82,19 @@ public class ConcessionContractDAOImpl implements ConcessionContractDAO {
 		                ConcessionContract.class).setParameter("search", "%" + search + "%").setFirstResult(offset)
 		        .setMaxResults(nrOfRecords).getResultList();
 	}
+	
+	@Override
+	public List<ConcessionContract> getAllGravesExpiredOnYears(String order, String search,Integer offset,
+	        Integer nrOfRecords, Integer currentYear) {
+		if (search == null || search.isEmpty()) {
+			return entityManager.createQuery("select c FROM ConcessionContract c", ConcessionContract.class).getResultList();
+		}
+		return entityManager
+		        .createQuery(
+		                "FROM ConcessionContract c where c.updatedDate != null and c.period like :search ",
+		                ConcessionContract.class).setParameter("search", "%" + search + "%").setFirstResult(offset)
+				        .setMaxResults(nrOfRecords).getResultList();
+	}
+	
+	
 }

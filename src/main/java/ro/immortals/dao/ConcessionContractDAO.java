@@ -21,4 +21,6 @@ public interface ConcessionContractDAO {
 	public Integer getAllSearchBySize(String search);
 
 	public List<ConcessionContract> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
+
+	public List<ConcessionContract> getAllGravesExpiredOnYears(String order, String search,Integer offset,Integer nrOfRecords, Integer currentYear);
 }

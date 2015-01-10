@@ -173,5 +173,13 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 		return concessionContractDAO.getAllByPageOrderBySearch(order, search,
 				offset, nrOfRecords);
 	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<ConcessionContract> getAllGravesExpiredOnYears(String order,
+			String search, Integer offset, Integer nrOfRecords, Integer currentYear) {
+		return concessionContractDAO.getAllGravesExpiredOnYears(order, search,
+				offset, nrOfRecords, currentYear);
+	}
 
 }

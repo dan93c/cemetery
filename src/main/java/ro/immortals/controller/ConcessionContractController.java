@@ -1,7 +1,7 @@
 package ro.immortals.controller;
 
 import java.util.Locale;
-
+import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -141,4 +141,30 @@ public class ConcessionContractController extends MainController {
 		contractService.update(contract, username);
 		return contractRegister(1, null, null, request);
 	}
+	
+	@RequestMapping(value = { "/gravesExpired/{page}" }, method = RequestMethod.GET)
+	public ModelAndView listGravesExpired(@PathVariable Integer page,
+			@RequestParam(value = ORDER, required = false) String order,
+			@RequestParam(value = SEARCH, required = false) String search,
+			HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(LIST_EXPIRED_GRAVES_JSP);
+		order = getOrder(order, request);
+		search = getSearch(search, request);
+		Integer recordsPerPage = DEFAULT_NR_OF_RECORDS;
+		Integer nrOfRecords = contractService.getAllSearchBySize(search);
+		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
+		page = setPagination(modelAndView, page, nrOfPages);
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS,
+				recordsPerPage);
+		modelAndView.addObject(ORDER, order);
+		modelAndView.addObject(SEARCH, search);
+		modelAndView.addObject(GRAVES, contractService
+				.getAllGravesExpiredOnYears(order, search,(page - 1)
+						* recordsPerPage, recordsPerPage, year) );
+		return modelAndView;
+
+	}
+	
+	
 }

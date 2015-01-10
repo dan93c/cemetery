@@ -102,6 +102,7 @@ public class MainController {
 	public static final String GRAVE_REGISTER_JSP = "graveRegister";
 	public static final String GRAVE_MONUMENT_REGISTER_JSP = "graveMonumentRegister";
 	public static final String GRAVE_REQUEST_REGISTER_JSP = "graveRequestRegister";
+	public static final String LIST_EXPIRED_GRAVES_JSP = "gravesExpired";
 
 	/**
 	 * set the nr of the current page and values of pagination format Pagination

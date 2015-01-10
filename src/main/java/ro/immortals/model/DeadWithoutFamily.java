@@ -47,11 +47,11 @@ public class DeadWithoutFamily implements java.io.Serializable{
 		this.id = id;
 	}
 
-	public String getFeneralCertificate() {
+	public String getFuneralCertificate() {
 		return funeralCertificate;
 	}
 
-	public void setFeneralCertificate(String feneralCertificate) {
+	public void setFuneralCertificate(String feneralCertificate) {
 		this.funeralCertificate = feneralCertificate;
 	}
 

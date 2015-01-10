@@ -20,5 +20,7 @@ public interface DeadWithoutFamilyDAO {
 
 	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
 
+	DeadWithoutFamily getByGraveAndFuneralDate(String nrGrave, String funeralCertificate);
+
 
 }

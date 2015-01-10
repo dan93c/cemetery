@@ -147,7 +147,19 @@ public class GraveController extends MainController {
 			return modelAndView;
 		}
 		String username = request.getUserPrincipal().getName();
-		graveService.update(grave, username);
+		Integer errorCode=graveService.update(grave, username);
+		if(errorCode==1){
+			ModelAndView modelAndView = new ModelAndView(EDIT_GRAVE_JSP);
+			modelAndView.addObject(GRAVE, grave);
+			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
+			modelAndView.addObject(PLOTS, plotService.getAll());
+			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+					"message.grave.already.exists",
+					new Object[] { grave.getNrGrave(),
+							grave.getPlot().getName() }, Locale.getDefault()));
+			return modelAndView;
+		}
+		
 		return list();
 	}
 

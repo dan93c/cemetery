@@ -94,7 +94,17 @@ public class PlotController extends MainController {
 			return modelAndView;
 		}
 		String username = request.getUserPrincipal().getName();
-		plotService.update(plot, username);
+		Integer errorCode=plotService.update(plot, username);
+		
+		if (errorCode == 1) {
+			ModelAndView modelAndView = new ModelAndView(EDIT_PLOT_JSP);
+			modelAndView.addObject(PLOT, plot);
+			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
+			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+					"message.plot.already.exists",
+					new Object[] { plot.getName() }, Locale.getDefault()));
+			return modelAndView;
+		}
 		return list();
 	}
 

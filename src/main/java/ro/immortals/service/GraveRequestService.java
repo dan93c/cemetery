@@ -8,7 +8,7 @@ public interface GraveRequestService {
 
 	public int add(GraveRequest graveRequest, String username);
 
-	public void update(GraveRequest graveRequest, String username);
+	public int update(GraveRequest graveRequest, String username);
 
 	public void delete(Integer id, String username);
 

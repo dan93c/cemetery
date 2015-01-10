@@ -8,7 +8,7 @@ public interface ConcessionContractService {
 
 	public int add(ConcessionContract concessionContract, String username);
 
-	public void update(ConcessionContract concessionContract, String username);
+	public int update(ConcessionContract concessionContract, String username);
 
 	public void delete(Integer id, String username);
 

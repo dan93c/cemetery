@@ -21,10 +21,10 @@ public class DeadWithoutFamilyValidator implements Validator {
 
 		DeadWithoutFamily deadWithoutFamily = (DeadWithoutFamily) target;
 
-		if (deadWithoutFamily.getFeneralCertificate().length() >= 50) {
+		if (deadWithoutFamily.getFuneralCertificate().length() >= 50) {
 			errors.rejectValue("funeralCertificate", "longText",
 					new Object[] { "Funeral_Certificate" },
-					"Campul 'Adeverinþa de înhumare' este prea lung.");
+					"Campul 'Adeverinï¿½a de ï¿½nhumare' este prea lung.");
 		}
 
 		if (deadWithoutFamily.getImlRequest().length() >= 50) {

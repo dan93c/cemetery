@@ -43,16 +43,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void update(User user, String username) {
-		History history = new History();
-		history.setUser(userDAO.getByUsername(username));
-		history.setActionName("Modificare");
-		history.setModificationDate(Calendar.getInstance().getTime());
-		history.setModifiedObject(MODIFIED_OBJECT);
-		history.setModifiedObjectCode(user.getUsername());
-		history.setDetails("Parola");
-		userDAO.update(user);
-		historyDAO.add(history);
+	public int update(User user, String username) {
+		if (checkDuplicate(user)) {
+			History history = new History();
+			history.setUser(userDAO.getByUsername(username));
+			history.setActionName("Modificare");
+			history.setModificationDate(Calendar.getInstance().getTime());
+			history.setModifiedObject(MODIFIED_OBJECT);
+			history.setModifiedObjectCode(user.getUsername());
+			history.setDetails("Parola");
+			userDAO.update(user);
+			historyDAO.add(history);
+			return 0;
+		}
+		return 1;
 	}
 
 	@Override

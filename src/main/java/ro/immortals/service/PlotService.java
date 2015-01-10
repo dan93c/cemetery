@@ -8,7 +8,7 @@ public interface PlotService {
 
 	public int add(Plot plot, String username);
 
-	public void update(Plot plot, String username);
+	public int update(Plot plot, String username);
 
 	public void delete(Integer id, String username);
 

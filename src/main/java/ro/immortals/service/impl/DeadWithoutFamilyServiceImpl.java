@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ro.immortals.dao.DeadWithoutFamilyDAO;
 import ro.immortals.dao.HistoryDAO;
 import ro.immortals.dao.UserDAO;
+import ro.immortals.model.Dead;
 import ro.immortals.model.DeadWithoutFamily;
 import ro.immortals.model.History;
 import ro.immortals.service.DeadWithoutFamilyService;
@@ -28,47 +29,49 @@ public class DeadWithoutFamilyServiceImpl implements DeadWithoutFamilyService {
 	@Override
 	@Transactional
 	public int add(DeadWithoutFamily deadWithoutFamily, String username) {
-		deadWithoutFamilyDAO.add(deadWithoutFamily);
-		History history = new History();
-		history.setUser(userDAO.getByUsername(username));
-		history.setActionName("Adaugare");
-		history.setModificationDate(Calendar.getInstance().getTime());
-		history.setModifiedObject(MODIFIED_OBJECT);
-		history.setDetails(deadWithoutFamily.toString());
-		history.setModifiedObjectCode(deadWithoutFamily.getId().toString());
-		historyDAO.add(history);
+		if (checkDuplicate(deadWithoutFamily)) {
+			deadWithoutFamilyDAO.add(deadWithoutFamily);
+			History history = new History();
+			history.setUser(userDAO.getByUsername(username));
+			history.setActionName("Adaugare");
+			history.setModificationDate(Calendar.getInstance().getTime());
+			history.setModifiedObject(MODIFIED_OBJECT);
+			history.setDetails(deadWithoutFamily.toString());
+			history.setModifiedObjectCode(deadWithoutFamily.getId().toString());
+			historyDAO.add(history);
+			return 0;
+		}
 		return 1;
 	}
 
 	@Override
 	@Transactional
-	public void update(DeadWithoutFamily deadWithoutFamily, String username) {
-		History history = new History();
-		history.setUser(userDAO.getByUsername(username));
-		history.setActionName("Modificare");
-		history.setModificationDate(Calendar.getInstance().getTime());
-		history.setModifiedObject(MODIFIED_OBJECT);
-		history.setModifiedObjectCode(deadWithoutFamily.getId().toString());
-		String details = setDetailsForHistory(deadWithoutFamily);
-		history.setDetails(details);
-		deadWithoutFamilyDAO.update(deadWithoutFamily);
-		historyDAO.add(history);
+	public int update(DeadWithoutFamily deadWithoutFamily, String username) {
+		if (checkDuplicate(deadWithoutFamily)) {
+			History history = new History();
+			history.setUser(userDAO.getByUsername(username));
+			history.setActionName("Modificare");
+			history.setModificationDate(Calendar.getInstance().getTime());
+			history.setModifiedObject(MODIFIED_OBJECT);
+			history.setModifiedObjectCode(deadWithoutFamily.getId().toString());
+			String details = setDetailsForHistory(deadWithoutFamily);
+			history.setDetails(details);
+			deadWithoutFamilyDAO.update(deadWithoutFamily);
+			historyDAO.add(history);
+			return 0;
+		}
+		return 1;
 	}
 
 	private String setDetailsForHistory(DeadWithoutFamily deadWithoutFamily) {
 		String details = "";
-		DeadWithoutFamily oldDeadWithoutFamily = deadWithoutFamilyDAO
-				.getById(deadWithoutFamily.getId());
-		if (!oldDeadWithoutFamily.getFeneralCertificate().contentEquals(
-				deadWithoutFamily.getFeneralCertificate())) {
-			details = "Adeverinta de inhumare veche:"
-					+ oldDeadWithoutFamily.getFeneralCertificate()
-					+ ", Adeverinta de inhumare noua:" + deadWithoutFamily.getFeneralCertificate() + "\r\n";
+		DeadWithoutFamily oldDeadWithoutFamily = deadWithoutFamilyDAO.getById(deadWithoutFamily.getId());
+		if (!oldDeadWithoutFamily.getFuneralCertificate().contentEquals(deadWithoutFamily.getFuneralCertificate())) {
+			details = "Adeverinta de inhumare veche:" + oldDeadWithoutFamily.getFuneralCertificate()
+					+ ", Adeverinta de inhumare noua:" + deadWithoutFamily.getFuneralCertificate() + "\r\n";
 		}
-		if (!oldDeadWithoutFamily.getImlRequest().contentEquals(
-				deadWithoutFamily.getImlRequest())) {
-			details = details + "Cererea IML veche:"
-					+ oldDeadWithoutFamily.getImlRequest() + ", Cererea IML noua:"
+		if (!oldDeadWithoutFamily.getImlRequest().contentEquals(deadWithoutFamily.getImlRequest())) {
+			details = details + "Cererea IML veche:" + oldDeadWithoutFamily.getImlRequest() + ", Cererea IML noua:"
 					+ deadWithoutFamily.getImlRequest() + "\r\n";
 		}
 		return details;
@@ -111,10 +114,20 @@ public class DeadWithoutFamilyServiceImpl implements DeadWithoutFamilyService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order,
-			String search, Integer offset, Integer nrOfRecords) {
-		return deadWithoutFamilyDAO.getAllByPageOrderBySearch(order, search,
-				offset, nrOfRecords);
+	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order, String search, Integer offset,
+			Integer nrOfRecords) {
+		return deadWithoutFamilyDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public boolean checkDuplicate(DeadWithoutFamily deadWithoutFamily) {
+		DeadWithoutFamily existingDead = deadWithoutFamilyDAO.getByGraveAndFuneralDate(deadWithoutFamily.getGrave()
+				.getNrGrave(), deadWithoutFamily.getFuneralCertificate());
+		if (existingDead != null && (existingDead.getId() != deadWithoutFamily.getId())) {
+			return false;
+		}
+		return true;
 	}
 
 }

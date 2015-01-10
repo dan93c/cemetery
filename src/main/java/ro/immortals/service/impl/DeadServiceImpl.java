@@ -28,58 +28,62 @@ public class DeadServiceImpl implements DeadService {
 	@Override
 	@Transactional
 	public int add(Dead dead, String username) {
-		deadDAO.add(dead);
-		History history = new History();
-		history.setUser(userDAO.getByUsername(username));
-		history.setActionName("Adaugare");
-		history.setModificationDate(Calendar.getInstance().getTime());
-		history.setModifiedObject(MODIFIED_OBJECT);
-		history.setDetails(dead.toString());
-		history.setModifiedObjectCode(dead.getId().toString());
-		historyDAO.add(history);
+		if (checkDuplicate(dead)) {
+			deadDAO.add(dead);
+			History history = new History();
+			history.setUser(userDAO.getByUsername(username));
+			history.setActionName("Adaugare");
+			history.setModificationDate(Calendar.getInstance().getTime());
+			history.setModifiedObject(MODIFIED_OBJECT);
+			history.setDetails(dead.toString());
+			history.setModifiedObjectCode(dead.getId().toString());
+			historyDAO.add(history);
+			return 0;
+		}
 		return 1;
 	}
 
 	@Override
 	@Transactional
-	public void update(Dead dead, String username) {
-		History history = new History();
-		history.setUser(userDAO.getByUsername(username));
-		history.setActionName("Modificare");
-		history.setModificationDate(Calendar.getInstance().getTime());
-		history.setModifiedObject(MODIFIED_OBJECT);
-		history.setModifiedObjectCode(dead.getId().toString());
-		String details = setDetailsForHistory(dead);
-		history.setDetails(details);
-		deadDAO.update(dead);
-		historyDAO.add(history);
+	public int update(Dead dead, String username) {
+		if (checkDuplicate(dead)) {
+			History history = new History();
+			history.setUser(userDAO.getByUsername(username));
+			history.setActionName("Modificare");
+			history.setModificationDate(Calendar.getInstance().getTime());
+			history.setModifiedObject(MODIFIED_OBJECT);
+			history.setModifiedObjectCode(dead.getId().toString());
+			String details = setDetailsForHistory(dead);
+			history.setDetails(details);
+			deadDAO.update(dead);
+			historyDAO.add(history);
+			return 0;
+		}
+		return 1;
+
 	}
 
 	private String setDetailsForHistory(Dead dead) {
 		String details = "";
 		Dead oldDead = deadDAO.getById(dead.getId());
 		if (!oldDead.getFirstName().contentEquals(dead.getFirstName())) {
-			details = "Nume vechi:" + oldDead.getFirstName() + ", Nume nou:"
-					+ dead.getFirstName() + "\r\n";
+			details = "Nume vechi:" + oldDead.getFirstName() + ", Nume nou:" + dead.getFirstName() + "\r\n";
 		}
 		if (!oldDead.getLastName().contentEquals(dead.getLastName())) {
-			details = details + "Prenume vechi:" + oldDead.getLastName()
-					+ ", Prenume nou:" + dead.getLastName() + "\r\n";
+			details = details + "Prenume vechi:" + oldDead.getLastName() + ", Prenume nou:" + dead.getLastName()
+					+ "\r\n";
 		}
 		if (oldDead.getFuneralDate().compareTo(dead.getFuneralDate()) != 0) {
-			details = details + "Data inmormantarii veche:"
-					+ oldDead.getFuneralDate().toString()
-					+ ", Data inmormantarii noua:"
-					+ dead.getFuneralDate().toString() + "\r\n";
+			details = details + "Data inmormantarii veche:" + oldDead.getFuneralDate().toString()
+					+ ", Data inmormantarii noua:" + dead.getFuneralDate().toString() + "\r\n";
 		}
 		if (!oldDead.getGrave().getId().equals(dead.getGrave().getId())) {
-			details = details + "Mormant vechi:"
-					+ oldDead.getGrave().getNrGrave() + ", Mormant nou:"
+			details = details + "Mormant vechi:" + oldDead.getGrave().getNrGrave() + ", Mormant nou:"
 					+ dead.getGrave().getNrGrave() + "\r\n";
 		}
 		if (!oldDead.getReligion().contentEquals(dead.getReligion())) {
-			details = details + "Religia veche:" + oldDead.getReligion()
-					+ ", Religia noua:" + dead.getReligion() + "\r\n";
+			details = details + "Religia veche:" + oldDead.getReligion() + ", Religia noua:" + dead.getReligion()
+					+ "\r\n";
 		}
 		return details;
 	}
@@ -116,8 +120,7 @@ public class DeadServiceImpl implements DeadService {
 	@Override
 	@Transactional(readOnly = true)
 	public boolean checkDuplicate(Dead dead) {
-		Dead existingDead = deadDAO.getByGraveAndFuneralDate(dead.getGrave()
-				.getNrGrave(), dead.getFuneralDate());
+		Dead existingDead = deadDAO.getByGraveAndFuneralDate(dead.getGrave().getNrGrave(), dead.getFuneralDate());
 		if (existingDead != null && (existingDead.getId() != dead.getId())) {
 			return false;
 		}
@@ -132,10 +135,8 @@ public class DeadServiceImpl implements DeadService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Dead> getAllByPageOrderBySearch(String order, String search,
-			Integer offset, Integer recordsPerPage) {
-		return deadDAO.getAllByPageOrderBySearch(order, search, offset,
-				recordsPerPage);
+	public List<Dead> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer recordsPerPage) {
+		return deadDAO.getAllByPageOrderBySearch(order, search, offset, recordsPerPage);
 	}
 
 }

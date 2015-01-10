@@ -73,6 +73,7 @@ public class MainController {
 	public static final Integer DEFAULT_NR_OF_RECORDS = 10;
 	public static final Integer FIRST_PAGE = 1;
 	public static final String SEARCH = "sch";
+	public static final String YEAR = "year";
 	public static final String ORDER = "order";
 
 	/* PAGES */
@@ -102,7 +103,7 @@ public class MainController {
 	public static final String GRAVE_REGISTER_JSP = "graveRegister";
 	public static final String GRAVE_MONUMENT_REGISTER_JSP = "graveMonumentRegister";
 	public static final String GRAVE_REQUEST_REGISTER_JSP = "graveRequestRegister";
-	public static final String LIST_EXPIRED_GRAVES_JSP = "gravesExpired";
+	public static final String LIST_EXPIRED_GRAVES_JSP = "listExpiredGraves";
 
 	/**
 	 * set the nr of the current page and values of pagination format Pagination

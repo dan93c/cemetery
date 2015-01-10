@@ -141,9 +141,9 @@ public class ConcessionContractController extends MainController {
 		contractService.update(contract, username);
 		return contractRegister(1, null, null, request);
 	}
-	
-	@RequestMapping(value = { "/gravesExpired/{page}" }, method = RequestMethod.GET)
-	public ModelAndView listGravesExpired(@PathVariable Integer page,
+
+	@RequestMapping(value = { "/expired/{page}" }, method = RequestMethod.GET)
+	public ModelAndView listExpiredGraves(@PathVariable Integer page,
 			@RequestParam(value = ORDER, required = false) String order,
 			@RequestParam(value = SEARCH, required = false) String search,
 			HttpServletRequest request) {
@@ -154,17 +154,15 @@ public class ConcessionContractController extends MainController {
 		Integer nrOfRecords = contractService.getAllSearchBySize(search);
 		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
 		page = setPagination(modelAndView, page, nrOfPages);
-		int year = Calendar.getInstance().get(Calendar.YEAR);
 		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS,
 				recordsPerPage);
 		modelAndView.addObject(ORDER, order);
 		modelAndView.addObject(SEARCH, search);
 		modelAndView.addObject(GRAVES, contractService
-				.getAllGravesExpiredOnYears(order, search,(page - 1)
-						* recordsPerPage, recordsPerPage, year) );
+				.getAllGravesExpiredOnYears(order, search, (page - 1)
+						* recordsPerPage, recordsPerPage));
 		return modelAndView;
 
 	}
-	
-	
+
 }

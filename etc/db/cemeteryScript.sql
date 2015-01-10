@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `cemeterydb`.`concession_contracts` (
   `address` VARCHAR(100) NULL DEFAULT NULL,
   `email_address` VARCHAR(100) NULL DEFAULT NULL,
   `grave_id` INT(11) NOT NULL,
-  `signed_date` DATETIME NULL DEFAULT NULL,
+  `expired_date` DATETIME NULL DEFAULT NULL,
   `updated_date` DATETIME NULL DEFAULT NULL,
   `period` INT NOT NULL,
   PRIMARY KEY (`id`),

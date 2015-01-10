@@ -42,7 +42,7 @@
 					de evidenta a contractelor de concesiune</a></li>
 			<li><a href="#">Registrul anual cu evidenta sesizarilor si
 					reclamatiile cetatenilor</a></li>
-			<li><a href="${CONTEXT_PATH}/contract/gravesExpired/1?o=0&sch=">Lista mormintelor expirate</a></li>
+			<li><a href="${CONTEXT_PATH}/contract/expired/1?o=0&sch=">Lista mormintelor expirate</a></li>
 		</ul></li>
 </ul>
 <!-- div containing the logout button and the user's name -->

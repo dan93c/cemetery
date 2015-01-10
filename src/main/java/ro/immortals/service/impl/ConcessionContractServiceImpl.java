@@ -30,7 +30,12 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	@Transactional
 	public int add(ConcessionContract concessionContract, String username) {
 		if (checkDuplicate(concessionContract)) {
-			concessionContract.setReleaseDate(new Date());
+			Calendar c = Calendar.getInstance();
+			concessionContract.setReleaseDate(c.getTime());
+			Integer expiredYear = c.get(Calendar.YEAR)
+					+ concessionContract.getPeriod();
+			c.set(Calendar.YEAR, expiredYear);
+			concessionContract.setExpiredDate(c.getTime());
 			concessionContractDAO.add(concessionContract);
 			History history = new History();
 			history.setUser(userDAO.getByUsername(username));
@@ -48,6 +53,9 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	@Override
 	@Transactional
 	public void update(ConcessionContract concessionContract, String username) {
+		Date expiredDate = getExpiredDate(concessionContract.getExpiredDate(),
+				concessionContract.getPeriod());
+		concessionContract.setExpiredDate(expiredDate);
 		History history = new History();
 		history.setUser(userDAO.getByUsername(username));
 		history.setActionName("Modificare");
@@ -58,6 +66,16 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 		history.setDetails(details);
 		concessionContractDAO.update(concessionContract);
 		historyDAO.add(history);
+	}
+
+	private Date getExpiredDate(Date oldExpiredDate, Integer period) {
+		Calendar c = Calendar.getInstance();
+		if (oldExpiredDate.after(c.getTime())) {
+			c.setTime(oldExpiredDate);
+		}
+		Integer expiredYear = c.get(Calendar.YEAR) + period;
+		c.set(Calendar.YEAR, expiredYear);
+		return c.getTime();
 	}
 
 	private String setDetailsForHistory(ConcessionContract concessionContract) {
@@ -173,13 +191,19 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 		return concessionContractDAO.getAllByPageOrderBySearch(order, search,
 				offset, nrOfRecords);
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<ConcessionContract> getAllGravesExpiredOnYears(String order,
-			String search, Integer offset, Integer nrOfRecords, Integer currentYear) {
+			String search, Integer offset, Integer nrOfRecords) {
 		return concessionContractDAO.getAllGravesExpiredOnYears(order, search,
-				offset, nrOfRecords, currentYear);
+				offset, nrOfRecords);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Integer getAllGravesExpiredOnYearsSize(String search) {
+		return concessionContractDAO.getAllGravesExpiredOnYearsSize(search);
 	}
 
 }

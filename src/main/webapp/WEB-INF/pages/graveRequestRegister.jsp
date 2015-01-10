@@ -72,7 +72,7 @@
 						<th>Stadiu de solutionare</th>
 					</tr>
 				</thead>
-				<c:forEach var="request" items="${requests}" varStatus="lineInfo">
+				<c:forEach var="request" items="${graves}" varStatus="lineInfo">
 					<tr>
 						<td>${lineInfo.count}</td>
 						<td><fmt:formatDate value="${request.registrationDate}"

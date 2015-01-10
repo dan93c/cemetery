@@ -5,7 +5,7 @@ import java.util.List;
 import ro.immortals.model.ConcessionContract;
 
 public interface ConcessionContractDAO {
-	
+
 	public void add(ConcessionContract concessionContract);
 
 	public void update(ConcessionContract concessionContract);
@@ -15,12 +15,16 @@ public interface ConcessionContractDAO {
 	public List<ConcessionContract> getAll();
 
 	public ConcessionContract getById(Integer id);
-	
+
 	public ConcessionContract getByCnp(String cnp);
-	
+
 	public Integer getAllSearchBySize(String search);
 
-	public List<ConcessionContract> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords);
+	public List<ConcessionContract> getAllByPageOrderBySearch(String order,
+			String search, Integer offset, Integer nrOfRecords);
 
-	public List<ConcessionContract> getAllGravesExpiredOnYears(String order, String search,Integer offset,Integer nrOfRecords, Integer currentYear);
+	public List<ConcessionContract> getAllGravesExpiredOnYears(String order,
+			String search, Integer offset, Integer nrOfRecords);
+
+	public Integer getAllGravesExpiredOnYearsSize(String search);
 }

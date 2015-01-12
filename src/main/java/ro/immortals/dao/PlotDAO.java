@@ -18,4 +18,6 @@ public interface PlotDAO {
 
 	public Plot getByNameAndCemetery(String name, Integer cId);
 
+	public List<Plot> getByCemetery(Integer cId);
+
 }

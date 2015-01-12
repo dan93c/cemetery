@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ro.immortals.model.Cemetery;
@@ -58,8 +60,7 @@ public class PlotController extends MainController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView doAdd(@ModelAttribute @Validated Plot plot,
-			BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView doAdd(@ModelAttribute @Validated Plot plot, BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return add(plot);
 		}
@@ -69,9 +70,11 @@ public class PlotController extends MainController {
 			ModelAndView modelAndView = new ModelAndView(ADD_PLOT_JSP);
 			modelAndView.addObject(PLOT, plot);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-					"message.plot.already.exists",
-					new Object[] { plot.getName() }, Locale.getDefault()));
+			modelAndView
+					.addObject(
+							ERROR_MESSAGE,
+							messageSource.getMessage("message.plot.already.exists", new Object[] { plot.getName() },
+									Locale.getDefault()));
 			return modelAndView;
 		}
 		return list();
@@ -86,8 +89,7 @@ public class PlotController extends MainController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView doEdit(@ModelAttribute @Validated Plot plot,
-			BindingResult bindingResult, HttpServletRequest request) {
+	public ModelAndView doEdit(@ModelAttribute @Validated Plot plot, BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_PLOT_JSP);
 			modelAndView.addObject(PLOT, plot);
@@ -99,10 +101,17 @@ public class PlotController extends MainController {
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public ModelAndView delete(@PathVariable Integer id,
-			HttpServletRequest request) {
+	public ModelAndView delete(@PathVariable Integer id, HttpServletRequest request) {
 		String username = request.getUserPrincipal().getName();
 		plotService.delete(id, username);
 		return list();
+	}
+
+	@RequestMapping(value = "/getPlotsByCemetery/{id}", method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<Plot> getPlotsByCemenety(@PathVariable Integer id, HttpServletRequest request) {
+		System.out.println("apelapelapelapelapel");
+		return plotService.getAllByCemetery(id);
 	}
 }

@@ -17,7 +17,7 @@
 		<div id="search_filter_container">
 			<div id="filter_container">
 				<form method="get"
-					action="${CONTEXT_PATH}/grave/cereri/${currentPage}?order=${order}&sch=${sch}"
+					action="${CONTEXT_PATH}/graveRequest/cereri/${currentPage}?order=${order}&sch=${sch}"
 					name="selectOrderForm">
 					<label id="order_label"> <select name="order"
 						class="input_box" id="order_criteria"
@@ -54,7 +54,7 @@
 			</div>
 			<div id="search_container">
 				<form method="get"
-					action="${CONTEXT_PATH}/grave/cereri/${currentPage}?order=${order}&sch=${sch}"
+					action="${CONTEXT_PATH}/graveRequest/cereri/${currentPage}?order=${order}&sch=${sch}"
 					name="searchForm">
 					<input class="input_box" type="text" name="sch" value="${sch}" />
 					<input type="submit" value="Cauta" class="btn">
@@ -72,13 +72,16 @@
 						<th>Stadiu de solutionare</th>
 					</tr>
 				</thead>
-				<c:forEach var="request" items="${requests}" varStatus="lineInfo">
+				<c:forEach var="graveRequest" items="${graveRequests}"
+					varStatus="lineInfo">
 					<tr>
 						<td>${lineInfo.count}</td>
 						<td><fmt:formatDate value="${request.registrationDate}"
 								pattern="yyyy-MM-dd HH:mm " /></td>
-						<td>${request.nrInfocet}</td>
-						<td>${request.solvingStage}</td>
+						<td>${graveRequest.nrInfocet}</td>
+						<td>${graveRequest.solvingStage}</td>
+						<td><a href="${CONTEXT_PATH}/graveRequest/edit/${graveRequest.id}"><button
+									class="btn-table">Modifica</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -90,17 +93,17 @@
 				<c:choose>
 					<c:when test="${currentPage != 1}">
 						<li title="First page"><a
-							href="${CONTEXT_PATH}/grave/cereri/1?order=${order}&sch=${sch}">
+							href="${CONTEXT_PATH}/graveRequest/cereri/1?order=${order}&sch=${sch}">
 								First </a></li>
 						<li title="Previous page"><a
-							href="${CONTEXT_PATH}/grave/cereri/${currentPage - 1}?order=${order}&sch=${sch}">Previous</a></li>
+							href="${CONTEXT_PATH}/graveRequest/cereri/${currentPage - 1}?order=${order}&sch=${sch}">Previous</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled" title="First page"><a
-							href="${CONTEXT_PATH}/grave/cereri/1?order=${order}&sch=${sch}">
+							href="${CONTEXT_PATH}/graveRequest/cereri/1?order=${order}&sch=${sch}">
 								First </a></li>
 						<li class="disabled" title="Previous page"><a
-							href="${CONTEXT_PATH}/grave/cereri/1?order=${order}&sch=${sch}">Previous</a></li>
+							href="${CONTEXT_PATH}/graveRequest/cereri/1?order=${order}&sch=${sch}">Previous</a></li>
 					</c:otherwise>
 				</c:choose>
 				<c:forEach begin="${begin}" end="${end}" var="i">
@@ -110,7 +113,7 @@
 						</c:when>
 						<c:otherwise>
 							<li title="Page ${i}"><a
-								href="${CONTEXT_PATH}/grave/cereri/${i}?order=${order}&sch=${sch}">${i}</a></li>
+								href="${CONTEXT_PATH}/graveRequest/cereri/${i}?order=${order}&sch=${sch}">${i}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -118,18 +121,18 @@
 				<c:choose>
 					<c:when test="${currentPage lt nrOfPages}">
 						<li title="Next page"><a
-							href="${CONTEXT_PATH}/grave/cereri/${currentPage + 1}?order=${order}&sch=${sch}">Next</a></li>
+							href="${CONTEXT_PATH}/graveRequest/cereri/${currentPage + 1}?order=${order}&sch=${sch}">Next</a></li>
 
 						<li title="Last page"><a
-							href="${CONTEXT_PATH}/grave/cereri/${nrOfPages}?order=${order}&sch=${sch}">
+							href="${CONTEXT_PATH}/graveRequest/cereri/${nrOfPages}?order=${order}&sch=${sch}">
 								Last </a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="disabled" title="Next page"><a
-							href="${CONTEXT_PATH}/grave/cereri/${nrOfPages}?order=${order}&sch=${sch}">Next</a></li>
+							href="${CONTEXT_PATH}/graveRequest/cereri/${nrOfPages}?order=${order}&sch=${sch}">Next</a></li>
 
 						<li class="disabled" title="Last page"><a
-							href="${CONTEXT_PATH}/grave/cereri/${nrOfPages}?order=${order}&sch=${sch}">
+							href="${CONTEXT_PATH}/graveRequest/cereri/${nrOfPages}?order=${order}&sch=${sch}">
 								Last </a></li>
 					</c:otherwise>
 				</c:choose>

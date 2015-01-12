@@ -17,4 +17,6 @@ public interface PlotService {
 	public Plot getById(Integer id);
 
 	public boolean checkDuplicate(Plot plot);
+
+	public List<Plot> getAllByCemetery(Integer cId);
 }

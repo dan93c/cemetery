@@ -124,7 +124,7 @@ public class GraveController extends MainController {
 							grave.getPlot().getName() }, Locale.getDefault()));
 			return modelAndView;
 		}
-		return list();
+		 return gravesRegister(1,null,null,request);
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -148,7 +148,7 @@ public class GraveController extends MainController {
 		}
 		String username = request.getUserPrincipal().getName();
 		graveService.update(grave, username);
-		return list();
+		 return gravesRegister(1,null,null,request);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)

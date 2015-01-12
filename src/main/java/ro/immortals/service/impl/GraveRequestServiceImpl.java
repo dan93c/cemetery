@@ -1,6 +1,7 @@
 package ro.immortals.service.impl;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 			history.setModificationDate(Calendar.getInstance().getTime());
 			history.setModifiedObject(MODIFIED_OBJECT);
 			history.setDetails(graveRequest.toString());
+			graveRequest.setRegistrationDate(Calendar.getInstance().getTime());
 			graveRequestDAO.add(graveRequest);
 			history.setModifiedObjectCode(graveRequest.getId().toString());
 			historyDAO.add(history);
@@ -126,6 +128,8 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 	@Transactional(readOnly = true)
 	public List<GraveRequest> getAllByPageOrderBySearch(String order,
 			String search, Integer offset, Integer nrOfRecords) {
+		System.out.println("sadasdas");
+		System.out.println(graveRequestDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords).size());
 		return graveRequestDAO.getAllByPageOrderBySearch(order, search, offset,
 				nrOfRecords);
 	}

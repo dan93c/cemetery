@@ -43,9 +43,11 @@ public class ConcessionContractController extends MainController {
 				recordsPerPage);
 		modelAndView.addObject(ORDER, order);
 		modelAndView.addObject(SEARCH, search);
-		modelAndView.addObject(GRAVES, contractService
+		modelAndView.addObject(CONTRACTS, contractService
 				.getAllByPageOrderBySearch(order, search, (page - 1)
 						* recordsPerPage, recordsPerPage));
+		System.out.println(contractService.getAllByPageOrderBySearch(order, search, (page - 1)
+						* recordsPerPage, recordsPerPage).size());
 		return modelAndView;
 
 	}

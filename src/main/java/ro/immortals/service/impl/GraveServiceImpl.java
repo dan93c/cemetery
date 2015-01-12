@@ -46,49 +46,49 @@ public class GraveServiceImpl implements GraveService {
 
 	@Override
 	@Transactional
-	public void update(Grave grave, String username) {
-		History history = new History();
-		history.setUser(userDAO.getByUsername(username));
-		history.setActionName("Modificare");
-		history.setModificationDate(Calendar.getInstance().getTime());
-		history.setModifiedObject(MODIFIED_OBJECT);
-		history.setModifiedObjectCode(grave.getId().toString());
-		String details = setDetailsForHistory(grave);
-		history.setDetails(details);
-		graveDAO.update(grave);
-		historyDAO.add(history);
+	public int update(Grave grave, String username) {
+		if (checkDuplicate(grave)) {
+			History history = new History();
+			history.setUser(userDAO.getByUsername(username));
+			history.setActionName("Modificare");
+			history.setModificationDate(Calendar.getInstance().getTime());
+			history.setModifiedObject(MODIFIED_OBJECT);
+			history.setModifiedObjectCode(grave.getId().toString());
+			String details = setDetailsForHistory(grave);
+			history.setDetails(details);
+			graveDAO.update(grave);
+			historyDAO.add(history);
+			return 0;
+		}
+		return 1;
 	}
 
 	private String setDetailsForHistory(Grave grave) {
 		String details = "";
 		Grave oldGrave = graveDAO.getById(grave.getId());
 		if (!oldGrave.getNrGrave().contentEquals(grave.getNrGrave())) {
-			details = "Denumire veche:" + oldGrave.getNrGrave()
-					+ ", Denumire noua:" + grave.getNrGrave() + "\r\n";
+			details = "Denumire veche:" + oldGrave.getNrGrave() + ", Denumire noua:" + grave.getNrGrave() + "\r\n";
 		}
 		if (!oldGrave.getSurface().contentEquals(grave.getSurface())) {
-			details = details + "Suprafata veche:" + oldGrave.getSurface()
-					+ ", Suprafata noua:" + grave.getSurface() + "\r\n";
+			details = details + "Suprafata veche:" + oldGrave.getSurface() + ", Suprafata noua:" + grave.getSurface()
+					+ "\r\n";
 		}
 		if (!oldGrave.getType().contentEquals(grave.getType())) {
 			if (oldGrave.getType() == null) {
-				details = details + "Tipul vechi: -, Tipul nou:"
-						+ grave.getType() + "\r\n";
+				details = details + "Tipul vechi: -, Tipul nou:" + grave.getType() + "\r\n";
 			} else {
 				if (grave.getType() != null) {
-					details = details + "Tipul vechi: " + oldGrave.getType()
-							+ ", Tipul nou:" + grave.getType() + "\r\n";
+					details = details + "Tipul vechi: " + oldGrave.getType() + ", Tipul nou:" + grave.getType()
+							+ "\r\n";
 				} else {
-					details = details + "Tipul vechi: " + oldGrave.getType()
-							+ ", Tipul nou: - \r\n";
+					details = details + "Tipul vechi: " + oldGrave.getType() + ", Tipul nou: - \r\n";
 
 				}
 
 			}
 		}
 		if (!oldGrave.getObservations().contentEquals(grave.getObservations())) {
-			details = details + "Observatii vechi:"
-					+ oldGrave.getObservations() + ", Observatii noi:"
+			details = details + "Observatii vechi:" + oldGrave.getObservations() + ", Observatii noi:"
 					+ grave.getObservations() + "\r\n";
 		}
 		return details;
@@ -126,8 +126,7 @@ public class GraveServiceImpl implements GraveService {
 	@Override
 	@Transactional(readOnly = true)
 	public boolean checkDuplicate(Grave grave) {
-		Grave existingGrave = graveDAO.getByNumberAndPlot(grave.getNrGrave(),
-				grave.getPlot().getId());
+		Grave existingGrave = graveDAO.getByNumberAndPlot(grave.getNrGrave(), grave.getPlot().getId());
 		if (existingGrave != null && (existingGrave.getId() != grave.getId())) {
 			return false;
 		}
@@ -136,8 +135,7 @@ public class GraveServiceImpl implements GraveService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public boolean checkGraveExistence(Grave grave, Integer plotId,
-			Integer graveId) {
+	public boolean checkGraveExistence(Grave grave, Integer plotId, Integer graveId) {
 		List<Grave> graves = graveDAO.getAll();
 		for (Grave g : graves) {
 			if (g.getId() == grave.getId() && g.getPlot().getId() == plotId
@@ -156,8 +154,7 @@ public class GraveServiceImpl implements GraveService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Grave> getAllByPageWithContractsAndDeads(Integer offset,
-			Integer nrOfRecords) {
+	public List<Grave> getAllByPageWithContractsAndDeads(Integer offset, Integer nrOfRecords) {
 		List<Grave> graves = graveDAO.getAllByPage(offset, nrOfRecords);
 		for (Grave g : graves) {
 			Hibernate.initialize(g.getConcessionContracts());
@@ -169,10 +166,8 @@ public class GraveServiceImpl implements GraveService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Grave> getAllByPageOrderBySearch(String order, String search,
-			Integer offset, Integer nrOfRecords) {
-		List<Grave> graves = graveDAO.getAllByPageOrderBySearch(order, search,
-				offset, nrOfRecords);
+	public List<Grave> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords) {
+		List<Grave> graves = graveDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
 		for (Grave g : graves) {
 			Hibernate.initialize(g.getConcessionContracts());
 			Hibernate.initialize(g.getDeads());
@@ -189,10 +184,9 @@ public class GraveServiceImpl implements GraveService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Grave> getAllMonumentsByPageOrderBySearch(String order,
-			String search, Integer offset, Integer nrOfRecords) {
-		List<Grave> graves = graveDAO.getAllMonumentsByPageOrderBySearch(order,
-				search, offset, nrOfRecords);
+	public List<Grave> getAllMonumentsByPageOrderBySearch(String order, String search, Integer offset,
+			Integer nrOfRecords) {
+		List<Grave> graves = graveDAO.getAllMonumentsByPageOrderBySearch(order, search, offset, nrOfRecords);
 		for (Grave g : graves) {
 			Hibernate.initialize(g.getConcessionContracts());
 			Hibernate.initialize(g.getDeads());

@@ -76,11 +76,12 @@
 					varStatus="lineInfo">
 					<tr>
 						<td>${lineInfo.count}</td>
-						<td><fmt:formatDate value="${request.registrationDate}"
+						<td><fmt:formatDate value="${graveRequest.registrationDate}"
 								pattern="yyyy-MM-dd HH:mm " /></td>
 						<td>${graveRequest.nrInfocet}</td>
 						<td>${graveRequest.solvingStage}</td>
-						<td><a href="${CONTEXT_PATH}/graveRequest/edit/${graveRequest.id}"><button
+						<td><a
+							href="${CONTEXT_PATH}/graveRequest/edit/${graveRequest.id}"><button
 									class="btn-table">Modifica</button></a></td>
 					</tr>
 				</c:forEach>

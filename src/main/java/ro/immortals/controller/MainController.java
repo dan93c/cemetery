@@ -81,6 +81,7 @@ public class MainController {
 	public static final Integer DEFAULT_NR_OF_RECORDS = 10;
 	public static final Integer FIRST_PAGE = 1;
 	public static final String SEARCH = "sch";
+	public static final String YEAR = "year";
 	public static final String ORDER = "order";
 
 	/* PAGES */
@@ -115,6 +116,8 @@ public class MainController {
 	public static final String ADD_CLAIM_JSP="addClaim";
 	public static final String EDIT_CLAIM_JSP="editClaim";
 	public static final String CLAIMS_REGISTER_JSP="claimRegister";
+	public static final String LIST_EXPIRED_GRAVES_JSP = "listExpiredGraves";
+
 
 	/**
 	 * set the nr of the current page and values of pagination format Pagination

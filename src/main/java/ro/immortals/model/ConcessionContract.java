@@ -51,8 +51,8 @@ public class ConcessionContract implements java.io.Serializable {
 
 	@DateTimeFormat(iso = ISO.NONE)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "signed_date")
-	private Date signedDate;
+	@Column(name = "expired_date")
+	private Date expiredDate;
 
 	@DateTimeFormat(iso = ISO.NONE)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -71,7 +71,7 @@ public class ConcessionContract implements java.io.Serializable {
 
 	public ConcessionContract(Integer id, String receiptNr, Date releaseDate,
 			String cnp, String firstName, String lastName, String address,
-			String emailAddress, Date signedDate, Date updatedDate,
+			String emailAddress, Date expiredDate, Date updatedDate,
 			Integer period, Grave grave) {
 		this.id = id;
 		this.receiptNr = receiptNr;
@@ -81,7 +81,7 @@ public class ConcessionContract implements java.io.Serializable {
 		this.lastName = lastName;
 		this.address = address;
 		this.emailAddress = emailAddress;
-		this.signedDate = signedDate;
+		this.expiredDate = expiredDate;
 		this.updatedDate = updatedDate;
 		this.period = period;
 		this.grave = grave;
@@ -151,12 +151,12 @@ public class ConcessionContract implements java.io.Serializable {
 		this.emailAddress = emailAddress;
 	}
 
-	public Date getSignedDate() {
-		return signedDate;
+	public Date getExpiredDate() {
+		return expiredDate;
 	}
 
-	public void setSignedDate(Date signedDate) {
-		this.signedDate = signedDate;
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
 	}
 
 	public Date getUpdatedDate() {
@@ -185,7 +185,7 @@ public class ConcessionContract implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return  (receiptNr != null ? "Numar:" + receiptNr + ", " : "")
+		return (receiptNr != null ? "Numar:" + receiptNr + ", " : "")
 				+ (releaseDate != null ? "Data eliberarii:"
 						+ releaseDate.toString() + ", " : "")
 				+ (cnp != null ? "CNP:" + cnp + ", " : "")

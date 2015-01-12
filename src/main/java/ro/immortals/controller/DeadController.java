@@ -112,7 +112,18 @@ public class DeadController extends MainController {
 			return modelAndView;
 		}
 		String username = request.getUserPrincipal().getName();
-		deadService.add(dead, username);
+		Integer errorCode = deadService.add(dead, username);
+		if (errorCode == 1) {
+			ModelAndView modelAndView = new ModelAndView(ADD_DEAD_JSP);
+			modelAndView.addObject(ERROR_MESSAGE,
+					messageSource.getMessage("message.dead.already.exists", new Object[] { dead.getId() }, Locale.getDefault()));
+			modelAndView.addObject(DEAD, dead);
+			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
+			modelAndView.addObject(PLOTS, plotService.getAll());
+			modelAndView.addObject(GRAVES, graveService.getAll());
+			return modelAndView;
+		}
+
 		return appointmentRegister(1, null, null, request);
 	}
 
@@ -147,7 +158,18 @@ public class DeadController extends MainController {
 			return modelAndView;
 		}
 		String username = request.getUserPrincipal().getName();
-		deadService.update(dead, username);
+		Integer errorCode = deadService.update(dead, username);
+
+		if (errorCode == 1) {
+			ModelAndView modelAndView = new ModelAndView(EDIT_DEAD_JSP);
+			modelAndView.addObject(ERROR_MESSAGE,
+					messageSource.getMessage("message.dead.already.exists", new Object[] { dead.getId() }, Locale.getDefault()));
+			modelAndView.addObject(DEAD, dead);
+			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
+			modelAndView.addObject(PLOTS, plotService.getAll());
+			modelAndView.addObject(GRAVES, graveService.getAll());
+			return modelAndView;
+		}
 		return appointmentRegister(1, null, null, request);
 	}
 }

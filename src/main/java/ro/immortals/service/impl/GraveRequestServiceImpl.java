@@ -47,30 +47,32 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 
 	@Override
 	@Transactional
-	public void update(GraveRequest graveRequest, String username) {
-		History history = new History();
-		history.setUser(userDAO.getByUsername(username));
-		history.setActionName("Modificare");
-		history.setModificationDate(Calendar.getInstance().getTime());
-		history.setModifiedObject(MODIFIED_OBJECT);
-		history.setModifiedObjectCode(graveRequest.getId().toString());
-		String details = setDetailsForHistory(graveRequest);
-		history.setDetails(details);
-		graveRequestDAO.update(graveRequest);
-		historyDAO.add(history);
+	public int update(GraveRequest graveRequest, String username) {
+		if (checkDuplicate(graveRequest)) {
+			History history = new History();
+			history.setUser(userDAO.getByUsername(username));
+			history.setActionName("Modificare");
+			history.setModificationDate(Calendar.getInstance().getTime());
+			history.setModifiedObject(MODIFIED_OBJECT);
+			history.setModifiedObjectCode(graveRequest.getId().toString());
+			String details = setDetailsForHistory(graveRequest);
+			history.setDetails(details);
+			graveRequest.setRegistrationDate(Calendar.getInstance().getTime());
+			graveRequestDAO.update(graveRequest);
+			historyDAO.add(history);
+			return 0;
+		}
+		return 1;
 	}
 
 	private String setDetailsForHistory(GraveRequest graveRequest) {
 		String details = "";
-		GraveRequest oldGraveRequest = graveRequestDAO.getById(graveRequest
-				.getId());
-		if (!oldGraveRequest.getNrInfocet().contentEquals(
-				graveRequest.getNrInfocet())) {
-			details = "Nr infocet vechi:" + oldGraveRequest.getNrInfocet()
-					+ ", Nr infocet nou:" + graveRequest.getNrInfocet() + "\r\n";
+		GraveRequest oldGraveRequest = graveRequestDAO.getById(graveRequest.getId());
+		if (!oldGraveRequest.getNrInfocet().contentEquals(graveRequest.getNrInfocet())) {
+			details = "Nr infocet vechi:" + oldGraveRequest.getNrInfocet() + ", Nr infocet nou:" + graveRequest.getNrInfocet()
+					+ "\r\n";
 		}
-		if (!oldGraveRequest.getSolvingStage().contentEquals(
-				graveRequest.getSolvingStage())) {
+		if (!oldGraveRequest.getSolvingStage().contentEquals(graveRequest.getSolvingStage())) {
 			details = details + "Stagiul de solutionare vechi:" + oldGraveRequest.getSolvingStage()
 					+ ", Stagiul de solutionare nou:" + graveRequest.getSolvingStage() + "\r\n";
 		}
@@ -109,10 +111,8 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 	@Override
 	@Transactional(readOnly = true)
 	public boolean checkDuplicate(GraveRequest graveRequest) {
-		GraveRequest existingGraveRequest = graveRequestDAO
-				.getByNrInfocet(graveRequest.getNrInfocet());
-		if (existingGraveRequest != null
-				&& (existingGraveRequest.getId() != graveRequest.getId())) {
+		GraveRequest existingGraveRequest = graveRequestDAO.getByNrInfocet(graveRequest.getNrInfocet());
+		if (existingGraveRequest != null && (existingGraveRequest.getId() != graveRequest.getId())) {
 			return false;
 		}
 		return true;
@@ -126,12 +126,8 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<GraveRequest> getAllByPageOrderBySearch(String order,
-			String search, Integer offset, Integer nrOfRecords) {
-		System.out.println("sadasdas");
-		System.out.println(graveRequestDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords).size());
-		return graveRequestDAO.getAllByPageOrderBySearch(order, search, offset,
-				nrOfRecords);
+	public List<GraveRequest> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords) {
+		return graveRequestDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
 	}
 
 }

@@ -8,7 +8,7 @@ public interface ConcessionContractService {
 
 	public int add(ConcessionContract concessionContract, String username);
 
-	public void update(ConcessionContract concessionContract, String username);
+	public int update(ConcessionContract concessionContract, String username);
 
 	public void delete(Integer id, String username);
 
@@ -20,6 +20,13 @@ public interface ConcessionContractService {
 
 	public Integer getAllSearchBySize(String search);
 
-	public List<ConcessionContract> getAllByPageOrderBySearch(String order, String search, Integer offset,
-	        Integer nrOfRecords);
+	public List<ConcessionContract> getAllByPageOrderBySearch(String order,
+			String search, Integer offset, Integer nrOfRecords);
+
+	public List<ConcessionContract> getAllGravesExpiredOnYears(String order,
+			String search, Integer offset, Integer nrOfRecords);
+
+	public Integer getAllGravesExpiredOnYearsSize(String search);
+
+
 }

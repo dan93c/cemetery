@@ -2,13 +2,14 @@ package ro.immortals.service;
 
 import java.util.List;
 
+import ro.immortals.model.Dead;
 import ro.immortals.model.DeadWithoutFamily;
 
 public interface DeadWithoutFamilyService {
 
 	public int add(DeadWithoutFamily deadWithoutFamily, String username);
 
-	public void update(DeadWithoutFamily deadWithoutFamily, String username);
+	public int update(DeadWithoutFamily deadWithoutFamily, String username);
 
 	public void delete(Integer id, String username);
 
@@ -20,5 +21,7 @@ public interface DeadWithoutFamilyService {
 
 	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order,
 			String search, Integer offset, Integer nrOfRecords);
+
+	boolean checkDuplicate(DeadWithoutFamily deadWithoutFamily);
 
 }

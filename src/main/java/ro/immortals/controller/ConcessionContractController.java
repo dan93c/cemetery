@@ -1,7 +1,7 @@
 package ro.immortals.controller;
 
 import java.util.Locale;
-
+import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -28,10 +28,8 @@ public class ConcessionContractController extends MainController {
 	 * return modelAndView; }
 	 */
 	@RequestMapping(value = { "/list/{page}" }, method = RequestMethod.GET)
-	public ModelAndView contractRegister(@PathVariable Integer page,
-			@RequestParam(value = ORDER, required = false) String order,
-			@RequestParam(value = SEARCH, required = false) String search,
-			HttpServletRequest request) {
+	public ModelAndView contractRegister(@PathVariable Integer page, @RequestParam(value = ORDER, required = false) String order,
+			@RequestParam(value = SEARCH, required = false) String search, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(LIST_CONTRACTS_JSP);
 		order = getOrder(order, request);
 		search = getSearch(search, request);
@@ -39,15 +37,11 @@ public class ConcessionContractController extends MainController {
 		Integer nrOfRecords = contractService.getAllSearchBySize(search);
 		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
 		page = setPagination(modelAndView, page, nrOfPages);
-		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS,
-				recordsPerPage);
+		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS, recordsPerPage);
 		modelAndView.addObject(ORDER, order);
 		modelAndView.addObject(SEARCH, search);
-		modelAndView.addObject(CONTRACTS, contractService
-				.getAllByPageOrderBySearch(order, search, (page - 1)
-						* recordsPerPage, recordsPerPage));
-		System.out.println(contractService.getAllByPageOrderBySearch(order, search, (page - 1)
-						* recordsPerPage, recordsPerPage).size());
+		modelAndView.addObject(CONTRACTS,
+				contractService.getAllByPageOrderBySearch(order, search, (page - 1) * recordsPerPage, recordsPerPage));
 		return modelAndView;
 
 	}
@@ -68,21 +62,18 @@ public class ConcessionContractController extends MainController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView doAdd(
-			@ModelAttribute @Validated ConcessionContract contract,
-			BindingResult bindingResult,
+	public ModelAndView doAdd(@ModelAttribute @Validated ConcessionContract contract, BindingResult bindingResult,
 			@RequestParam(value = "cemeterySelect", required = false) Integer cemeteryId,
-			@RequestParam(value = "plotSelect", required = false) Integer plotId,
-			HttpServletRequest request) {
+			@RequestParam(value = "plotSelect", required = false) Integer plotId, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return add(contract);
 		}
-		if (!graveService.checkGraveExistence(contract.getGrave(), plotId,
-				cemeteryId)) {
+		if (!graveService.checkGraveExistence(contract.getGrave(), plotId, cemeteryId)) {
 			ModelAndView modelAndView = new ModelAndView(ADD_CONTRACT_JSP);
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-					"message.grave.not.exists", new Object[] { contract
-							.getGrave().getId() }, Locale.getDefault()));
+			modelAndView.addObject(
+					ERROR_MESSAGE,
+					messageSource.getMessage("message.grave.not.exists", new Object[] { contract.getGrave().getId() },
+							Locale.getDefault()));
 			modelAndView.addObject(CONTRACT, contract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
@@ -93,10 +84,10 @@ public class ConcessionContractController extends MainController {
 		int errorCode = contractService.add(contract, username);
 		if (errorCode == 1) {
 			ModelAndView modelAndView = new ModelAndView(ADD_CONTRACT_JSP);
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-					"message.contract.already.exists",
-					new Object[] { contract.getReceiptNr() },
-					Locale.getDefault()));
+			modelAndView.addObject(
+					ERROR_MESSAGE,
+					messageSource.getMessage("message.contract.already.exists", new Object[] { contract.getReceiptNr() },
+							Locale.getDefault()));
 			modelAndView.addObject(CONTRACT, contract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
@@ -117,30 +108,62 @@ public class ConcessionContractController extends MainController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView doEdit(
-			@ModelAttribute @Validated ConcessionContract contract,
-			BindingResult bindingResult,
+	public ModelAndView doEdit(@ModelAttribute @Validated ConcessionContract contract, BindingResult bindingResult,
 			@RequestParam(value = "cemeterySelect", required = false) Integer cemeteryId,
-			@RequestParam(value = "plotSelect", required = false) Integer plotId,
-			HttpServletRequest request) {
+			@RequestParam(value = "plotSelect", required = false) Integer plotId, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return edit(contract.getId());
 		}
 
-		if (!graveService.checkGraveExistence(contract.getGrave(), plotId,
-				cemeteryId)) {
+		if (!graveService.checkGraveExistence(contract.getGrave(), plotId, cemeteryId)) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_CONTRACT_JSP);
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-					"message.grave.not.exists", new Object[] { contract
-							.getGrave().getId() }, Locale.getDefault()));
+			modelAndView.addObject(
+					ERROR_MESSAGE,
+					messageSource.getMessage("message.grave.not.exists", new Object[] { contract.getGrave().getId() },
+							Locale.getDefault()));
 			modelAndView.addObject(CONTRACT, contract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
 			modelAndView.addObject(GRAVES, graveService.getAll());
 			return modelAndView;
 		}
+
 		String username = request.getUserPrincipal().getName();
-		contractService.update(contract, username);
+		Integer errorCode = contractService.update(contract, username);
+
+		if (errorCode == 1) {
+			ModelAndView modelAndView = new ModelAndView(EDIT_CONTRACT_JSP);
+			modelAndView.addObject(
+					ERROR_MESSAGE,
+					messageSource.getMessage("message.contract.already.exists", new Object[] { contract.getReceiptNr() },
+							Locale.getDefault()));
+			modelAndView.addObject(CONTRACT, contract);
+			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
+			modelAndView.addObject(PLOTS, plotService.getAll());
+			modelAndView.addObject(GRAVES, graveService.getAll());
+			return modelAndView;
+		}
 		return contractRegister(1, null, null, request);
 	}
+
+	@RequestMapping(value = { "/expired/{page}" }, method = RequestMethod.GET)
+	public ModelAndView listExpiredGraves(@PathVariable Integer page,
+			@RequestParam(value = ORDER, required = false) String order,
+			@RequestParam(value = SEARCH, required = false) String search, HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView(LIST_EXPIRED_GRAVES_JSP);
+		order = getOrder(order, request);
+		search = getSearch(search, request);
+		Integer recordsPerPage = DEFAULT_NR_OF_RECORDS;
+		Integer nrOfRecords = contractService.getAllSearchBySize(search);
+		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
+		page = setPagination(modelAndView, page, nrOfPages);
+		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS, recordsPerPage);
+		modelAndView.addObject(ORDER, order);
+		modelAndView.addObject(SEARCH, search);
+		modelAndView.addObject(GRAVES,
+				contractService.getAllGravesExpiredOnYears(order, search, (page - 1) * recordsPerPage, recordsPerPage));
+		return modelAndView;
+
+	}
+
 }

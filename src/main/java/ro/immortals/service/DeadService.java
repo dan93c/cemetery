@@ -8,7 +8,7 @@ public interface DeadService {
 
 	public int add(Dead dead, String username);
 
-	public void update(Dead dead, String username);
+	public int update(Dead dead, String username);
 
 	public void delete(Integer id, String username);
 

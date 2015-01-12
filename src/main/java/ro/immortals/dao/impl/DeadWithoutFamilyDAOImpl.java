@@ -1,5 +1,8 @@
 package ro.immortals.dao.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import ro.immortals.dao.DeadWithoutFamilyDAO;
+import ro.immortals.model.Dead;
 import ro.immortals.model.DeadWithoutFamily;
 
 @Repository
@@ -96,5 +100,17 @@ public class DeadWithoutFamilyDAOImpl implements DeadWithoutFamilyDAO {
 				        .setFirstResult(offset).setMaxResults(nrOfRecords).getResultList();
 			}
 		}
+	}
+	
+	@Override
+	public DeadWithoutFamily getByGraveAndFuneralDate(String nrGrave, String funeralCertificate) {
+		List<DeadWithoutFamily> funeralList = entityManager
+		        .createQuery("from DeadWithoutFamily d where d.grave.nrGrave= :nrGrave and d.funeralCertificate= '" + funeralCertificate + "'",
+		                DeadWithoutFamily.class).setParameter("nrGrave", nrGrave).getResultList();
+		if (funeralList.size() > 0)
+			return funeralList.get(0);
+		else
+			return null;
+
 	}
 }

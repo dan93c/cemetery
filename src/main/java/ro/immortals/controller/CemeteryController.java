@@ -88,7 +88,14 @@ public class CemeteryController extends MainController {
 			return modelAndView;
 		}
 		String username = request.getUserPrincipal().getName();
-		cemeteryService.update(cemetery, username);
+		Integer errorCode=cemeteryService.update(cemetery, username);
+		if (errorCode == 1) {
+			ModelAndView modelAndView = new ModelAndView(EDIT_CEMETERY_JSP);
+			modelAndView.addObject(CEMETERY, cemetery);
+			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage("message.cemetery.already.exists",
+			        new Object[] { cemetery.getName() }, Locale.getDefault()));
+			return modelAndView;
+		}
 		return list();
 	}
 

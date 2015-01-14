@@ -40,7 +40,7 @@
 						<td><label>Nume</label></td>
 						<td><form:input type="text" path="name" required="required"
 								placeholder="Nume parcela"></form:input></td>
-						<td><form:errors path="name" cssClass="error" /></td>
+						<td><form:errors path="name" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -57,7 +57,7 @@
 									</c:choose>
 								</c:forEach>
 							</form:select></td>
-						<td><form:errors path="cemetery" cssClass="error" /></td>
+						<td><form:errors path="cemetery" cssClass="error" id="redError"/></td>
 					</tr>
 
 					<tr></tr>

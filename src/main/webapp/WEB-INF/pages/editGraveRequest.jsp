@@ -26,7 +26,11 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
-						<span>${errorMessage}</span>
+						<div class="alert alert-danger" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
+							${errorMessage}
+						</div>
 					</c:if>
 				</s:bind>
 				<table class="height-tr">
@@ -38,7 +42,7 @@
 						<td><label>Numar infocet</label></td>
 						<td><form:input type="text" path="nrInfocet"
 								required="required" placeholder="Numar infocet" maxLengh="45"></form:input></td>
-						<td><form:errors path="nrInfocet" cssClass="error" /></td>
+						<td><form:errors path="nrInfocet" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -52,7 +56,7 @@
 								<option value="Cerere nesolutionata">Cerere
 									nesolutionata</option>
 							</form:select></td>
-						<td><form:errors path="solvingStage" cssClass="error" /></td>
+						<td><form:errors path="solvingStage" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="left"><input type="submit"

@@ -41,49 +41,49 @@
 						<td><label>Numar</label></td>
 						<td><form:input type="text" path="receiptNr"
 								required="required" placeholder="Numar" maxLengh="45"></form:input></td>
-						<td><form:errors path="receiptNr" cssClass="error" /></td>
+						<td><form:errors path="receiptNr" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>CNP</label></td>
 						<td><form:input type="text" path="cnp" required="required"
 								placeholder="CNP" maxLengh="45"></form:input></td>
-						<td><form:errors path="cnp" cssClass="error" /></td>
+						<td><form:errors path="cnp" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Nume</label></td>
 						<td><form:input type="text" path="lastName"
 								required="required" placeholder="Nume" maxLengh="45"></form:input></td>
-						<td><form:errors path="lastName" cssClass="error" /></td>
+						<td><form:errors path="lastName" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Prenume</label></td>
 						<td><form:input type="text" path="firstName"
 								required="required" placeholder="Prenume" maxLengh="45"></form:input></td>
-						<td><form:errors path="firstName" cssClass="error" /></td>
+						<td><form:errors path="firstName" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Adresa</label></td>
 						<td><form:input type="text" path="address"
 								required="required" placeholder="Adresa" maxLengh="45"></form:input></td>
-						<td><form:errors path="address" cssClass="error" /></td>
+						<td><form:errors path="address" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>E-mail</label></td>
 						<td><form:input type="email" path="emailAddress"
 								placeholder="E-mail" maxLengh="45"></form:input></td>
-						<td><form:errors path="emailAddress" cssClass="error" /></td>
+						<td><form:errors path="emailAddress" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Perioada</label></td>
 						<td><form:input type="number" path="period"
 								required="required" placeholder="Perioada"></form:input></td>
-						<td><form:errors path="period" cssClass="error" /></td>
+						<td><form:errors path="period" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>

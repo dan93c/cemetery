@@ -41,14 +41,14 @@
 						<td><label>Nume</label></td>
 						<td><form:input type="text" path="name" required="required"
 								placeholder="Nume cimitir"></form:input></td>
-						<td><form:errors path="name" cssClass="error" /></td>
+						<td><form:errors path="name" cssClass="error" id="redError" /></td>
 					</tr>
 				  	<tr></tr> 
 					<tr>
 						<td><label>Adresa</label></td>
 						<td><form:input type="text" path="address"
 								required="required" placeholder="Adresa completa"></form:input></td>
-						<td><form:errors path="address" cssClass="error" /></td>
+						<td><form:errors path="address" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>

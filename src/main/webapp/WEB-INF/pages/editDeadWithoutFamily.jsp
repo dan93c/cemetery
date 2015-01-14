@@ -42,14 +42,14 @@
 						<td><form:input type="text" path="funeralCertificate"
 								required="required" placeholder="Adeverinta inhumare"
 								maxLengh="45"></form:input></td>
-						<td><form:errors path="funeralCertificate" cssClass="error" /></td>
+						<td><form:errors path="funeralCertificate" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Solicitare IML</label></td>
 						<td><form:input type="text" path="imlRequest"
 								required="required" placeholder="Solicitare IML" maxLengh="45"></form:input></td>
-						<td><form:errors path="imlRequest" cssClass="error" /></td>
+						<td><form:errors path="imlRequest" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>

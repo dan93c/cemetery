@@ -26,7 +26,11 @@
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
-						<span>${errorMessage}</span>
+						<div class="alert alert-danger" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
+							${errorMessage}
+						</div>
 					</c:if>
 				</s:bind>
 				<table class="height-tr">
@@ -37,35 +41,35 @@
 						<td><label>Numarul</label></td>
 						<td><form:input type="text" path="nrGrave"
 								required="required" placeholder="Numar mormant" maxLengh="45"></form:input></td>
-						<td><form:errors path="nrGrave" cssClass="error" /></td>
+						<td><form:errors path="nrGrave" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Tipul</label></td>
 						<td><form:input type="text" path="type" placeholder="Tipul"
 								maxLengh="45"></form:input></td>
-						<td><form:errors path="type" cssClass="error" /></td>
+						<td><form:errors path="type" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Suprafata</label></td>
 						<td><form:input type="text" path="surface"
 								required="required" placeholder="Suprafata"></form:input></td>
-						<td><form:errors path="surface" cssClass="error" /></td>
+						<td><form:errors path="surface" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Poza scanata</label></td>
 						<td><form:input type="text" path="photoScanned"
 								maxLengh="200"></form:input></td>
-						<td><form:errors path="photoScanned" cssClass="error" /></td>
+						<td><form:errors path="photoScanned" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Observatii</label></td>
 						<td><form:input type="text" path="observations"
 								placeholder="Observatii" maxLengh="100"></form:input></td>
-						<td><form:errors path="observations" cssClass="error" /></td>
+						<td><form:errors path="observations" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -98,7 +102,7 @@
 									</c:choose>
 								</c:forEach>
 							</form:select></td>
-						<td><form:errors path="plot" cssClass="error" /></td>
+						<td><form:errors path="plot" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>

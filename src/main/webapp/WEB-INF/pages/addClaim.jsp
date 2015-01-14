@@ -42,14 +42,14 @@
 						<td><label>Reclamant</label></td>
 						<td><form:input type="text" path="complainer" required="required"
 								placeholder="Nume reclamant"></form:input></td>
-						<td><form:errors path="complainer" cssClass="error" /></td>
+						<td><form:errors path="complainer" cssClass="error" id="redError" /></td>
 					</tr>
 				  	<tr></tr> 
 					<tr>
 						<td><label>Reclamatie</label></td>
 						<td><form:input type="text" path="claims"
 								required="required" placeholder="Reclamatie"></form:input></td>
-						<td><form:errors path="claims" cssClass="error" /></td>
+						<td><form:errors path="claims" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>

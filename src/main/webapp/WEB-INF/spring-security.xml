@@ -14,6 +14,9 @@
 		<intercept-url pattern="/grave/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/dead/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/dead2/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/contract/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/claim/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/graveRequest/**" access="ROLE_ADMIN" />
 		<form-login login-page='/' default-target-url="/default"
 			authentication-failure-url="/error-login" />
 

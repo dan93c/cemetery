@@ -176,8 +176,8 @@ public class GraveDAOImpl implements GraveDAO {
 				                "SELECT distinct g FROM Grave g left join  g.concessionContracts c where g.type!=null and ( "
 				                        + " g.nrGrave like :search" + " or g.surface like :search"
 				                        + " or g.observations like :search" + " or g.plot.name like :search"
-				                        + " or g.plot.cemetery.name like :search"
-				                        + " order by c.firstName,c.lastName,c.emailAddress,g.plot.name )", Grave.class)
+				                        + " or g.plot.cemetery.name like :search)"
+				                        + " order by c.firstName,c.lastName,c.emailAddress,g.plot.name ", Grave.class)
 				        .setParameter("search", "%" + search + "%").setFirstResult(offset).setMaxResults(nrOfRecords)
 				        .getResultList();
 			} else if (order.equals("2")) {
@@ -186,7 +186,7 @@ public class GraveDAOImpl implements GraveDAO {
 				                "SELECT distinct g FROM Grave g left join  g.concessionContracts c where g.type!=null and ( "
 				                        + " g.nrGrave like :search" + " or g.surface like :search"
 				                        + " or g.observations like :search" + " or g.plot.name like :search"
-				                        + " or g.plot.cemetery.name like :search" + " order by c.address,g.plot.name )",
+				                        + " or g.plot.cemetery.name like :search)" + " order by c.address,g.plot.name ",
 				                Grave.class).setParameter("search", "%" + search + "%").setFirstResult(offset)
 				        .setMaxResults(nrOfRecords).getResultList();
 			} else if (order.equals("3")) {
@@ -194,8 +194,8 @@ public class GraveDAOImpl implements GraveDAO {
 				        .createQuery(
 				                "SELECT g FROM Grave g where g.type!=null and ( " + " g.nrGrave like :search"
 				                        + " or g.surface like :search" + " or g.observations like :search"
-				                        + " or g.plot.name like :search" + " or g.plot.cemetery.name like :search"
-				                        + " order by g.observations,g.nrGrave )", Grave.class)
+				                        + " or g.plot.name like :search" + " or g.plot.cemetery.name like :search)"
+				                        + " order by g.observations,g.nrGrave ", Grave.class)
 				        .setParameter("search", "%" + search + "%").setFirstResult(offset).setMaxResults(nrOfRecords)
 				        .getResultList();
 			} else {
@@ -203,8 +203,8 @@ public class GraveDAOImpl implements GraveDAO {
 				        .createQuery(
 				                "SELECT g FROM Grave g where g.type!=null and ( " + " g.nrGrave like :search"
 				                        + " or g.surface like :search" + " or g.observations like :search"
-				                        + " or g.plot.name like :search" + " or g.plot.cemetery.name like :search"
-				                        + " order by g.plot.cemetery.name,g.plot.name,g.nrGrave )", Grave.class)
+				                        + " or g.plot.name like :search" + " or g.plot.cemetery.name like :search)"
+				                        + " order by g.plot.cemetery.name,g.plot.name,g.nrGrave ", Grave.class)
 				        .setParameter("search", "%" + search + "%").setFirstResult(offset).setMaxResults(nrOfRecords)
 				        .getResultList();
 			}

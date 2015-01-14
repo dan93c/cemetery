@@ -1,5 +1,6 @@
 package ro.immortals.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ro.immortals.model.ConcessionContract;
@@ -23,8 +24,13 @@ public interface ConcessionContractDAO {
 	public List<ConcessionContract> getAllByPageOrderBySearch(String order,
 			String search, Integer offset, Integer nrOfRecords);
 
-	public List<ConcessionContract> getAllGravesExpiredOnYears(String order,
-			String search, Integer offset, Integer nrOfRecords);
+//	public List<ConcessionContract> getAllGravesExpiredOnYears(String order,
+//			String search, Integer offset, Integer nrOfRecords);
+//
+//	public Integer getAllGravesExpiredOnYearsSize(String search);
 
-	public Integer getAllGravesExpiredOnYearsSize(String search);
+	public List<ConcessionContract> getAllGravesExpiredOnYears(Date start, Date end, String order, Integer offset,
+            Integer nrOfRecords);
+
+	public Integer getAllGravesExpiredOnYearsSize(Date start, Date end);
 }

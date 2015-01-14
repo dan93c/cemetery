@@ -22,7 +22,11 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
-		p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
+		p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}"
+		p:initialSize="10" p:maxActive="100" p:maxIdle="50" p:minIdle="10"
+		p:timeBetweenEvictionRunsMillis="30000" p:minEvictableIdleTimeMillis="60000"
+		p:validationQuery="SELECT 1" />
+
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"

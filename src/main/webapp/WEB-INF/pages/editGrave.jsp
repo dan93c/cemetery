@@ -70,7 +70,7 @@
 					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
-						<td><select name="cemeterySelect">
+						<td><form:select path="plot.cemetery.id">
 								<c:forEach var="cemetery" items="${cemeteries}">
 									<c:choose>
 										<c:when test="${cemetery.id eq grave.plot.cemetery.id}">
@@ -81,7 +81,7 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-						</select></td>
+						</form:select></td>
 					</tr>
 					<tr></tr>
 					<tr>

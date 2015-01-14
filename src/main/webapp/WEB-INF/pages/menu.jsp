@@ -44,15 +44,17 @@
 			<li><a href="${CONTEXT_PATH}/claim/add">Adauga reclamatie</a>
 			<li><a href="${CONTEXT_PATH}/contract/list/1?o=0&sch=">Registrul
 					anual de evidenta a contractelor de concesiune</a></li>
-			<li><a href="${CONTEXT_PATH}/claim/reclamatii/1?o=0&sch=">Registrul anual cu evidenta sesizarilor si
-					reclamatiile cetatenilor</a></li>
-			<li><a href="${CONTEXT_PATH}/contract/expired/1?o=0&sch=">Lista mormintelor expirate</a></li>
+			<li><a href="${CONTEXT_PATH}/claim/reclamatii/1?o=0&sch=">Registrul
+					anual cu evidenta sesizarilor si reclamatiile cetatenilor</a></li>
+			<li><a href="${CONTEXT_PATH}/contract/expired/1?o=0&sch=">Lista
+					mormintelor expirate</a></li>
 		</ul></li>
 </ul>
 <!-- div containing the logout button and the user's name -->
 <div id="logout_header">
 	<p id="logged_user">&nbsp;${username}&nbsp;</p>
-	<img id="logout_button"
+	<a href="${CONTEXT_PATH}/j_spring_security_logout"> <img
+		id="logout_button"
 		src="<%=request.getContextPath()%>/resources/img/logout4.png"
-		alt="logout">
+		alt="logout" title="Log out"></a>
 </div>

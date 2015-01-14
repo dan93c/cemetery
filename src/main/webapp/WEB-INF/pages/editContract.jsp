@@ -20,9 +20,9 @@
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div class="alert alert-danger" role="alert">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-								Error.Invalid data.
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
+							Error.Invalid data.
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
@@ -36,6 +36,9 @@
 				<table class="height-tr">
 					<tr>
 						<td><form:input type="hidden" path="id"></form:input></td>
+						<td><form:input type="hidden" path="expiredDate"></form:input></td>
+						<td><form:input type="hidden" path="updatedDate"></form:input></td>
+						<td><form:input type="hidden" path="releaseDate"></form:input></td>
 					</tr>
 					<tr>
 						<td><label>Numar</label></td>
@@ -75,7 +78,7 @@
 					<tr>
 						<td><label>E-mail</label></td>
 						<td><form:input type="email" path="emailAddress"
-								required="required" placeholder="E-mail" maxLengh="45"></form:input></td>
+								placeholder="E-mail" maxLengh="45"></form:input></td>
 						<td><form:errors path="emailAddress" cssClass="error" /></td>
 					</tr>
 					<tr></tr>
@@ -88,24 +91,24 @@
 					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
-						<td><select name="cemeterySelect">
+						<td><form:select path="grave.plot.cemetery.id">
 								<c:forEach var="cemetery" items="${cemeteries}">
 									<option value="${cemetery.id}">
 										<c:out value="${cemetery.name}" />
 									</option>
 								</c:forEach>
-						</select></td>
+							</form:select></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Parcela</label></td>
-						<td><select name="plotSelect">
+						<td><form:select path="grave.plot.id">
 								<c:forEach var="plot" items="${plots}">
 									<option value="${plot.id}">
 										<c:out value="${plot.name}" />
 									</option>
 								</c:forEach>
-						</select></td>
+							</form:select></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -117,6 +120,11 @@
 									</option>
 								</c:forEach>
 							</form:select></td>
+					</tr>
+					<tr></tr>
+					<tr>
+						<td><label>Reinnoire </label></td>
+						<td><input type="checkbox" name="r" value="update" /></td>
 					</tr>
 					<tr></tr>
 					<tr>

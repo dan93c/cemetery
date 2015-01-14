@@ -102,9 +102,8 @@
 						    ${dead.firstName} ${dead.lastName} -  <fmt:formatDate
 									value="${dead.funeralDate}" pattern="yyyy-MM-dd" />
 								<br>
-							</c:forEach> <c:forEach var="dead" items="${grave.deadsWithoutFamily}">
-						    ${dead.firstName} ${dead.lastName} -  <fmt:formatDate
-									value="${dead.funeralDate}" pattern="yyyy-MM-dd" />
+							</c:forEach><c:forEach var="dead" items="${grave.deadsWithoutFamily}">
+						    Adeverinta: ${dead.funeralCertificate} IML: ${dead.imlRequest} 
 								<br>
 							</c:forEach></td>
 						<td>${grave.surface}</td>

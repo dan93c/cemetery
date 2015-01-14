@@ -22,9 +22,9 @@
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div class="alert alert-danger" role="alert">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-								Error.Invalid data.
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
+							Error.Invalid data.
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
@@ -73,7 +73,7 @@
 					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
-						<td><select name="cemeterySelect">
+						<td><select name="cemeterySelect" id="cmm">
 								<c:forEach var="cemetery" items="${cemeteries}">
 									<option value="${cemetery.id}">
 										<c:out value="${cemetery.name}" />
@@ -103,4 +103,31 @@
 		</div>
 	</div>
 </body>
+<%-- <script src="${CONTEXT_PATH}/resources/js/jquery.js"></script>
+<script type=text/javascript>
+	$('#cmm').change(function() {
+		alert($(this).val());
+		$.ajax({
+			url : "${CONTEXT_PATH}"+'/plot/getPlotsByCemetery/' + $(this).val(),
+			type : 'GET',
+			dataType: 'json',
+			success : function(response) {
+				alert("succes");
+				var data = response.partialContent;
+				for (var i = 0; i < data.length; i++) {
+					var row = data[i];
+					alert(row);
+				}
+			},
+			error : function(xhr, status, error) {
+				alert(error);
+				handleGenericError(xhr, status, error, function() {
+					var err = eval("(" + xhr.responseText + ")");
+					alert(err);
+				});
+			}
+		});
+
+	});
+</script> --%>
 </html>

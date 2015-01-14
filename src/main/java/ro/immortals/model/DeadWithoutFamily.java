@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "deads_without_family")
-public class DeadWithoutFamily implements java.io.Serializable{
+public class DeadWithoutFamily implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -21,7 +21,7 @@ public class DeadWithoutFamily implements java.io.Serializable{
 
 	@Column(name = "funeral_certificate", length = 50)
 	private String funeralCertificate;
-	
+
 	@Column(name = "iml_request", length = 50)
 	private String imlRequest;
 
@@ -30,14 +30,14 @@ public class DeadWithoutFamily implements java.io.Serializable{
 	private Grave grave;
 
 	public DeadWithoutFamily() {
-    }
+	}
 
-	public DeadWithoutFamily(Integer id, String feneralCertificate, String imlRequest, Grave grave) {
-	    this.id = id;
-	    this.funeralCertificate = feneralCertificate;
-	    this.imlRequest = imlRequest;
-	    this.grave = grave;
-    }
+	public DeadWithoutFamily(Integer id, String funeralCertificate, String imlRequest, Grave grave) {
+		this.id = id;
+		this.funeralCertificate = funeralCertificate;
+		this.imlRequest = imlRequest;
+		this.grave = grave;
+	}
 
 	public Integer getId() {
 		return id;
@@ -51,8 +51,9 @@ public class DeadWithoutFamily implements java.io.Serializable{
 		return funeralCertificate;
 	}
 
-	public void setFuneralCertificate(String feneralCertificate) {
-		this.funeralCertificate = feneralCertificate;
+	public void setFuneralCertificate(String funeralCertificate) {
+		this.funeralCertificate = funeralCertificate;
+
 	}
 
 	public String getImlRequest() {
@@ -73,8 +74,7 @@ public class DeadWithoutFamily implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return (funeralCertificate != null ? "Adeverinta inhumare:"
-				+ funeralCertificate + ", " : "")
+		return (funeralCertificate != null ? "Adeverinta inhumare:" + funeralCertificate + ", " : "")
 				+ (imlRequest != null ? "Solicitare IML:" + imlRequest + ", " : "");
 	}
 

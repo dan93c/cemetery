@@ -1,6 +1,7 @@
 package ro.immortals.service.impl;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 			history.setModificationDate(Calendar.getInstance().getTime());
 			history.setModifiedObject(MODIFIED_OBJECT);
 			history.setDetails(graveRequest.toString());
+			graveRequest.setRegistrationDate(Calendar.getInstance().getTime());
 			graveRequestDAO.add(graveRequest);
 			history.setModifiedObjectCode(graveRequest.getId().toString());
 			historyDAO.add(history);
@@ -55,6 +57,7 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 			history.setModifiedObjectCode(graveRequest.getId().toString());
 			String details = setDetailsForHistory(graveRequest);
 			history.setDetails(details);
+			graveRequest.setRegistrationDate(Calendar.getInstance().getTime());
 			graveRequestDAO.update(graveRequest);
 			historyDAO.add(history);
 			return 0;
@@ -66,8 +69,8 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 		String details = "";
 		GraveRequest oldGraveRequest = graveRequestDAO.getById(graveRequest.getId());
 		if (!oldGraveRequest.getNrInfocet().contentEquals(graveRequest.getNrInfocet())) {
-			details = "Nr infocet vechi:" + oldGraveRequest.getNrInfocet() + ", Nr infocet nou:"
-					+ graveRequest.getNrInfocet() + "\r\n";
+			details = "Nr infocet vechi:" + oldGraveRequest.getNrInfocet() + ", Nr infocet nou:" + graveRequest.getNrInfocet()
+					+ "\r\n";
 		}
 		if (!oldGraveRequest.getSolvingStage().contentEquals(graveRequest.getSolvingStage())) {
 			details = details + "Stagiul de solutionare vechi:" + oldGraveRequest.getSolvingStage()

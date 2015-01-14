@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "claims_book")
-public class ClaimBook {
+public class ClaimBook implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -27,6 +27,7 @@ public class ClaimBook {
 	}
 
 	public ClaimBook(Integer id, String complainer, String claims) {
+		super();
 		this.id = id;
 		this.complainer = complainer;
 		this.claims = claims;
@@ -45,9 +46,6 @@ public class ClaimBook {
 	}
 
 	public void setComplainer(String complainer) {
-		if (complainer == null) {
-			this.complainer = "Anonim";
-		}
 		this.complainer = complainer;
 	}
 
@@ -61,9 +59,7 @@ public class ClaimBook {
 
 	@Override
 	public String toString() {
-		return (complainer != null ? "autor:" + complainer + ", " : "")
-				+ (claims != null ? "reclamatii:" + claims : "");
+		return (complainer != null ? "autor:" + complainer + ", " : "") + (claims != null ? "reclamatii:" + claims : "");
 	}
 
-	
 }

@@ -114,4 +114,9 @@ public class PlotServiceImpl implements PlotService {
 		return true;
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Plot> getAllByCemetery(Integer cId){
+		return plotDAO.getByCemetery(cId);
+	}
 }

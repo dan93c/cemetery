@@ -65,10 +65,12 @@ public class DeadWithoutFamilyServiceImpl implements DeadWithoutFamilyService {
 
 	private String setDetailsForHistory(DeadWithoutFamily deadWithoutFamily) {
 		String details = "";
+
 		DeadWithoutFamily oldDeadWithoutFamily = deadWithoutFamilyDAO.getById(deadWithoutFamily.getId());
 		if (!oldDeadWithoutFamily.getFuneralCertificate().contentEquals(deadWithoutFamily.getFuneralCertificate())) {
 			details = "Adeverinta de inhumare veche:" + oldDeadWithoutFamily.getFuneralCertificate()
-					+ ", Adeverinta de inhumare noua:" + deadWithoutFamily.getFuneralCertificate() + "\r\n";
+
+			+ ", Adeverinta de inhumare noua:" + deadWithoutFamily.getFuneralCertificate() + "\r\n";
 		}
 		if (!oldDeadWithoutFamily.getImlRequest().contentEquals(deadWithoutFamily.getImlRequest())) {
 			details = details + "Cererea IML veche:" + oldDeadWithoutFamily.getImlRequest() + ", Cererea IML noua:"
@@ -114,16 +116,15 @@ public class DeadWithoutFamilyServiceImpl implements DeadWithoutFamilyService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order, String search, Integer offset,
-			Integer nrOfRecords) {
+	public List<DeadWithoutFamily> getAllByPageOrderBySearch(String order, String search, Integer offset, Integer nrOfRecords) {
 		return deadWithoutFamilyDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public boolean checkDuplicate(DeadWithoutFamily deadWithoutFamily) {
-		DeadWithoutFamily existingDead = deadWithoutFamilyDAO.getByGraveAndFuneralDate(deadWithoutFamily.getGrave()
-				.getNrGrave(), deadWithoutFamily.getFuneralCertificate());
+		DeadWithoutFamily existingDead = deadWithoutFamilyDAO.getByGraveAndFuneralDate(deadWithoutFamily.getGrave().getNrGrave(),
+				deadWithoutFamily.getFuneralCertificate());
 		if (existingDead != null && (existingDead.getId() != deadWithoutFamily.getId())) {
 			return false;
 		}

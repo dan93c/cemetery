@@ -8,15 +8,15 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Adauga contract concesiune</title>
+<title>Modifica decedat fara apartinator</title>
 </head>
 <body>
 	<div id="container">
 		<%@include file="menu.jsp"%>
 		<div id="center">
-			<h2>Date contract</h2>
-			<form:form name="addContract" modelAttribute="contract"
-				action="${CONTEXT_PATH}/contract/add" method="POST">
+			<h2>Date despre decedat</h2>
+			<form:form name="editDeadWithoutFamily" modelAttribute="deadWithoutFamily"
+				action="${CONTEXT_PATH}/dead2/edit" method="POST">
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div class="alert alert-danger" role="alert">
@@ -38,52 +38,18 @@
 						<td><form:input type="hidden" path="id"></form:input></td>
 					</tr>
 					<tr>
-						<td><label>Numar</label></td>
-						<td><form:input type="text" path="receiptNr"
-								required="required" placeholder="Numar" maxLengh="45"></form:input></td>
-						<td><form:errors path="receiptNr" cssClass="error" /></td>
+						<td><label>Adeverinta inhumare</label></td>
+						<td><form:input type="text" path="funeralCertificate"
+								required="required" placeholder="Adeverinta inhumare"
+								maxLengh="45"></form:input></td>
+						<td><form:errors path="funeralCertificate" cssClass="error" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
-						<td><label>CNP</label></td>
-						<td><form:input type="text" path="cnp" required="required"
-								placeholder="CNP" maxLengh="45"></form:input></td>
-						<td><form:errors path="cnp" cssClass="error" /></td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td><label>Nume</label></td>
-						<td><form:input type="text" path="lastName"
-								required="required" placeholder="Nume" maxLengh="45"></form:input></td>
-						<td><form:errors path="lastName" cssClass="error" /></td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td><label>Prenume</label></td>
-						<td><form:input type="text" path="firstName"
-								required="required" placeholder="Prenume" maxLengh="45"></form:input></td>
-						<td><form:errors path="firstName" cssClass="error" /></td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td><label>Adresa</label></td>
-						<td><form:input type="text" path="address"
-								required="required" placeholder="Adresa" maxLengh="45"></form:input></td>
-						<td><form:errors path="address" cssClass="error" /></td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td><label>E-mail</label></td>
-						<td><form:input type="email" path="emailAddress"
-								placeholder="E-mail" maxLengh="45"></form:input></td>
-						<td><form:errors path="emailAddress" cssClass="error" /></td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td><label>Perioada</label></td>
-						<td><form:input type="number" path="period"
-								required="required" placeholder="Perioada"></form:input></td>
-						<td><form:errors path="period" cssClass="error" /></td>
+						<td><label>Solicitare IML</label></td>
+						<td><form:input type="text" path="imlRequest"
+								required="required" placeholder="Solicitare IML" maxLengh="45"></form:input></td>
+						<td><form:errors path="imlRequest" cssClass="error" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -118,14 +84,15 @@
 								</c:forEach>
 							</form:select></td>
 					</tr>
+					<tr></tr>
 					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="Adauga contract concesiune"
-							class="button medium square blue" /></td>
+						<td colspan="2" align="left"><input type="submit"
+							value="Modifica decedat" class="button medium square blue" /></td>
 					</tr>
 				</table>
 			</form:form>
 		</div>
 	</div>
+
 </body>
 </html>

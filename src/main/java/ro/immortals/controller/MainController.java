@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import ro.immortals.service.CemeteryService;
+import ro.immortals.service.ClaimBookService;
 import ro.immortals.service.ConcessionContractService;
 import ro.immortals.service.DeadService;
 import ro.immortals.service.DeadWithoutFamilyService;
@@ -38,9 +39,12 @@ public class MainController {
 
 	@Autowired
 	protected ConcessionContractService contractService;
-	
+
 	@Autowired
 	protected DeadWithoutFamilyService deadWithoutFamilyService;
+	
+	@Autowired
+	protected ClaimBookService claimService;
 
 	public static final String ERROR_MESSAGE = "errorMessage";
 	public static final String MESSAGE = "message";
@@ -50,7 +54,8 @@ public class MainController {
 	public static final String PLOTS = "plots";
 	public static final String GRAVES = "graves";
 	public static final String GRAVE = "grave";
-	public static final String GRAVE_REQUEST = "graveRequuest";
+	public static final String GRAVE_REQUEST = "graveRequest";
+	public static final String GRAVE_REQUESTS = "graveRequests";
 	public static final String GRAVE_REQUEST_VALIDATOR = "graveRequestValidator";
 	public static final String GRAVE_VALIDATOR = "graveValidator";
 	public static final String USERNAME = "username";
@@ -63,6 +68,9 @@ public class MainController {
 	public static final String CONTRACTS = "contracts";
 	public static final String HISTORY = "history";
 	public static final String OBJECTS = "objects";
+	public static final String CLAIM="claimBook";
+	public static final String CLAIMS="claims";
+	public static final String CLAIM_VALIDATOR="claimBookValidator";
 
 	public static final String SELECT_NR_OF_RECORDS = "selectNrOfRecords";
 	public static final String CURRENT_PAGE = "currentPage";
@@ -89,13 +97,15 @@ public class MainController {
 	public static final String EDIT_DEAD_JSP = "editDead";
 	public static final String ADD_DEAD_WITHOUT_FAMILY_JSP = "addDeadWithoutFamily";
 	public static final String EDIT_DEAD_WITHOUT_FAMILY_JSP = "editDeadWithoutFamily";
-/*	public static final String LIST_DEADS_JSP = "listDeads";*/
+	/* public static final String LIST_DEADS_JSP = "listDeads"; */
 	public static final String ADD_CONTRACT_JSP = "addContract";
 	public static final String EDIT_CONTRACT_JSP = "editContract";
 	public static final String LIST_CONTRACTS_JSP = "listContracts";
 	public static final String ADD_GRAVE_JSP = "addGrave";
 	public static final String EDIT_GRAVE_JSP = "editGrave";
 	public static final String LIST_GRAVES_JSP = "listGraves";
+	public static final String ADD_GRAVE_REQUEST_JSP = "addGraveRequest";
+	public static final String EDIT_GRAVE_REQUEST_JSP = "editGraveRequest";
 	public static final String HISTORY_JSP = "history";
 	public static final String APPOINTMENT_REGISTER_JSP = "appointmentRegister";
 	public static final String DEAD_REGISTER_JSP = "deadRegister";
@@ -103,7 +113,11 @@ public class MainController {
 	public static final String GRAVE_REGISTER_JSP = "graveRegister";
 	public static final String GRAVE_MONUMENT_REGISTER_JSP = "graveMonumentRegister";
 	public static final String GRAVE_REQUEST_REGISTER_JSP = "graveRequestRegister";
+	public static final String ADD_CLAIM_JSP="addClaim";
+	public static final String EDIT_CLAIM_JSP="editClaim";
+	public static final String CLAIMS_REGISTER_JSP="claimRegister";
 	public static final String LIST_EXPIRED_GRAVES_JSP = "listExpiredGraves";
+
 
 	/**
 	 * set the nr of the current page and values of pagination format Pagination

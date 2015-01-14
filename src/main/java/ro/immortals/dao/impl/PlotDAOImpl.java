@@ -11,7 +11,7 @@ import ro.immortals.dao.PlotDAO;
 import ro.immortals.model.Plot;
 
 @Repository
-public class PlotDAOImpl implements PlotDAO{
+public class PlotDAOImpl implements PlotDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -42,14 +42,20 @@ public class PlotDAOImpl implements PlotDAO{
 	public Plot getById(Integer id) {
 		return entityManager.find(Plot.class, id);
 	}
-	
+
 	@Override
-	public Plot getByNameAndCemetery(String name,Integer cId) {
+	public Plot getByNameAndCemetery(String name, Integer cId) {
 		List<Plot> plotList = entityManager.createQuery("from Plot p where p.name= :name and p.cemetery.id=:cId", Plot.class)
-		        .setParameter("name", name).setParameter("cId", cId).getResultList();
+				.setParameter("name", name).setParameter("cId", cId).getResultList();
 		if (plotList.size() > 0)
 			return plotList.get(0);
 		else
 			return null;
+	}
+
+	@Override
+	public List<Plot> getByCemetery(Integer cId) {
+		return entityManager.createQuery("from Plot p where p.cemetery.id=:cId", Plot.class).setParameter("cId", cId)
+				.getResultList();
 	}
 }

@@ -1,8 +1,10 @@
 package ro.immortals.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import ro.immortals.model.ConcessionContract;
+import ro.immortals.model.Grave;
 
 public interface ConcessionContractDAO {
 
@@ -16,7 +18,7 @@ public interface ConcessionContractDAO {
 
 	public ConcessionContract getById(Integer id);
 
-	public ConcessionContract getByCnp(String cnp);
+	public ConcessionContract getByExpirationDateGrave(Date exp,Integer graveId);
 
 	public Integer getAllSearchBySize(String search);
 

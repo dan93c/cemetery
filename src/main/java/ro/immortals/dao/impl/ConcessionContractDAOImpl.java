@@ -1,5 +1,6 @@
 package ro.immortals.dao.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -47,10 +48,11 @@ public class ConcessionContractDAOImpl implements ConcessionContractDAO {
 	}
 
 	@Override
-	public ConcessionContract getByCnp(String cnp) {
+	public ConcessionContract getByExpirationDateGrave(Date exp,Integer graveId) {
+		SimpleDateFormat sdf=new SimpleDateFormat("yy-mm-dd hh:mm:ss");
 		List<ConcessionContract> concessionContractList = entityManager
-				.createQuery("from ConcessionContract c where c.cnp= :cnp",
-						ConcessionContract.class).setParameter("cnp", cnp)
+				.createQuery("from ConcessionContract c where c.expired_date <= :exp and c.grave_id=: graveId",
+						ConcessionContract.class).setParameter("exp", sdf.format(exp)).setParameter("graveId", graveId)
 				.getResultList();
 		if (concessionContractList.size() > 0)
 			return concessionContractList.get(0);

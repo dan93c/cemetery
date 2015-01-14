@@ -151,7 +151,7 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	@Override
 	@Transactional(readOnly = true)
 	public boolean checkDuplicate(ConcessionContract concessionContract) {
-		ConcessionContract existingConcessionContract = concessionContractDAO.getByCnp(concessionContract.getCnp());
+		ConcessionContract existingConcessionContract = concessionContractDAO.getByExpirationDateGrave(concessionContract.getExpiredDate(),concessionContract.getGrave().getId());
 		if (existingConcessionContract != null && (existingConcessionContract.getId() != concessionContract.getId())) {
 			return false;
 		}

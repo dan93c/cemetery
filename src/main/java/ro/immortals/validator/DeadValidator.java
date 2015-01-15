@@ -41,10 +41,12 @@ public class DeadValidator implements Validator {
 					"Campul 'Religie' este prea lung.");
 		}
 
-		if (Character.isWhitespace(dead.getReligion().charAt(0))) {
-			errors.rejectValue("religion", "whitespace",
-					new Object[] { "Religie" },
-					"Campul 'Religie' nu poate incepe cu spatiu.");
+		if (dead.getReligion() != null && !dead.getReligion().isEmpty()) {
+			if (Character.isWhitespace(dead.getReligion().charAt(0))) {
+				errors.rejectValue("religion", "whitespace",
+						new Object[] { "Religie" },
+						"Campul 'Religie' nu poate incepe cu spatiu.");
+			}
 		}
 
 		if (dead.getFirstName().length() >= 100) {
@@ -52,21 +54,26 @@ public class DeadValidator implements Validator {
 					new Object[] { "Nume" }, "Campul 'Nume' este prea lung.");
 		}
 
-		if (Character.isWhitespace(dead.getFirstName().charAt(0))) {
-			errors.rejectValue("firstName", "whitespace",
-					new Object[] { "Nume" },
-					"Campul 'Nume' nu poate incepe cu spatiu.");
+		if (dead.getFirstName() != null && !dead.getFirstName().isEmpty()) {
+			if (Character.isWhitespace(dead.getFirstName().charAt(0))) {
+				errors.rejectValue("firstName", "whitespace",
+						new Object[] { "Nume" },
+						"Campul 'Nume' nu poate incepe cu spatiu.");
+			}
 		}
+
 		if (dead.getLastName().length() >= 100) {
 			errors.rejectValue("lastName", "longText",
 					new Object[] { "Prenume" },
 					"Campul 'Prenume' este prea lung.");
 		}
 
-		if (Character.isWhitespace(dead.getLastName().charAt(0))) {
-			errors.rejectValue("lastName", "whitespace",
-					new Object[] { "Prenume" },
-					"Campul 'Prenume' nu poate incepe cu spatiu.");
+		if (dead.getLastName() != null && !dead.getLastName().isEmpty()) {
+			if (Character.isWhitespace(dead.getLastName().charAt(0))) {
+				errors.rejectValue("lastName", "whitespace",
+						new Object[] { "Prenume" },
+						"Campul 'Prenume' nu poate incepe cu spatiu.");
+			}
 		}
 
 		if (dead.getFuneralDate() != null) {

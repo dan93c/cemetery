@@ -28,10 +28,12 @@ public class UserValidator implements Validator {
 					"Campul 'Username' este prea lung.");
 		}
 
-		if (Character.isWhitespace(user.getUsername().charAt(0))) {
-			errors.rejectValue("username", "whitespace",
-					new Object[] { "Username" },
-					"Campul 'Username' nu poate incepe cu spatiu.");
+		if (user.getUsername() != null && !user.getUsername().isEmpty()) {
+			if (Character.isWhitespace(user.getUsername().charAt(0))) {
+				errors.rejectValue("username", "whitespace",
+						new Object[] { "Username" },
+						"Campul 'Username' nu poate incepe cu spatiu.");
+			}
 		}
 
 		if (user.getPassword().length() >= 45) {
@@ -40,10 +42,12 @@ public class UserValidator implements Validator {
 					"Campul 'Parola' este prea lung.");
 		}
 
-		if (Character.isWhitespace(user.getPassword().charAt(0))) {
-			errors.rejectValue("password", "whitespace",
-					new Object[] { "Parola" },
-					"Campul 'Parola' nu poate incepe cu spatiu.");
+		if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+			if (Character.isWhitespace(user.getPassword().charAt(0))) {
+				errors.rejectValue("password", "whitespace",
+						new Object[] { "Parola" },
+						"Campul 'Parola' nu poate incepe cu spatiu.");
+			}
 		}
 
 	}

@@ -25,10 +25,12 @@ public class PlotValidator implements Validator {
 					"Campul 'Nume' este prea lung.");
 		}
 
-		if (Character.isWhitespace(plot.getName().charAt(0))) {
-			errors.rejectValue("name", "whitespace",
-					new Object[] { "Nume" },
-					"Campul 'Nume' nu poate incepe cu spatiu.");
+		if (plot.getName() != null && !plot.getName().isEmpty()) {
+			if (Character.isWhitespace(plot.getName().charAt(0))) {
+				errors.rejectValue("name", "whitespace",
+						new Object[] { "Nume" },
+						"Campul 'Nume' nu poate incepe cu spatiu.");
+			}
 		}
 
 	}

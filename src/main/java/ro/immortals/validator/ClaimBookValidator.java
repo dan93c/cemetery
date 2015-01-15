@@ -18,6 +18,8 @@ public class ClaimBookValidator implements Validator {
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "claims",
 				"error.claimBook.claims.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "complainer",
+				"error.claimBook.complainer.required");
 
 		ClaimBook claimBook = (ClaimBook) target;
 
@@ -27,22 +29,36 @@ public class ClaimBookValidator implements Validator {
 					"Campul 'Reclamant' este prea lung.");
 		}
 
-		if (Character.isWhitespace(claimBook.getComplainer().charAt(0))) {
-			errors.rejectValue("complainer", "whitespace",
+		if (claimBook.getComplainer() != null
+				&& !claimBook.getComplainer().isEmpty()) {
+			if (Character.isWhitespace(claimBook.getComplainer().charAt(0))) {
+				errors.rejectValue("complainer", "whitespace",
+						new Object[] { "Reclamant" },
+						"Campul 'Reclamant' nu poate incepe cu spatiu.");
+			}
+		} else {
+			errors.rejectValue("complainer", "erro.claimBook.complainer.null",
 					new Object[] { "Reclamant" },
-					"Campul 'Reclamant' nu poate incepe cu spatiu.");
+					"Campul 'Reclamant' nu poate ramane necompletat.");
 		}
+
 		if (claimBook.getClaims().length() >= 500) {
 			errors.rejectValue("claims", "longText",
 					new Object[] { "Reclamatii" },
 					"Campul 'Reclamatii' este prea lung.");
 		}
-		if (Character.isWhitespace(claimBook.getClaims().charAt(0))) {
-			errors.rejectValue("claims", "whitespace",
-					new Object[] { "Reclamatii" },
-					"Campul 'Reclamatii' nu poate incepe cu spatiu.");
-		}
 
+		if (claimBook.getClaims() != null && !claimBook.getClaims().isEmpty()) {
+			if (Character.isWhitespace(claimBook.getClaims().charAt(0))) {
+				errors.rejectValue("claims", "whitespace",
+						new Object[] { "Reclamatii" },
+						"Campul 'Reclamatii' nu poate incepe cu spatiu.");
+			}
+		} else {
+			errors.rejectValue("claims", "erro.claimBook.claims.null",
+					new Object[] { "Reclamatii" },
+					"Campul 'Reclamatii' nu poate ramane necompletat.");
+		}
 	}
 
 }

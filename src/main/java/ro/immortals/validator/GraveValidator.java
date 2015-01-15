@@ -18,6 +18,10 @@ public class GraveValidator implements Validator {
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "surface",
 				"error.grave.surface.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nrGrave",
+				"error.grave.nrGrave.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "type",
+				"error.grave.type.required");
 
 		Grave grave = (Grave) target;
 
@@ -27,10 +31,12 @@ public class GraveValidator implements Validator {
 					"Campul 'Nr.Mormant' este prea lung.");
 		}
 
-		if (Character.isWhitespace(grave.getNrGrave().charAt(0))) {
-			errors.rejectValue("nrGrave", "whitespace",
-					new Object[] { "Nr.Mormant" },
-					"Campul 'Nr.Mormant' nu poate incepe cu spatiu.");
+		if (grave.getNrGrave() != null && !grave.getNrGrave().isEmpty()) {
+			if (Character.isWhitespace(grave.getNrGrave().charAt(0))) {
+				errors.rejectValue("nrGrave", "whitespace",
+						new Object[] { "Nr.Mormant" },
+						"Campul 'Nr.Mormant' nu poate incepe cu spatiu.");
+			}
 		}
 
 		if (grave.getObservations().length() >= 100) {
@@ -39,10 +45,13 @@ public class GraveValidator implements Validator {
 					"Campul 'Observatii' este prea lung.");
 		}
 
-		if (Character.isWhitespace(grave.getObservations().charAt(0))) {
-			errors.rejectValue("observations", "whitespace",
-					new Object[] { "Observatii" },
-					"Campul 'Observatii' nu poate incepe cu spatiu.");
+		if (grave.getObservations() != null
+				&& !grave.getObservations().isEmpty()) {
+			if (Character.isWhitespace(grave.getObservations().charAt(0))) {
+				errors.rejectValue("observations", "whitespace",
+						new Object[] { "Observatii" },
+						"Campul 'Observatii' nu poate incepe cu spatiu.");
+			}
 		}
 
 		if (grave.getType().length() >= 45) {
@@ -51,10 +60,12 @@ public class GraveValidator implements Validator {
 					"Campul 'Tip.Mormant' este prea lung.");
 		}
 
-		if (Character.isWhitespace(grave.getType().charAt(0))) {
-			errors.rejectValue("type", "whitespace",
-					new Object[] { "Tip.Mormant" },
-					"Campul 'Tip.Mormant' nu poate incepe cu spatiu.");
+		if (grave.getType() != null && !grave.getType().isEmpty()) {
+			if (Character.isWhitespace(grave.getType().charAt(0))) {
+				errors.rejectValue("type", "whitespace",
+						new Object[] { "Tip.Mormant" },
+						"Campul 'Tip.Mormant' nu poate incepe cu spatiu.");
+			}
 		}
 
 		if (grave.getSurface().length() >= 45) {
@@ -63,10 +74,12 @@ public class GraveValidator implements Validator {
 					"Campul 'Suprafata' este prea lung.");
 		}
 
-		if (Character.isWhitespace(grave.getSurface().charAt(0))) {
-			errors.rejectValue("surface", "whitespace",
-					new Object[] { "Suprafata" },
-					"Campul 'Suprafata' nu poate incepe cu spatiu.");
+		if (grave.getSurface() != null && !grave.getSurface().isEmpty()) {
+			if (Character.isWhitespace(grave.getSurface().charAt(0))) {
+				errors.rejectValue("surface", "whitespace",
+						new Object[] { "Suprafata" },
+						"Campul 'Suprafata' nu poate incepe cu spatiu.");
+			}
 		}
 	}
 

@@ -17,6 +17,8 @@ public class DeadWithoutFamilyValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funeralCertificate",
 				"error.deadWithoutFamily.funeralCertificate.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "imlRequest",
+				"error.deadWithoutFamily.imlRequest.required");
 
 		DeadWithoutFamily deadWithoutFamily = (DeadWithoutFamily) target;
 
@@ -26,11 +28,14 @@ public class DeadWithoutFamilyValidator implements Validator {
 					"Campul 'Adeverin�a de �nhumare' este prea lung.");
 		}
 
-		if (Character.isWhitespace(deadWithoutFamily.getFuneralCertificate()
-				.charAt(0))) {
-			errors.rejectValue("funeralCertificate", "whitespace",
-					new Object[] { "Funeral_Certificate" },
-					"Campul 'Adeverin�a de �nhumare' nu poate incepe cu spatiu.");
+		if (deadWithoutFamily.getFuneralCertificate() != null
+				&& !deadWithoutFamily.getFuneralCertificate().isEmpty()) {
+			if (Character.isWhitespace(deadWithoutFamily
+					.getFuneralCertificate().charAt(0))) {
+				errors.rejectValue("funeralCertificate", "whitespace",
+						new Object[] { "Funeral_Certificate" },
+						"Campul 'Adeverin�a de �nhumare' nu poate incepe cu spatiu.");
+			}
 		}
 
 		if (deadWithoutFamily.getImlRequest().length() >= 50) {
@@ -38,11 +43,15 @@ public class DeadWithoutFamilyValidator implements Validator {
 					new Object[] { "Iml_Request" },
 					"Campul 'Solicitare IML' este prea lung.");
 		}
-		
-		if (Character.isWhitespace(deadWithoutFamily.getImlRequest().charAt(0))) {
-			errors.rejectValue("imlRequest", "whitespace",
-					new Object[] { "Iml_Request" },
-					"Campul 'Solicitare IML' nu poate incepe cu spatiu.");
+
+		if (deadWithoutFamily.getImlRequest() != null
+				&& !deadWithoutFamily.getImlRequest().isEmpty()) {
+			if (Character.isWhitespace(deadWithoutFamily.getImlRequest()
+					.charAt(0))) {
+				errors.rejectValue("imlRequest", "whitespace",
+						new Object[] { "Iml_Request" },
+						"Campul 'Solicitare IML' nu poate incepe cu spatiu.");
+			}
 		}
 	}
 

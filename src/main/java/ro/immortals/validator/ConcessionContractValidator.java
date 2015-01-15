@@ -37,25 +37,60 @@ public class ConcessionContractValidator implements Validator {
 						new Object[] { "Receipt_Nr" },
 						"Campul 'Receipt_Nr' este prea lung.");
 			}
+
+			if (Character.isWhitespace(concessionContract.getReceiptNr()
+					.charAt(0))) {
+				errors.rejectValue("receipt_nr", "whitespace",
+						new Object[] { "Receipt_Nr" },
+						"Campul 'Receipt_Nr' nu poate incepe cu spatiu.");
+			}
+
 			if (concessionContract.getAddress().length() >= 100) {
 				errors.rejectValue("address", "longText",
 						new Object[] { "Adresa" },
 						"Campul 'Adresa' este prea lung.");
+			}
+
+			if (Character.isWhitespace(concessionContract.getAddress()
+					.charAt(0))) {
+				errors.rejectValue("address", "whitespace",
+						new Object[] { "Adresa" },
+						"Campul 'Adresa' nu poate incepe cu spatiu.");
 			}
 			if (concessionContract.getFirstName().length() >= 100) {
 				errors.rejectValue("firstName", "longText",
 						new Object[] { "Nume" },
 						"Campul 'Nume' este prea lung.");
 			}
+
+			if (Character.isWhitespace(concessionContract.getFirstName()
+					.charAt(0))) {
+				errors.rejectValue("firstName", "whitespace",
+						new Object[] { "Nume" },
+						"Campul 'Nume' nu poate incepe cu spatiu.");
+			}
+
 			if (concessionContract.getLastName().length() >= 100) {
 				errors.rejectValue("lastName", "longText",
 						new Object[] { "Prenume" },
 						"Campul 'Prenume' este prea lung.");
 			}
 
+			if (Character.isWhitespace(concessionContract.getLastName().charAt(
+					0))) {
+				errors.rejectValue("lastName", "whitespace",
+						new Object[] { "Prenume" },
+						"Campul 'Prenume' nu poate incepe cu spatiu.");
+			}
+
 			if (concessionContract.getCnp().length() > 13) {
 				errors.rejectValue("cnp", "longText", new Object[] { "Cnp" },
 						"Campul 'Cnp' este prea lung.");
+			}
+
+			if (Character.isWhitespace(concessionContract.getCnp().charAt(0))) {
+				errors.rejectValue("cnp", "whitespace", new Object[] { "Cnp" },
+						"Campul 'Cnp' nu poate incepe cu spatiu.");
 			}
 
 			if (concessionContract.getEmailAddress().length() >= 100) {
@@ -64,8 +99,17 @@ public class ConcessionContractValidator implements Validator {
 						"Campul 'Email' este prea lung.");
 			}
 
-			if (containsOnlyNumbers(concessionContract.getCnp())==false) {
-				errors.rejectValue("cnp", "message.contract.error.invalid.field.number", new Object[] { "Cnp" },
+			if (Character.isWhitespace(concessionContract.getEmailAddress()
+					.charAt(0))) {
+				errors.rejectValue("emailAddress", "whitespace",
+						new Object[] { "Email" },
+						"Campul 'Email' nu poate incepe cu spatiu.");
+			}
+
+			if (containsOnlyNumbers(concessionContract.getCnp()) == false) {
+				errors.rejectValue("cnp",
+						"message.contract.error.invalid.field.number",
+						new Object[] { "Cnp" },
 						"Campul 'Cnp' trebuie sa fie format doar din cifre!");
 			}
 		}

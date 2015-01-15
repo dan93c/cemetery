@@ -17,7 +17,6 @@ public class DeadWithoutFamilyValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "funeralCertificate",
 				"error.deadWithoutFamily.funeralCertificate.required");
-		
 
 		DeadWithoutFamily deadWithoutFamily = (DeadWithoutFamily) target;
 
@@ -27,9 +26,23 @@ public class DeadWithoutFamilyValidator implements Validator {
 					"Campul 'Adeverin�a de �nhumare' este prea lung.");
 		}
 
+		if (Character.isWhitespace(deadWithoutFamily.getFuneralCertificate()
+				.charAt(0))) {
+			errors.rejectValue("funeralCertificate", "whitespace",
+					new Object[] { "Funeral_Certificate" },
+					"Campul 'Adeverin�a de �nhumare' nu poate incepe cu spatiu.");
+		}
+
 		if (deadWithoutFamily.getImlRequest().length() >= 50) {
-			errors.rejectValue("imlRequest", "longText", new Object[] { "Iml_Request" },
+			errors.rejectValue("imlRequest", "longText",
+					new Object[] { "Iml_Request" },
 					"Campul 'Solicitare IML' este prea lung.");
+		}
+		
+		if (Character.isWhitespace(deadWithoutFamily.getImlRequest().charAt(0))) {
+			errors.rejectValue("imlRequest", "whitespace",
+					new Object[] { "Iml_Request" },
+					"Campul 'Solicitare IML' nu poate incepe cu spatiu.");
 		}
 	}
 

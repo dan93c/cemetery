@@ -22,12 +22,25 @@ public class ClaimBookValidator implements Validator {
 		ClaimBook claimBook = (ClaimBook) target;
 
 		if (claimBook.getComplainer().length() >= 100) {
-			errors.rejectValue("complainer", "longText", new Object[] { "Reclamant" },
+			errors.rejectValue("complainer", "longText",
+					new Object[] { "Reclamant" },
 					"Campul 'Reclamant' este prea lung.");
 		}
+
+		if (Character.isWhitespace(claimBook.getComplainer().charAt(0))) {
+			errors.rejectValue("complainer", "whitespace",
+					new Object[] { "Reclamant" },
+					"Campul 'Reclamant' nu poate incepe cu spatiu.");
+		}
 		if (claimBook.getClaims().length() >= 500) {
-			errors.rejectValue("claims", "longText", new Object[] { "Reclamatii" },
+			errors.rejectValue("claims", "longText",
+					new Object[] { "Reclamatii" },
 					"Campul 'Reclamatii' este prea lung.");
+		}
+		if (Character.isWhitespace(claimBook.getClaims().charAt(0))) {
+			errors.rejectValue("claims", "whitespace",
+					new Object[] { "Reclamatii" },
+					"Campul 'Reclamatii' nu poate incepe cu spatiu.");
 		}
 
 	}

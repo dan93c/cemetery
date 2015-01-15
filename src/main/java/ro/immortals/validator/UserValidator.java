@@ -28,10 +28,22 @@ public class UserValidator implements Validator {
 					"Campul 'Username' este prea lung.");
 		}
 
+		if (Character.isWhitespace(user.getUsername().charAt(0))) {
+			errors.rejectValue("username", "whitespace",
+					new Object[] { "Username" },
+					"Campul 'Username' nu poate incepe cu spatiu.");
+		}
+
 		if (user.getPassword().length() >= 45) {
 			errors.rejectValue("password", "longText",
-					new Object[] { "Password" },
-					"Campul 'Password' este prea lung.");
+					new Object[] { "Parola" },
+					"Campul 'Parola' este prea lung.");
+		}
+
+		if (Character.isWhitespace(user.getPassword().charAt(0))) {
+			errors.rejectValue("password", "whitespace",
+					new Object[] { "Parola" },
+					"Campul 'Parola' nu poate incepe cu spatiu.");
 		}
 
 	}

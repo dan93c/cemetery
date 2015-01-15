@@ -26,10 +26,22 @@ public class GraveRequestValidator implements Validator {
 					"Campul 'Nr.Infocet' este prea lung.");
 		}
 
+		if (Character.isWhitespace(graveRequest.getNrInfocet().charAt(0))) {
+			errors.rejectValue("nrInfocet", "whitespace",
+					new Object[] { "Nr.Infocet" },
+					"Campul 'Nr.Infocet' nu poate incepe cu spatiu.");
+		}
+
 		if (graveRequest.getSolvingStage().length() >= 45) {
 			errors.rejectValue("solvingStage", "longText",
 					new Object[] { "Stadiu de solutionare" },
 					"Campul 'Stadiu de solutionare' este prea lung.");
+		}
+
+		if (Character.isWhitespace(graveRequest.getSolvingStage().charAt(0))) {
+			errors.rejectValue("solvingStage", "whitespace",
+					new Object[] { "Stadiu de solutionare" },
+					"Campul 'Statiu de solutionare' nu poate incepe cu spatiu.");
 		}
 
 	}

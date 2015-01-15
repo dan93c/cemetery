@@ -15,12 +15,20 @@ public class PlotValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "error.plot.name.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",
+				"error.plot.name.required");
 
 		Plot plot = (Plot) target;
 
 		if (plot.getName().length() >= 45) {
-			errors.rejectValue("name", "longText", new Object[] { "Denumire" }, "Campul 'Denumire' este prea lung.");
+			errors.rejectValue("name", "longText", new Object[] { "Nume" },
+					"Campul 'Nume' este prea lung.");
+		}
+
+		if (Character.isWhitespace(plot.getName().charAt(0))) {
+			errors.rejectValue("name", "whitespace",
+					new Object[] { "Nume" },
+					"Campul 'Nume' nu poate incepe cu spatiu.");
 		}
 
 	}

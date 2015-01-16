@@ -96,8 +96,8 @@
 						<td>${contract.receiptNr}</td>
 						<td><fmt:formatDate value="${contract.releaseDate}"
 								pattern="yyyy-MM-dd" /></td>
-						<td>${contract.lastName}</td>
 						<td>${contract.firstName}</td>
+						<td>${contract.lastName}</td>
 						<td>${contract.address}</td>
 						<td>${contract.cnp}</td>
 						<td>${contract.emailAddress}</td>

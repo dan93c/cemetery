@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -21,17 +21,17 @@
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div class="alert alert-danger" role="alert">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-								Error.Invalid data.
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
+							Error.Invalid data.
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
-					<div class="alert alert-danger" role="alert">
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span class="sr-only">Error:</span>
+						<div class="alert alert-danger" role="alert">
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
 							${errorMessage}
-					</div>
+						</div>
 					</c:if>
 				</s:bind>
 				<table class="height-tr">
@@ -40,21 +40,22 @@
 					</tr>
 					<tr>
 						<td><label>Reclamant</label></td>
-						<td><form:input type="text" path="complainer" required="required"
-								placeholder="Nume reclamant"></form:input></td>
-						<td><form:errors path="complainer" cssClass="error" id="redError" /></td>
+						<td><form:input type="text" path="complainer"
+								required="required" placeholder="Nume reclamant"></form:input></td>
+						<td><form:errors path="complainer" cssClass="error"
+								id="redError" /></td>
 					</tr>
-				  	<tr></tr> 
+					<tr></tr>
 					<tr>
 						<td><label>Reclamatie</label></td>
-						<td><form:input type="text" path="claims"
-								required="required" placeholder="Reclamatie"></form:input></td>
-						<td><form:errors path="claims" cssClass="error" id="redError"/></td>
+						<td><form:textarea path="claims" rows="5" cols="30"
+								required="required" placeholder="Reclamatie/Sesizare"></form:textarea></td>
+						<td><form:errors path="claims" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td colspan="2" align="left"><input type="submit"
-							value="Adauga reclamatie" class="button medium square blue"/></td>
+							value="Adauga reclamatie" class="button medium square blue" /></td>
 						<td></td>
 					</tr>
 				</table>

@@ -25,18 +25,18 @@
 						onchange="this.form.submit();">
 							<c:choose>
 								<c:when test="${order eq '0'}">
-									<option value="0" selected="selected">Numar</option>
+									<option value="0" selected="selected">Data inregistrarii</option>
 								</c:when>
 								<c:otherwise>
-									<option value="0">Numar</option>
+									<option value="0">Data inregistrarii</option>
 								</c:otherwise>
 							</c:choose>
 							<c:choose>
 								<c:when test="${order eq '1'}">
-									<option value="1" selected="selected">Nume</option>
+									<option value="1" selected="selected">Reclamant</option>
 								</c:when>
 								<c:otherwise>
-									<option value="1">Nume</option>
+									<option value="1">Reclamant</option>
 								</c:otherwise>
 							</c:choose>
 					</select>

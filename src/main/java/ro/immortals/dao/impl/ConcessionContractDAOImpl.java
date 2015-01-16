@@ -62,6 +62,22 @@ public class ConcessionContractDAOImpl implements ConcessionContractDAO {
 	}
 
 	@Override
+	public ConcessionContract getByNrContractAndCNP(String nrContract,
+			String cnp) {
+		List<ConcessionContract> concessionContractList = entityManager
+				.createQuery(
+						"from ConcessionContract c where c.receiptNr = :nrContract and c.cnp= :cnp",
+						ConcessionContract.class)
+				.setParameter("nrContract", nrContract)
+				.setParameter("cnp", cnp).getResultList();
+		if (concessionContractList.size() > 0)
+			return concessionContractList.get(0);
+		else
+			return null;
+
+	}
+
+	@Override
 	public Integer getAllSearchBySize(String search) {
 		if (search == null || search.isEmpty()) {
 			return entityManager
@@ -81,39 +97,138 @@ public class ConcessionContractDAOImpl implements ConcessionContractDAO {
 	public List<ConcessionContract> getAllByPageOrderBySearch(String order,
 			String search, Integer offset, Integer nrOfRecords) {
 		if (search == null || search.isEmpty()) {
-			return entityManager
-					.createQuery("select c FROM ConcessionContract c",
-							ConcessionContract.class).setFirstResult(offset)
-					.setMaxResults(nrOfRecords).getResultList();
+			if (order.contentEquals("1")) {
+				return entityManager
+						.createQuery(
+								"select c FROM ConcessionContract c order by c.receiptNr,c.firstName",
+								ConcessionContract.class)
+						.setFirstResult(offset).setMaxResults(nrOfRecords)
+						.getResultList();
+			} else if (order.contentEquals("2")) {
+				return entityManager
+						.createQuery(
+								"select c FROM ConcessionContract c order by c.firstName,c.lastName,c.emailAddress",
+								ConcessionContract.class)
+						.setFirstResult(offset).setMaxResults(nrOfRecords)
+						.getResultList();
+			} else if (order.contentEquals("3")) {
+				return entityManager
+						.createQuery(
+								"select c FROM ConcessionContract c order by c.address,c.releaseDate",
+								ConcessionContract.class)
+						.setFirstResult(offset).setMaxResults(nrOfRecords)
+						.getResultList();
+			} else {
+				return entityManager
+						.createQuery(
+								"select c FROM ConcessionContract c order by c.releaseDate,c.firstName",
+								ConcessionContract.class)
+						.setFirstResult(offset).setMaxResults(nrOfRecords)
+						.getResultList();
+			}
 		}
-		return entityManager
-				.createQuery(
-						"FROM ConcessionContract c where c.cnp like :search or  c.firstName like :search or"
-								+ "  c.lastName like :search or  c.receiptNr like :search or  c.address like :search",
-						ConcessionContract.class)
-				.setParameter("search", "%" + search + "%")
-				.setFirstResult(offset).setMaxResults(nrOfRecords)
-				.getResultList();
+		if (order.contentEquals("1")) {
+			return entityManager
+					.createQuery(
+							"FROM ConcessionContract c where c.cnp like :search or  c.firstName like :search or"
+									+ "  c.lastName like :search or  c.receiptNr like :search or  "
+									+ "c.address like :search order by c.receiptNr,c.firstName",
+							ConcessionContract.class)
+					.setParameter("search", "%" + search + "%")
+					.setFirstResult(offset).setMaxResults(nrOfRecords)
+					.getResultList();
+		} else if (order.contentEquals("2")) {
+
+			return entityManager
+					.createQuery(
+							"FROM ConcessionContract c where c.cnp like :search or  c.firstName like :search or"
+									+ "  c.lastName like :search or  c.receiptNr like :search or  "
+									+ "c.address like :search order by c.firstName,c.lastName,c.emailAddress",
+							ConcessionContract.class)
+					.setParameter("search", "%" + search + "%")
+					.setFirstResult(offset).setMaxResults(nrOfRecords)
+					.getResultList();
+		} else if (order.contentEquals("3")) {
+			return entityManager
+					.createQuery(
+							"FROM ConcessionContract c where c.cnp like :search or  c.firstName like :search or"
+									+ "  c.lastName like :search or  c.receiptNr like :search or  "
+									+ "c.address like :search order by c.address,c.releaseDate",
+							ConcessionContract.class)
+					.setParameter("search", "%" + search + "%")
+					.setFirstResult(offset).setMaxResults(nrOfRecords)
+					.getResultList();
+		} else {
+			return entityManager
+					.createQuery(
+							"FROM ConcessionContract c where c.cnp like :search or  c.firstName like :search or"
+									+ "  c.lastName like :search or  c.receiptNr like :search or  "
+									+ "c.address like :search order by c.releaseDate,c.firstName",
+							ConcessionContract.class)
+					.setParameter("search", "%" + search + "%")
+					.setFirstResult(offset).setMaxResults(nrOfRecords)
+					.getResultList();
+		}
 	}
 
 	@Override
 	public List<ConcessionContract> getAllGravesExpiredOnYears(Date start,
 			Date end, String order, Integer offset, Integer nrOfRecords) {
 		if (start == null) {
-			return entityManager
-					.createQuery(
-							"select c FROM ConcessionContract c where c.expiredDate< :date order by c.expiredDate",
-							ConcessionContract.class).setParameter("date", end)
-					.setFirstResult(offset).setMaxResults(nrOfRecords)
-					.getResultList();
+			if (order.contentEquals("1")) {
+				return entityManager
+						.createQuery(
+								"select c FROM ConcessionContract c where c.expiredDate< :date order by c.expiredDate desc",
+								ConcessionContract.class)
+						.setParameter("date", end).setFirstResult(offset)
+						.setMaxResults(nrOfRecords).getResultList();
+			} else if (order.contentEquals("2")) {
+				return entityManager
+						.createQuery(
+								"select c FROM ConcessionContract c where c.expiredDate< :date "
+										+ "order by c.firstName,c.lastName,c.emailAddress",
+								ConcessionContract.class)
+						.setParameter("date", end).setFirstResult(offset)
+						.setMaxResults(nrOfRecords).getResultList();
+			} else {
+
+				return entityManager
+						.createQuery(
+								"select c FROM ConcessionContract c where c.expiredDate< :date order by c.expiredDate",
+								ConcessionContract.class)
+						.setParameter("date", end).setFirstResult(offset)
+						.setMaxResults(nrOfRecords).getResultList();
+			}
 
 		} else {
-			return entityManager
-					.createQuery(
-							"FROM ConcessionContract c where c.expiredDate between :start and :end order by c.expiredDate",
-							ConcessionContract.class).setParameter("end", end)
-					.setParameter("start", start).setFirstResult(offset)
-					.setMaxResults(nrOfRecords).getResultList();
+			if (order.contentEquals("1")) {
+				return entityManager
+						.createQuery(
+								"FROM ConcessionContract c where c.expiredDate between :start and :end "
+										+ "order by c.expiredDate desc",
+								ConcessionContract.class)
+						.setParameter("end", end).setParameter("start", start)
+						.setFirstResult(offset).setMaxResults(nrOfRecords)
+						.getResultList();
+			} else if (order.contentEquals("2")) {
+				return entityManager
+						.createQuery(
+								"FROM ConcessionContract c where c.expiredDate between :start and :end "
+										+ "order by c.firstName,c.lastName,c.emailAddress",
+								ConcessionContract.class)
+						.setParameter("end", end).setParameter("start", start)
+						.setFirstResult(offset).setMaxResults(nrOfRecords)
+						.getResultList();
+			} else {
+				return entityManager
+						.createQuery(
+								"FROM ConcessionContract c where c.expiredDate between :start and :end "
+										+ "order by c.expiredDate",
+								ConcessionContract.class)
+						.setParameter("end", end).setParameter("start", start)
+						.setFirstResult(offset).setMaxResults(nrOfRecords)
+						.getResultList();
+			}
 		}
 	}
 
@@ -133,22 +248,6 @@ public class ConcessionContractDAOImpl implements ConcessionContractDAO {
 							ConcessionContract.class).setParameter("end", end)
 					.setParameter("start", start).getResultList().size();
 		}
-	}
-
-	@Override
-	public ConcessionContract getByNrContractAndCNP(String nrContract,
-			String cnp) {
-		List<ConcessionContract> concessionContractList = entityManager
-				.createQuery(
-						"from ConcessionContract c where c.receiptNr = :nrContract and c.cnp= :cnp",
-						ConcessionContract.class)
-				.setParameter("nrContract", nrContract)
-				.setParameter("cnp", cnp).getResultList();
-		if (concessionContractList.size() > 0)
-			return concessionContractList.get(0);
-		else
-			return null;
-
 	}
 
 }

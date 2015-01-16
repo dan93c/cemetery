@@ -19,6 +19,7 @@ public class ConcessionContractValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAIIIIIIIIIIIIICIIIIIIIIIIIIIIIIIIIIInu in");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receipt_nr",
 				"error.concessionContract.receipt_nr.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cnp",
@@ -115,10 +116,7 @@ public class ConcessionContractValidator implements Validator {
 						"Campul 'Prenume' nu poate ramane necompletat.");
 			}
 
-			if (concessionContract.getCnp().length() > 13) {
-				errors.rejectValue("cnp", "longText", new Object[] { "Cnp" },
-						"Campul 'Cnp' este prea lung.");
-			}
+			System.out.println(concessionContract.getCnp());
 
 			if (concessionContract.getCnp() != null
 					&& !concessionContract.getCnp().isEmpty()) {
@@ -127,6 +125,21 @@ public class ConcessionContractValidator implements Validator {
 					errors.rejectValue("cnp", "whitespace",
 							new Object[] { "Cnp" },
 							"Campul 'Cnp' nu poate incepe cu spatiu.");
+				}
+				if (concessionContract.getCnp().length() < 13
+						|| concessionContract.getCnp().length() > 13) {
+					errors.rejectValue("cnp",
+							"error.concessionContract.cnp.length",
+							new Object[] { "Cnp" },
+							"Campul 'Cnp'trebuie sa fie format din 13 cifre.");
+
+				}
+
+				if (containsOnlyNumbers(concessionContract.getCnp()) == false) {
+					errors.rejectValue("cnp",
+							"message.contract.error.invalid.field.number",
+							new Object[] { "Cnp" },
+							"Campul 'Cnp' trebuie sa fie format doar din cifre!");
 				}
 			} else {
 				errors.rejectValue("cnp", "error.concessionContract.cnp.null",

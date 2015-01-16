@@ -42,7 +42,7 @@ public class MainController {
 
 	@Autowired
 	protected DeadWithoutFamilyService deadWithoutFamilyService;
-	
+
 	@Autowired
 	protected ClaimBookService claimService;
 
@@ -68,9 +68,10 @@ public class MainController {
 	public static final String CONTRACTS = "contracts";
 	public static final String HISTORY = "history";
 	public static final String OBJECTS = "objects";
-	public static final String CLAIM="claimBook";
-	public static final String CLAIMS="claims";
-	public static final String CLAIM_VALIDATOR="claimBookValidator";
+	public static final String CLAIM = "claimBook";
+	public static final String CLAIMS = "claims";
+	public static final String CLAIM_VALIDATOR = "claimBookValidator";
+	public static final String CONCESSION_CONTRACT_VALIDATOR = "concessionContractValidator";
 
 	public static final String SELECT_NR_OF_RECORDS = "selectNrOfRecords";
 	public static final String CURRENT_PAGE = "currentPage";
@@ -113,11 +114,10 @@ public class MainController {
 	public static final String GRAVE_REGISTER_JSP = "graveRegister";
 	public static final String GRAVE_MONUMENT_REGISTER_JSP = "graveMonumentRegister";
 	public static final String GRAVE_REQUEST_REGISTER_JSP = "graveRequestRegister";
-	public static final String ADD_CLAIM_JSP="addClaim";
-	public static final String EDIT_CLAIM_JSP="editClaim";
-	public static final String CLAIMS_REGISTER_JSP="claimRegister";
+	public static final String ADD_CLAIM_JSP = "addClaim";
+	public static final String EDIT_CLAIM_JSP = "editClaim";
+	public static final String CLAIMS_REGISTER_JSP = "claimRegister";
 	public static final String LIST_EXPIRED_GRAVES_JSP = "listExpiredGraves";
-
 
 	/**
 	 * set the nr of the current page and values of pagination format Pagination
@@ -132,7 +132,8 @@ public class MainController {
 	 *            the number of pages
 	 * @return the current page
 	 */
-	public Integer setPagination(ModelAndView modelAndView, Integer page, Integer nrOfPages) {
+	public Integer setPagination(ModelAndView modelAndView, Integer page,
+			Integer nrOfPages) {
 		if ((page == null) || (page > nrOfPages) || (page < 1)) {
 			page = FIRST_PAGE;
 		}

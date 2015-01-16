@@ -5,8 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import ro.immortals.dao.ConcessionContractDAO;
 import ro.immortals.dao.HistoryDAO;
@@ -14,6 +18,8 @@ import ro.immortals.dao.UserDAO;
 import ro.immortals.model.ConcessionContract;
 import ro.immortals.model.History;
 import ro.immortals.service.ConcessionContractService;
+import ro.immortals.validator.ConcessionContractValidator;
+import ro.immortals.controller.MainController;
 
 @Service
 public class ConcessionContractServiceImpl implements ConcessionContractService {
@@ -26,13 +32,15 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	private UserDAO userDAO;
 	private static final String MODIFIED_OBJECT = "Contract de concesiune";
 
+
 	@Override
 	@Transactional
 	public int add(ConcessionContract concessionContract, String username) {
 		if (checkDuplicate(concessionContract)) {
 			Calendar c = Calendar.getInstance();
 			concessionContract.setReleaseDate(c.getTime());
-			Integer expiredYear = c.get(Calendar.YEAR) + concessionContract.getPeriod();
+			Integer expiredYear = c.get(Calendar.YEAR)
+					+ concessionContract.getPeriod();
 			c.set(Calendar.YEAR, expiredYear);
 			concessionContract.setExpiredDate(c.getTime());
 			concessionContractDAO.add(concessionContract);
@@ -51,10 +59,13 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 
 	@Override
 	@Transactional
-	public int update(ConcessionContract concessionContract, String username, String updateDate) {
+	public int update(ConcessionContract concessionContract, String username,
+			String updateDate) {
 		if (checkDuplicate(concessionContract)) {
 			if (updateDate != null) {
-				Date expiredDate = getExpiredDate(concessionContract.getExpiredDate(), concessionContract.getPeriod());
+				Date expiredDate = getExpiredDate(
+						concessionContract.getExpiredDate(),
+						concessionContract.getPeriod());
 				concessionContract.setExpiredDate(expiredDate);
 				concessionContract.setUpdatedDate(new Date());
 				System.out.println("-----------dsfs-----------------");
@@ -89,36 +100,52 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 
 	private String setDetailsForHistory(ConcessionContract concessionContract) {
 		String details = "";
-		ConcessionContract oldConcessionContract = concessionContractDAO.getById(concessionContract.getId());
-		if (!oldConcessionContract.getFirstName().contentEquals(concessionContract.getFirstName())) {
-			details = "Nume vechi:" + oldConcessionContract.getFirstName() + ", Nume nou:"
-					+ concessionContract.getFirstName() + "\r\n";
+		ConcessionContract oldConcessionContract = concessionContractDAO
+				.getById(concessionContract.getId());
+		if (!oldConcessionContract.getFirstName().contentEquals(
+				concessionContract.getFirstName())) {
+			details = "Nume vechi:" + oldConcessionContract.getFirstName()
+					+ ", Nume nou:" + concessionContract.getFirstName()
+					+ "\r\n";
 		}
-		if (!oldConcessionContract.getLastName().contentEquals(concessionContract.getLastName())) {
-			details = details + "Prenume vechi:" + oldConcessionContract.getLastName() + ", Prenume nou:"
+		if (!oldConcessionContract.getLastName().contentEquals(
+				concessionContract.getLastName())) {
+			details = details + "Prenume vechi:"
+					+ oldConcessionContract.getLastName() + ", Prenume nou:"
 					+ concessionContract.getLastName() + "\r\n";
 		}
-		if (!oldConcessionContract.getAddress().contentEquals(concessionContract.getAddress())) {
-			details = details + "Adresa veche:" + oldConcessionContract.getAddress() + ", Adresa noua:"
+		if (!oldConcessionContract.getAddress().contentEquals(
+				concessionContract.getAddress())) {
+			details = details + "Adresa veche:"
+					+ oldConcessionContract.getAddress() + ", Adresa noua:"
 					+ concessionContract.getAddress() + "\r\n";
 		}
-		if (!oldConcessionContract.getCnp().contentEquals(concessionContract.getCnp())) {
-			details = details + "CNP vechi:" + oldConcessionContract.getCnp() + ", CNP nou:"
-					+ concessionContract.getCnp() + "\r\n";
+		if (!oldConcessionContract.getCnp().contentEquals(
+				concessionContract.getCnp())) {
+			details = details + "CNP vechi:" + oldConcessionContract.getCnp()
+					+ ", CNP nou:" + concessionContract.getCnp() + "\r\n";
 		}
-		if (!oldConcessionContract.getEmailAddress().contentEquals(concessionContract.getEmailAddress())) {
-			details = details + "Email vechi:" + oldConcessionContract.getEmailAddress() + ", Email nou:"
+		if (!oldConcessionContract.getEmailAddress().contentEquals(
+				concessionContract.getEmailAddress())) {
+			details = details + "Email vechi:"
+					+ oldConcessionContract.getEmailAddress() + ", Email nou:"
 					+ concessionContract.getEmailAddress() + "\r\n";
 		}
-		if (!oldConcessionContract.getReceiptNr().contentEquals(concessionContract.getReceiptNr())) {
-			details = details + "Numarul vechi:" + oldConcessionContract.getReceiptNr() + ", Numarul nou:"
+		if (!oldConcessionContract.getReceiptNr().contentEquals(
+				concessionContract.getReceiptNr())) {
+			details = details + "Numarul vechi:"
+					+ oldConcessionContract.getReceiptNr() + ", Numarul nou:"
 					+ concessionContract.getReceiptNr() + "\r\n";
 		}
 		if (concessionContract.getUpdatedDate() != null) {
 			if (oldConcessionContract.getUpdatedDate() != null) {
-				if (oldConcessionContract.getUpdatedDate().compareTo(concessionContract.getUpdatedDate()) != 0) {
-					details = details + "Data reinnoirii veche:" + oldConcessionContract.getUpdatedDate().toString()
-							+ ", Data reinnoirii noua:" + concessionContract.getUpdatedDate().toString() + "\r\n";
+				if (oldConcessionContract.getUpdatedDate().compareTo(
+						concessionContract.getUpdatedDate()) != 0) {
+					details = details + "Data reinnoirii veche:"
+							+ oldConcessionContract.getUpdatedDate().toString()
+							+ ", Data reinnoirii noua:"
+							+ concessionContract.getUpdatedDate().toString()
+							+ "\r\n";
 				}
 			} else {
 				details = details + "Reinnoire contract \r\n";
@@ -126,14 +153,21 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 		}
 
 		if (oldConcessionContract.getUpdatedDate() != null) {
-			if (oldConcessionContract.getUpdatedDate().compareTo(concessionContract.getUpdatedDate()) != 0) {
-				details = details + "Data reinnoirii veche:" + oldConcessionContract.getUpdatedDate().toString()
-						+ ", Data reinnoirii noua:" + concessionContract.getUpdatedDate().toString() + "\r\n";
+			if (oldConcessionContract.getUpdatedDate().compareTo(
+					concessionContract.getUpdatedDate()) != 0) {
+				details = details + "Data reinnoirii veche:"
+						+ oldConcessionContract.getUpdatedDate().toString()
+						+ ", Data reinnoirii noua:"
+						+ concessionContract.getUpdatedDate().toString()
+						+ "\r\n";
 			}
 		}
 
-		if (!oldConcessionContract.getGrave().getId().equals(concessionContract.getGrave().getId())) {
-			details = details + "Mormant vechi:" + oldConcessionContract.getGrave().getNrGrave() + ", Mormant nou:"
+		if (!oldConcessionContract.getGrave().getId()
+				.equals(concessionContract.getGrave().getId())) {
+			details = details + "Mormant vechi:"
+					+ oldConcessionContract.getGrave().getNrGrave()
+					+ ", Mormant nou:"
 					+ concessionContract.getGrave().getNrGrave() + "\r\n";
 		}
 		return details;
@@ -142,7 +176,8 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	@Override
 	@Transactional
 	public void delete(Integer id, String username) {
-		ConcessionContract concessionContract = concessionContractDAO.getById(id);
+		ConcessionContract concessionContract = concessionContractDAO
+				.getById(id);
 		if (concessionContract != null) {
 			History history = new History();
 			history.setUser(userDAO.getByUsername(username));
@@ -173,7 +208,11 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	public boolean checkDuplicate(ConcessionContract concessionContract) {
 		ConcessionContract existingConcessionContract = concessionContractDAO
 				.getByExpirationDateGrave(concessionContract.getGrave().getId());
-		if (existingConcessionContract != null && (existingConcessionContract.getId() != concessionContract.getId())) {
+		System.out.println("Contract pentru"+concessionContract.getGrave().getId());
+		System.out.println("EXISTING : "+ existingConcessionContract.getId() +"  DADA" +concessionContract.getId());
+		if (existingConcessionContract != null
+				&& (existingConcessionContract.getId() != concessionContract
+						.getId())) {
 			return false;
 		}
 		return true;
@@ -187,18 +226,20 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<ConcessionContract> getAllByPageOrderBySearch(String order, String search, Integer offset,
-			Integer nrOfRecords) {
-		return concessionContractDAO.getAllByPageOrderBySearch(order, search, offset, nrOfRecords);
+	public List<ConcessionContract> getAllByPageOrderBySearch(String order,
+			String search, Integer offset, Integer nrOfRecords) {
+		return concessionContractDAO.getAllByPageOrderBySearch(order, search,
+				offset, nrOfRecords);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<ConcessionContract> getAllGravesExpiredOnYears(String order, String search, Integer offset,
-			Integer nrOfRecords) {
+	public List<ConcessionContract> getAllGravesExpiredOnYears(String order,
+			String search, Integer offset, Integer nrOfRecords) {
 		if (!isYear(search)) {
-			return concessionContractDAO.getAllGravesExpiredOnYears(null, Calendar.getInstance().getTime(), order,
-					offset, nrOfRecords);
+			return concessionContractDAO.getAllGravesExpiredOnYears(null,
+					Calendar.getInstance().getTime(), order, offset,
+					nrOfRecords);
 		}
 		Calendar start = Calendar.getInstance();
 		start.set(Calendar.YEAR, Integer.parseInt(search));
@@ -209,17 +250,19 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 		end.set(Calendar.MONTH, 0);
 		end.set(Calendar.DAY_OF_MONTH, 1);
 		System.out.println("--------------------tryt--------------"
-				+ concessionContractDAO.getAllGravesExpiredOnYears(start.getTime(), end.getTime(), order, offset,
+				+ concessionContractDAO.getAllGravesExpiredOnYears(
+						start.getTime(), end.getTime(), order, offset,
 						nrOfRecords).size());
-		return concessionContractDAO.getAllGravesExpiredOnYears(start.getTime(), end.getTime(), order, offset,
-				nrOfRecords);
+		return concessionContractDAO.getAllGravesExpiredOnYears(
+				start.getTime(), end.getTime(), order, offset, nrOfRecords);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Integer getAllGravesExpiredOnYearsSize(String search) {
 		if (!isYear(search)) {
-			return concessionContractDAO.getAllGravesExpiredOnYearsSize(null, Calendar.getInstance().getTime());
+			return concessionContractDAO.getAllGravesExpiredOnYearsSize(null,
+					Calendar.getInstance().getTime());
 		}
 		Calendar start = Calendar.getInstance();
 		start.set(Calendar.YEAR, Integer.parseInt(search));
@@ -230,7 +273,8 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 		end.set(Calendar.MONTH, 0);
 		end.set(Calendar.DAY_OF_MONTH, 1);
 
-		return concessionContractDAO.getAllGravesExpiredOnYearsSize(start.getTime(), end.getTime());
+		return concessionContractDAO.getAllGravesExpiredOnYearsSize(
+				start.getTime(), end.getTime());
 	}
 
 	private static boolean isYear(String str) {

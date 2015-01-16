@@ -33,7 +33,8 @@ public class DeadController extends MainController {
 	private Validator deadValidator;
 
 	@InitBinder(DEAD)
-	private void initBinder(HttpServletRequest request, WebDataBinder binder) throws Exception {
+	private void initBinder(HttpServletRequest request, WebDataBinder binder)
+			throws Exception {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
 		binder.registerCustomEditor(Date.class, editor);
@@ -41,8 +42,10 @@ public class DeadController extends MainController {
 	}
 
 	@RequestMapping(value = "/list/{page}", method = RequestMethod.GET)
-	public ModelAndView list(@PathVariable Integer page, @RequestParam(value = ORDER, required = false) String order,
-			@RequestParam(value = SEARCH, required = false) String search, HttpServletRequest request) {
+	public ModelAndView list(@PathVariable Integer page,
+			@RequestParam(value = ORDER, required = false) String order,
+			@RequestParam(value = SEARCH, required = false) String search,
+			HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(DEAD_REGISTER_JSP);
 		order = getOrder(order, request);
 		search = getSearch(search, request);
@@ -50,18 +53,22 @@ public class DeadController extends MainController {
 		Integer nrOfRecords = deadService.getAllSearchBySize(search);
 		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
 		page = setPagination(modelAndView, page, nrOfPages);
-		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS, recordsPerPage);
+		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS,
+				recordsPerPage);
 		modelAndView.addObject(ORDER, order);
 		modelAndView.addObject(SEARCH, search);
-		modelAndView.addObject(DEADS,
-				deadService.getAllByPageOrderBySearch(order, search, (page - 1) * recordsPerPage, recordsPerPage));
+		modelAndView.addObject(
+				DEADS,
+				deadService.getAllByPageOrderBySearch(order, search, (page - 1)
+						* recordsPerPage, recordsPerPage));
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/inmormantari/{page}", method = RequestMethod.GET)
 	public ModelAndView appointmentRegister(@PathVariable Integer page,
 			@RequestParam(value = ORDER, required = false) String order,
-			@RequestParam(value = SEARCH, required = false) String search, HttpServletRequest request) {
+			@RequestParam(value = SEARCH, required = false) String search,
+			HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(APPOINTMENT_REGISTER_JSP);
 		order = getOrder(order, request);
 		search = getSearch(search, request);
@@ -69,11 +76,14 @@ public class DeadController extends MainController {
 		Integer nrOfRecords = deadService.getAllSearchBySize(search);
 		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
 		page = setPagination(modelAndView, page, nrOfPages);
-		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS, recordsPerPage);
+		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS,
+				recordsPerPage);
 		modelAndView.addObject(ORDER, order);
 		modelAndView.addObject(SEARCH, search);
-		modelAndView.addObject(DEADS,
-				deadService.getAllByPageOrderBySearch(order, search, (page - 1) * recordsPerPage, recordsPerPage));
+		modelAndView.addObject(
+				DEADS,
+				deadService.getAllByPageOrderBySearch(order, search, (page - 1)
+						* recordsPerPage, recordsPerPage));
 		return modelAndView;
 	}
 
@@ -93,18 +103,21 @@ public class DeadController extends MainController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView doAdd(@ModelAttribute @Validated Dead dead, BindingResult bindingResult,
+	public ModelAndView doAdd(
+			@ModelAttribute @Validated Dead dead,
+			BindingResult bindingResult,
 			@RequestParam(value = "cemeterySelect", required = false) Integer cemeteryId,
-			@RequestParam(value = "plotSelect", required = false) Integer plotId, HttpServletRequest request) {
+			@RequestParam(value = "plotSelect", required = false) Integer plotId,
+			HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return add(dead);
 		}
-		if (!graveService.checkGraveExistence(dead.getGrave(), plotId, cemeteryId)) {
+		if (!graveService.checkGraveExistence(dead.getGrave(), plotId,
+				cemeteryId)) {
 			ModelAndView modelAndView = new ModelAndView(ADD_DEAD_JSP);
-			modelAndView.addObject(
-					ERROR_MESSAGE,
-					messageSource.getMessage("message.grave.not.exists", new Object[] { dead.getGrave().getId() },
-							Locale.getDefault()));
+			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+					"message.grave.not.exists", new Object[] { dead.getGrave()
+							.getNrGrave() }, Locale.getDefault()));
 			modelAndView.addObject(DEAD, dead);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
@@ -115,8 +128,9 @@ public class DeadController extends MainController {
 		Integer errorCode = deadService.add(dead, username);
 		if (errorCode == 1) {
 			ModelAndView modelAndView = new ModelAndView(ADD_DEAD_JSP);
-			modelAndView.addObject(ERROR_MESSAGE,
-					messageSource.getMessage("message.dead.already.exists", new Object[] { dead.getId() }, Locale.getDefault()));
+			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+					"message.dead.already.exists",
+					new Object[] { dead.getFirstName() }, Locale.getDefault()));
 			modelAndView.addObject(DEAD, dead);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
@@ -138,19 +152,20 @@ public class DeadController extends MainController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView doEdit(@ModelAttribute @Validated Dead dead, BindingResult bindingResult,
-			@RequestParam(value = "cemeterySelect", required = false) Integer cemeteryId,
-			@RequestParam(value = "plotSelect", required = false) Integer plotId, HttpServletRequest request) {
+	public ModelAndView doEdit(
+			@ModelAttribute @Validated Dead dead,
+			BindingResult bindingResult,
+			HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return edit(dead.getId());
 		}
 
-		if (!graveService.checkGraveExistence(dead.getGrave(), plotId, cemeteryId)) {
+		if (!graveService.checkGraveExistence(dead.getGrave(), dead.getGrave().getPlot().getId(),
+				 dead.getGrave().getPlot().getCemetery().getId())) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_DEAD_JSP);
-			modelAndView.addObject(
-					ERROR_MESSAGE,
-					messageSource.getMessage("message.grave.not.exists", new Object[] { dead.getGrave().getId() },
-							Locale.getDefault()));
+			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+					"message.grave.not.exists", new Object[] { dead.getGrave()
+							.getNrGrave() }, Locale.getDefault()));
 			modelAndView.addObject(DEAD, dead);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
@@ -162,8 +177,9 @@ public class DeadController extends MainController {
 
 		if (errorCode == 1) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_DEAD_JSP);
-			modelAndView.addObject(ERROR_MESSAGE,
-					messageSource.getMessage("message.dead.already.exists", new Object[] { dead.getId() }, Locale.getDefault()));
+			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+					"message.dead.already.exists",
+					new Object[] { dead.getFirstName() }, Locale.getDefault()));
 			modelAndView.addObject(DEAD, dead);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());

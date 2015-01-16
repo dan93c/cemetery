@@ -69,7 +69,7 @@
 						<th>#</th>
 						<th>Data inregistrarii</th>
 						<th>Nr infocet</th>
-						<th>Stadiu de solutionare</th>
+						<th colspan="2">Stadiu de solutionare</th>
 					</tr>
 				</thead>
 				<c:forEach var="graveRequest" items="${graveRequests}"

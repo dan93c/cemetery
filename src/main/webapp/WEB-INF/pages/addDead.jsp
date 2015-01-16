@@ -19,9 +19,9 @@
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div class="alert alert-danger" role="alert">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-								Error.Invalid data.
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
+							Error.Invalid data.
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
@@ -40,34 +40,39 @@
 						<td><label>Nume</label></td>
 						<td><form:input type="text" path="lastName"
 								required="required" placeholder="Nume decedat" maxLengh="45"></form:input></td>
-						<td><form:errors path="lastName" cssClass="error" id="redError"/></td>
+						<td><form:errors path="lastName" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Prenume</label></td>
 						<td><form:input type="text" path="firstName"
 								required="required" placeholder="Prenume decedat" maxLengh="45"></form:input></td>
-						<td><form:errors path="firstName" cssClass="error" id="redError"/></td>
+						<td><form:errors path="firstName" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Religia</label></td>
 						<td><form:input type="text" path="religion"
 								required="required" placeholder="Religia" maxLengh="45"></form:input></td>
-						<td><form:errors path="religion" cssClass="error" id="redError"/></td>
+						<td><form:errors path="religion" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Data mortii</label></td>
 						<td><form:input type="text" path="deathDate" id="deathDate"></form:input></td>
-						<td><form:errors path="deathDate" cssClass="error" id="redError"/></td>
+						<td><form:errors path="deathDate" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Data inmormantarii</label></td>
 						<td><form:input type="text" path="funeralDate"
 								id="funeralDate"></form:input></td>
-						<td><form:errors path="funeralDate" cssClass="error" id="redError"/></td>
+						<td><form:errors path="funeralDate" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -118,11 +123,11 @@
 <script src="${CONTEXT_PATH}/resources/js/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 	$('#funeralDate').datetimepicker({
-		formatDate:'Y/m/d'
+		formatDate : 'Y/m/d'
 	});
 	$('#deathDate').datetimepicker({
-		defaultTime:'00:00',
-		formatDate:'Y/m/d'
+		defaultTime : '00:00',
+		formatDate : 'Y/m/d'
 	});
 </script>
 </html>

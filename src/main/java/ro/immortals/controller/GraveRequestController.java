@@ -41,7 +41,8 @@ public class GraveRequestController extends MainController {
 	@RequestMapping(value = { "/cereri/{page}" }, method = RequestMethod.GET)
 	public ModelAndView graveRequestsRegister(@PathVariable Integer page,
 			@RequestParam(value = ORDER, required = false) String order,
-			@RequestParam(value = SEARCH, required = false) String search, HttpServletRequest request) {
+			@RequestParam(value = SEARCH, required = false) String search,
+			HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView(GRAVE_REQUEST_REGISTER_JSP);
 		order = getOrder(order, request);
 		search = getSearch(search, request);
@@ -49,11 +50,13 @@ public class GraveRequestController extends MainController {
 		Integer nrOfRecords = graveRequestService.getAllSearchBySize(search);
 		Integer nrOfPages = (int) Math.ceil(nrOfRecords * 1.0 / recordsPerPage);
 		page = setPagination(modelAndView, page, nrOfPages);
-		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS, recordsPerPage);
+		request.getSession(false).setAttribute(SELECT_NR_OF_RECORDS,
+				recordsPerPage);
 		modelAndView.addObject(ORDER, order);
 		modelAndView.addObject(SEARCH, search);
-		modelAndView.addObject(GRAVE_REQUESTS,
-				graveRequestService.getAllByPageOrderBySearch(order, search, (page - 1) * recordsPerPage, recordsPerPage));
+		modelAndView.addObject(GRAVE_REQUESTS, graveRequestService
+				.getAllByPageOrderBySearch(order, search, (page - 1)
+						* recordsPerPage, recordsPerPage));
 		return modelAndView;
 
 	}
@@ -71,8 +74,9 @@ public class GraveRequestController extends MainController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView doAdd(@ModelAttribute @Validated GraveRequest graveRequest, BindingResult bindingResult,
-			HttpServletRequest request) {
+	public ModelAndView doAdd(
+			@ModelAttribute @Validated GraveRequest graveRequest,
+			BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			return add(graveRequest);
 		}
@@ -81,12 +85,12 @@ public class GraveRequestController extends MainController {
 		if (errorCode == 1) {
 			ModelAndView modelAndView = new ModelAndView(ADD_GRAVE_REQUEST_JSP);
 			modelAndView.addObject(GRAVE_REQUEST, graveRequest);
-			/*
-			 * modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-			 * "message.grave.already.exists", new Object[] {
-			 * grave.getNrGrave(), grave.getPlot().getName() },
-			 * Locale.getDefault()));
-			 */
+
+			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+					"message.graveRequest.already.exists",
+					new Object[] { graveRequest.getNrInfocet() },
+					Locale.getDefault()));
+
 			return modelAndView;
 		}
 		return graveRequestsRegister(1, null, null, request);
@@ -100,8 +104,9 @@ public class GraveRequestController extends MainController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView doEdit(@ModelAttribute @Validated GraveRequest graveRequest, BindingResult bindingResult,
-			HttpServletRequest request) {
+	public ModelAndView doEdit(
+			@ModelAttribute @Validated GraveRequest graveRequest,
+			BindingResult bindingResult, HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_GRAVE_REQUEST_JSP);
 			modelAndView.addObject(GRAVE_REQUEST, graveRequest);

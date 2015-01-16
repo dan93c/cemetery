@@ -23,8 +23,7 @@
 						onchange="this.form.submit();">
 							<c:choose>
 								<c:when test="${order eq '0'}">
-									<option value="0" selected="selected">Data
-										eliberarii</option>
+									<option value="0" selected="selected">Data eliberarii</option>
 								</c:when>
 								<c:otherwise>
 									<option value="0">Data eliberarii</option>
@@ -104,8 +103,8 @@
 						<td>${contract.emailAddress}</td>
 						<td>${contract.grave.nrGrave}</td>
 						<td>${contract.grave.plot.name}</td>
-						<td>${contract.grave.plot.cemetery.name}<a
-							href="${CONTEXT_PATH}/contract/edit/${contract.id}"><button
+						<td>${contract.grave.plot.cemetery.name}</td>
+						<td><a href="${CONTEXT_PATH}/contract/edit/${contract.id}"><button
 									class="btn-table">Modifica</button></a></td>
 					</tr>
 				</c:forEach>

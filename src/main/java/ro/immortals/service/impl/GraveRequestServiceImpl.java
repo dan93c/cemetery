@@ -58,6 +58,7 @@ public class GraveRequestServiceImpl implements GraveRequestService {
 			String details = setDetailsForHistory(graveRequest);
 			history.setDetails(details);
 			graveRequest.setRegistrationDate(Calendar.getInstance().getTime());
+			System.out.println("------------------service");
 			graveRequestDAO.update(graveRequest);
 			historyDAO.add(history);
 			return 0;

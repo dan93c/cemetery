@@ -60,12 +60,40 @@
 											inregistrata</option>
 									</c:otherwise>
 								</c:choose>
+								<c:choose>
+									<c:when
+										test="${graveRequest.solvingStage == 'Cerere in curs de solutionare'}">
+										<option value="Cerere in curs de solutionare"
+											selected="selected">Cerere in curs de solutionare</option>
+									</c:when>
+									<c:otherwise>
+										<option value="Cerere in curs de solutionare">Cerere
+											in curs de solutionare</option>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when
+										test="${graveRequest.solvingStage == 'Cerere solutionata'}">
+										<option value="Cerere solutionata" selected="selected">Cerere
+											solutionata</option>
+									</c:when>
+									<c:otherwise>
+										<option value="Cerere solutionata">Cerere solutionata
+										</option>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when
+										test="${graveRequest.solvingStage == 'Cerere nesolutionata'}">
+										<option value="Cerere nesolutionata" selected="selected">Cerere
+											nesolutionata</option>
+									</c:when>
+									<c:otherwise>
+										<option value="Cerere nesolutionata">Cerere
+											nesolutionata</option>
+									</c:otherwise>
+								</c:choose>
 
-								<option value="Cerere in curs de solutionare">Cerere in
-									curs de solutionare</option>
-								<option value="Cerere solutionata">Cerere solutionata</option>
-								<option value="Cerere nesolutionata">Cerere
-									nesolutionata</option>
 							</form:select></td>
 						<td><form:errors path="solvingStage" cssClass="error"
 								id="redError" /></td>

@@ -58,7 +58,7 @@
 					<tr>
 						<th rowspan="2">#</th>
 						<th rowspan="2">Reclamant</th>
-						<th colspan="4">Mormant</th>
+						<th colspan="4">Reclamatii/Sugestii</th>
 					</tr>
 				</thead>
 				<c:forEach var="claim" items="${claims}" varStatus="lineInfo">

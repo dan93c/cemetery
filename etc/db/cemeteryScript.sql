@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `cemeterydb`.`graves` (
     FOREIGN KEY (`plot_id`)
     REFERENCES `cemeterydb`.`plots` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

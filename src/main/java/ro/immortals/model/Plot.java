@@ -31,7 +31,7 @@ public class Plot implements java.io.Serializable {
 	@JoinColumn(name = "cemetery_id")
 	private Cemetery cemetery;
 
-	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "plot")
+	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "plot")
 	private List<Grave> graves = new ArrayList<Grave>();
 
 	public Plot() {

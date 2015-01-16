@@ -26,13 +26,6 @@ import sun.misc.GC;
 @RequestMapping("/contract")
 public class ConcessionContractController extends MainController {
 
-	/*
-	 * @RequestMapping(value = "/list", method = RequestMethod.GET) public
-	 * ModelAndView list() { ModelAndView modelAndView = new
-	 * ModelAndView(LIST_CONTRACTS_JSP); List<ConcessionContract> contracts =
-	 * contractService.getAll(); modelAndView.addObject(CONTRACTS, contracts);
-	 * return modelAndView; }
-	 */
 	@Autowired
 	@Qualifier(CONCESSION_CONTRACT_VALIDATOR)
 	private Validator contractValidator;
@@ -66,13 +59,14 @@ public class ConcessionContractController extends MainController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView add(@ModelAttribute ConcessionContract contract) {
+	public ModelAndView add(
+			@ModelAttribute ConcessionContract concessionContract) {
 
 		ModelAndView modelAndView = new ModelAndView(ADD_CONTRACT_JSP);
-		if (contract == null) {
+		if (concessionContract == null) {
 			modelAndView.addObject(CONTRACT, new ConcessionContract());
 		} else {
-			modelAndView.addObject(CONTRACT, contract);
+			modelAndView.addObject(CONTRACT, concessionContract);
 		}
 		modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 		modelAndView.addObject(PLOTS, plotService.getAll());
@@ -82,38 +76,39 @@ public class ConcessionContractController extends MainController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView doAdd(
-			@ModelAttribute @Validated ConcessionContract contract,
+			@ModelAttribute @Validated ConcessionContract concessionContract,
 			BindingResult bindingResult,
 			@RequestParam(value = "cemeterySelect", required = false) Integer cemeteryId,
 			@RequestParam(value = "plotSelect", required = false) Integer plotId,
 			HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
-			return add(contract);
+			return add(concessionContract);
 		}
-		if (!graveService.checkGraveExistence(contract.getGrave(), plotId,
-				cemeteryId)) {
+		if (!graveService.checkGraveExistence(concessionContract.getGrave(),
+				plotId, cemeteryId)) {
 			ModelAndView modelAndView = new ModelAndView(ADD_CONTRACT_JSP);
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-					"message.grave.not.exists", new Object[] { contract
-							.getGrave().getNrGrave() }, Locale.getDefault()));
-			modelAndView.addObject(CONTRACT, contract);
+			modelAndView.addObject(ERROR_MESSAGE, messageSource
+					.getMessage("message.grave.not.exists",
+							new Object[] { concessionContract.getGrave()
+									.getNrGrave() }, Locale.getDefault()));
+			modelAndView.addObject(CONTRACT, concessionContract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
 			modelAndView.addObject(GRAVES, graveService.getAll());
 			return modelAndView;
 		}
 		String username = request.getUserPrincipal().getName();
-		int errorCode = contractService.add(contract, username);
+		int errorCode = contractService.add(concessionContract, username);
 		if (errorCode != 0) {
 			ModelAndView modelAndView = new ModelAndView(ADD_CONTRACT_JSP);
-			modelAndView.addObject(CONTRACT, contract);
+			modelAndView.addObject(CONTRACT, concessionContract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
 			modelAndView.addObject(GRAVES, graveService.getAll());
 			if (errorCode == 1) { // existing contract
 				modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
 						"message.contract.already.exists",
-						new Object[] { contract.getReceiptNr() },
+						new Object[] { concessionContract.getReceiptNr() },
 						Locale.getDefault()));
 			} else if (errorCode == 2) {// grave is not free
 				modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
@@ -129,11 +124,8 @@ public class ConcessionContractController extends MainController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView(EDIT_CONTRACT_JSP);
-		ConcessionContract c = contractService.getById(id);
-		System.out.println(c.getGrave().getNrGrave() + " ID "
-				+ c.getGrave().getId());
-		modelAndView.addObject(CONTRACT, c);
-
+		ConcessionContract concessionContract = contractService.getById(id);
+		modelAndView.addObject(CONTRACT, concessionContract);
 		modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 		modelAndView.addObject(PLOTS, plotService.getAll());
 		modelAndView.addObject(GRAVES, graveService.getAll());
@@ -142,41 +134,40 @@ public class ConcessionContractController extends MainController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public ModelAndView doEdit(
-			@ModelAttribute @Validated ConcessionContract contract,
+			@ModelAttribute @Validated ConcessionContract concessionContract,
 			BindingResult bindingResult,
 			@RequestParam(value = "r", required = false) String updateDate,
 			HttpServletRequest request) {
 		if (bindingResult.hasErrors()) {
-			return edit(contract.getId());
+			return edit(concessionContract.getId());
 		}
-		if (!graveService.checkGraveExistence(contract.getGrave(), contract
-				.getGrave().getPlot().getId(), contract.getGrave().getPlot()
-				.getCemetery().getId())) {
+		if (!graveService.checkGraveExistence(concessionContract.getGrave(),
+				concessionContract.getGrave().getPlot().getId(),
+				concessionContract.getGrave().getPlot().getCemetery().getId())) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_CONTRACT_JSP);
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-					"message.grave.not.exists", new Object[] { contract
-							.getGrave().getNrGrave() }, Locale.getDefault()));
-			modelAndView.addObject(CONTRACT, contract);
+			modelAndView.addObject(ERROR_MESSAGE, messageSource
+					.getMessage("message.grave.not.exists",
+							new Object[] { concessionContract.getGrave()
+									.getNrGrave() }, Locale.getDefault()));
+			modelAndView.addObject(CONTRACT, concessionContract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
 			modelAndView.addObject(GRAVES, graveService.getAll());
 			return modelAndView;
 		}
-
 		String username = request.getUserPrincipal().getName();
-		Integer errorCode = contractService.update(contract, username,
-				updateDate);
-
+		Integer errorCode = contractService.update(concessionContract,
+				username, updateDate);
 		if (errorCode != 0) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_CONTRACT_JSP);
-			modelAndView.addObject(CONTRACT, contract);
+			modelAndView.addObject(CONTRACT, concessionContract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
 			modelAndView.addObject(GRAVES, graveService.getAll());
-			if (errorCode == 1) { // existing contract
+			if (errorCode == 1) { // existing concessionContract
 				modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
 						"message.contract.already.exists",
-						new Object[] { contract.getReceiptNr() },
+						new Object[] { concessionContract.getReceiptNr() },
 						Locale.getDefault()));
 			} else if (errorCode == 2) {// grave is not free
 				modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(

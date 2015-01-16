@@ -64,7 +64,7 @@ public class MainController {
 	public static final String DEAD_VALIDATOR = "deadValidator";
 	public static final String DEAD_WITHOUT_FAMILY = "deadWithoutFamily";
 	public static final String DEAD_WITHOUT_FAMILY_VALIDATOR = "deadWithoutFamilyValidator";
-	public static final String CONTRACT = "contract";
+	public static final String CONTRACT = "concessionContract";
 	public static final String CONTRACTS = "contracts";
 	public static final String HISTORY = "history";
 	public static final String OBJECTS = "objects";

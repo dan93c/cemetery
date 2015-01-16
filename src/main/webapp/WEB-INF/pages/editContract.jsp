@@ -8,14 +8,14 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Modifica decedat</title>
+<title>Modifica contract</title>
 </head>
 <body>
 	<div id="container">
 		<%@include file="menu.jsp"%>
 		<div id="center">
 			<h2>Date contract</h2>
-			<form:form name="editContract" modelAttribute="contract"
+			<form:form name="editContract" modelAttribute="concessionContract"
 				action="${CONTEXT_PATH}/contract/edit" method="POST">
 				<s:bind path="*">
 					<c:if test="${status.error}">
@@ -100,7 +100,7 @@
 								<c:forEach var="cemetery" items="${cemeteries}">
 									<c:choose>
 										<c:when
-											test="${contract.grave.plot.cemetery.id == cemetery.id}">
+											test="${concessionContract.grave.plot.cemetery.id == cemetery.id}">
 											<option value="${cemetery.id}" selected="selected">
 												<c:out value="${cemetery.name}" />
 											</option>
@@ -120,7 +120,7 @@
 						<td><form:select path="grave.plot.id">
 								<c:forEach var="plot" items="${plots}">
 									<c:choose>
-										<c:when test="${contract.grave.plot.id == plot.id}">
+										<c:when test="${concessionContract.grave.plot.id == plot.id}">
 											<option value="${plot.id}" selected="selected">
 												<c:out value="${plot.name}" />
 											</option>
@@ -140,7 +140,7 @@
 						<td><form:select path="grave.id">
 								<c:forEach var="grave" items="${graves}">
 									<c:choose>
-										<c:when test="${contract.grave.id == grave.id}">
+										<c:when test="${concessionContract.grave.id == grave.id}">
 											<option value="${grave.id}" selected="selected">
 												<c:out value="${grave.nrGrave}" />
 											</option>

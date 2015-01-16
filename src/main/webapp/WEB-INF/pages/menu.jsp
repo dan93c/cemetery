@@ -55,6 +55,6 @@
 	<p id="logged_user">&nbsp;${username}&nbsp;</p>
 	<a href="${CONTEXT_PATH}/j_spring_security_logout"> <img
 		id="logout_button"
-		src="<%=request.getContextPath()%>/resources/img/logout4.png"
+		src="${CONTEXT_PATH}/resources/img/logout4.png"
 		alt="logout" title="Log out"></a>
 </div>

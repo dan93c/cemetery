@@ -19,39 +19,48 @@ public class ConcessionContractValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAIIIIIIIIIIIIICIIIIIIIIIIIIIIIIIIIIInu in");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receipt_nr",
-				"error.concessionContract.receipt_nr.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "receiptNr",
+				"error.field.required", new Object[] { "Numar contract" });
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cnp",
-				"error.concessionContract.cnp.required");
-
+				"error.field.required", new Object[] { "CNP" });
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName",
+				"error.field.required", new Object[] { "Nume" });
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName",
+				"error.field.required", new Object[] { "Prenume" });
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address",
+				"error.field.required", new Object[] { "address" });
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "period",
+				"error.field.required", new Object[] { "Perioada" });
 		ConcessionContract concessionContract = (ConcessionContract) target;
 
-		if (isValidEmailAddress(concessionContract.getEmailAddress()) == false
-				&& concessionContract.getEmailAddress() != null) {
+		if ((concessionContract.getEmailAddress() != null && !concessionContract
+				.getEmailAddress().isEmpty())
+				&& isValidEmailAddress(concessionContract.getEmailAddress()) == false) {
+
 			errors.rejectValue("emailAddress",
-					"error.concessionContract.email.invalid", null,
+					"error.concessionContract.email.invalid",
+					new Object[] { "Adresa de email" },
 					"Adresa de email este invalida");
 		} else {
 			if (concessionContract.getReceiptNr().length() >= 45) {
-				errors.rejectValue("receipt_nr", "longText",
-						new Object[] { "Receipt_Nr" },
-						"Campul 'Receipt_Nr' este prea lung.");
+				errors.rejectValue("receiptNr", "longText",
+						new Object[] { "Numar contract" },
+						"Campul 'Numar contract' este prea lung.");
 			}
 			if (concessionContract.getReceiptNr() != null
 					&& !concessionContract.getReceiptNr().isEmpty()) {
 				if (Character.isWhitespace(concessionContract.getReceiptNr()
 						.charAt(0))) {
-					errors.rejectValue("receipt_nr", "whitespace",
-							new Object[] { "Receipt_Nr" },
-							"Campul 'Receipt_Nr' nu poate incepe cu spatiu.");
+					errors.rejectValue("receiptNr", "whitespace",
+							new Object[] { "Numar contract" },
+							"Campul 'Numar contract' nu poate incepe cu spatiu.");
 				}
 
 			} else {
-				errors.rejectValue("receipt_nr",
+				errors.rejectValue("receiptNr",
 						"error.concessionContract.receiptNr.null",
-						new Object[] { "Receipt_Nr" },
-						"Campul 'Receipt_Nr' nu poate ramane necompletat.");
+						new Object[] { "Numar contract" },
+						"Campul 'Numar contract' nu poate ramane necompletat.");
 			}
 			if (concessionContract.getAddress().length() >= 100) {
 				errors.rejectValue("address", "longText",
@@ -116,8 +125,6 @@ public class ConcessionContractValidator implements Validator {
 						"Campul 'Prenume' nu poate ramane necompletat.");
 			}
 
-			System.out.println(concessionContract.getCnp());
-
 			if (concessionContract.getCnp() != null
 					&& !concessionContract.getCnp().isEmpty()) {
 				if (Character.isWhitespace(concessionContract.getCnp()
@@ -161,17 +168,6 @@ public class ConcessionContractValidator implements Validator {
 							new Object[] { "Email" },
 							"Campul 'Email' nu poate incepe cu spatiu.");
 				}
-			} else {
-				errors.rejectValue("email",
-						"error.concessionContract.email.null",
-						new Object[] { "Email" },
-						"Campul 'Email' nu poate ramane necompletat.");
-			}
-			if (containsOnlyNumbers(concessionContract.getCnp()) == false) {
-				errors.rejectValue("cnp",
-						"message.contract.error.invalid.field.number",
-						new Object[] { "Cnp" },
-						"Campul 'Cnp' trebuie sa fie format doar din cifre!");
 			}
 		}
 

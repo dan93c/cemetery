@@ -15,7 +15,7 @@
 		<%@include file="menu.jsp"%>
 		<div id="center">
 			<h2>Date contract</h2>
-			<form:form name="addContract" modelAttribute="contract"
+			<form:form name="addContract" modelAttribute="concessionContract"
 				action="${CONTEXT_PATH}/contract/add" method="POST">
 				<s:bind path="*">
 					<c:if test="${status.error}">

@@ -44,58 +44,73 @@
 						<td><label>Numar</label></td>
 						<td><form:input type="text" path="receiptNr"
 								required="required" placeholder="Numar" maxLengh="45"></form:input></td>
-						<td><form:errors path="receiptNr" cssClass="error" id="redError"/></td>
+						<td><form:errors path="receiptNr" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>CNP</label></td>
 						<td><form:input type="text" path="cnp" required="required"
 								placeholder="CNP" maxLengh="45"></form:input></td>
-						<td><form:errors path="cnp" cssClass="error" id="redError"/></td>
+						<td><form:errors path="cnp" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Nume</label></td>
 						<td><form:input type="text" path="lastName"
 								required="required" placeholder="Nume" maxLengh="45"></form:input></td>
-						<td><form:errors path="lastName" cssClass="error" id="redError"/></td>
+						<td><form:errors path="lastName" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Prenume</label></td>
 						<td><form:input type="text" path="firstName"
 								required="required" placeholder="Prenume" maxLengh="45"></form:input></td>
-						<td><form:errors path="firstName" cssClass="error" id="redError"/></td>
+						<td><form:errors path="firstName" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Adresa</label></td>
 						<td><form:input type="text" path="address"
 								required="required" placeholder="Adresa" maxLengh="45"></form:input></td>
-						<td><form:errors path="address" cssClass="error" id="redError"/></td>
+						<td><form:errors path="address" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>E-mail</label></td>
 						<td><form:input type="email" path="emailAddress"
 								placeholder="E-mail" maxLengh="45"></form:input></td>
-						<td><form:errors path="emailAddress" cssClass="error" id="redError"/></td>
+						<td><form:errors path="emailAddress" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Perioada</label></td>
-						<td><form:input type="number" path="period"
+						<td><form:input type="number" path="period" min="1" 
 								required="required" placeholder="Perioada"></form:input></td>
-						<td><form:errors path="period" cssClass="error" id="redError"/></td>
+						<td><form:errors path="period" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
 						<td><form:select path="grave.plot.cemetery.id">
 								<c:forEach var="cemetery" items="${cemeteries}">
-									<option value="${cemetery.id}">
-										<c:out value="${cemetery.name}" />
-									</option>
+									<c:choose>
+										<c:when
+											test="${contract.grave.plot.cemetery.id == cemetery.id}">
+											<option value="${cemetery.id}" selected="selected">
+												<c:out value="${cemetery.name}" />
+											</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${cemetery.id}">
+												<c:out value="${cemetery.name}" />
+											</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</form:select></td>
 					</tr>
@@ -104,9 +119,18 @@
 						<td><label>Parcela</label></td>
 						<td><form:select path="grave.plot.id">
 								<c:forEach var="plot" items="${plots}">
-									<option value="${plot.id}">
-										<c:out value="${plot.name}" />
-									</option>
+									<c:choose>
+										<c:when test="${contract.grave.plot.id == plot.id}">
+											<option value="${plot.id}" selected="selected">
+												<c:out value="${plot.name}" />
+											</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${plot.id}">
+												<c:out value="${plot.name}" />
+											</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</form:select></td>
 					</tr>
@@ -115,11 +139,21 @@
 						<td><label>Mormantul</label></td>
 						<td><form:select path="grave.id">
 								<c:forEach var="grave" items="${graves}">
-									<option value="${grave.id}">
-										<c:out value="${grave.nrGrave}" />
-									</option>
+									<c:choose>
+										<c:when test="${contract.grave.id == grave.id}">
+											<option value="${grave.id}" selected="selected">
+												<c:out value="${grave.nrGrave}" />
+											</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${grave.id}">
+												<c:out value="${grave.nrGrave}" />
+											</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</form:select></td>
+							<td><form:errors path="grave" cssClass="error" id="redError"/></td>
 					</tr>
 					<tr></tr>
 					<tr>

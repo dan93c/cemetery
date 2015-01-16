@@ -32,27 +32,30 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	private UserDAO userDAO;
 	private static final String MODIFIED_OBJECT = "Contract de concesiune";
 
-
 	@Override
 	@Transactional
 	public int add(ConcessionContract concessionContract, String username) {
 		if (checkDuplicate(concessionContract)) {
-			Calendar c = Calendar.getInstance();
-			concessionContract.setReleaseDate(c.getTime());
-			Integer expiredYear = c.get(Calendar.YEAR)
-					+ concessionContract.getPeriod();
-			c.set(Calendar.YEAR, expiredYear);
-			concessionContract.setExpiredDate(c.getTime());
-			concessionContractDAO.add(concessionContract);
-			History history = new History();
-			history.setUser(userDAO.getByUsername(username));
-			history.setActionName("Adaugare");
-			history.setModificationDate(Calendar.getInstance().getTime());
-			history.setModifiedObject(MODIFIED_OBJECT);
-			history.setDetails(concessionContract.toString());
-			history.setModifiedObjectCode(concessionContract.getId().toString());
-			historyDAO.add(history);
-			return 0;
+			if (checkFreeGrave(concessionContract)) {
+				Calendar c = Calendar.getInstance();
+				concessionContract.setReleaseDate(c.getTime());
+				Integer expiredYear = c.get(Calendar.YEAR)
+						+ concessionContract.getPeriod();
+				c.set(Calendar.YEAR, expiredYear);
+				concessionContract.setExpiredDate(c.getTime());
+				concessionContractDAO.add(concessionContract);
+				History history = new History();
+				history.setUser(userDAO.getByUsername(username));
+				history.setActionName("Adaugare");
+				history.setModificationDate(Calendar.getInstance().getTime());
+				history.setModifiedObject(MODIFIED_OBJECT);
+				history.setDetails(concessionContract.toString());
+				history.setModifiedObjectCode(concessionContract.getId()
+						.toString());
+				historyDAO.add(history);
+				return 0;
+			}
+			return 2;
 		}
 		return 1;
 	}
@@ -62,28 +65,31 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	public int update(ConcessionContract concessionContract, String username,
 			String updateDate) {
 		if (checkDuplicate(concessionContract)) {
-			if (updateDate != null) {
-				Date expiredDate = getExpiredDate(
-						concessionContract.getExpiredDate(),
-						concessionContract.getPeriod());
-				concessionContract.setExpiredDate(expiredDate);
-				concessionContract.setUpdatedDate(new Date());
-				System.out.println("-----------dsfs-----------------");
+			if (checkFreeGrave(concessionContract)) {
+				if (updateDate != null) {
+					Date expiredDate = getExpiredDate(
+							concessionContract.getExpiredDate(),
+							concessionContract.getPeriod());
+					concessionContract.setExpiredDate(expiredDate);
+					concessionContract.setUpdatedDate(new Date());
+				}
+				History history = new History();
+				history.setActionName("Modificare");
+				history.setModificationDate(Calendar.getInstance().getTime());
+				history.setModifiedObject(MODIFIED_OBJECT);
+				history.setModifiedObjectCode(concessionContract.getId()
+						.toString());
+				String details = setDetailsForHistory(concessionContract);
+				if (!details.isEmpty()) {
+					history.setUser(userDAO.getByUsername(username));
+					details = "Numarul: " + details;
+					history.setDetails(details);
+					concessionContractDAO.update(concessionContract);
+					historyDAO.add(history);
+				}
+				return 0;
 			}
-			History history = new History();
-			history.setUser(userDAO.getByUsername(username));
-			history.setActionName("Modificare");
-			history.setModificationDate(Calendar.getInstance().getTime());
-			history.setModifiedObject(MODIFIED_OBJECT);
-			history.setModifiedObjectCode(concessionContract.getId().toString());
-			String details = setDetailsForHistory(concessionContract);
-			if (!details.isEmpty()) {
-				details = "Numarul: " + details;
-				history.setDetails(details);
-				concessionContractDAO.update(concessionContract);
-				historyDAO.add(history);
-			}
-			return 0;
+			return 2;
 		}
 		return 1;
 	}
@@ -150,18 +156,24 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 			} else {
 				details = details + "Reinnoire contract \r\n";
 			}
-		}
-
-		if (oldConcessionContract.getUpdatedDate() != null) {
-			if (oldConcessionContract.getUpdatedDate().compareTo(
-					concessionContract.getUpdatedDate()) != 0) {
-				details = details + "Data reinnoirii veche:"
-						+ oldConcessionContract.getUpdatedDate().toString()
-						+ ", Data reinnoirii noua:"
-						+ concessionContract.getUpdatedDate().toString()
+			if (!oldConcessionContract.getPeriod().equals(
+					concessionContract.getPeriod())) {
+				details = details + "Perioada veche:"
+						+ oldConcessionContract.getPeriod()
+						+ ", Perioada noua:" + concessionContract.getPeriod()
 						+ "\r\n";
 			}
 		}
+
+		/*
+		 * if (oldConcessionContract.getUpdatedDate() != null) { if
+		 * (oldConcessionContract.getUpdatedDate().compareTo(
+		 * concessionContract.getUpdatedDate()) != 0) { details = details +
+		 * "Data reinnoirii veche:" +
+		 * oldConcessionContract.getUpdatedDate().toString() +
+		 * ", Data reinnoirii noua:" +
+		 * concessionContract.getUpdatedDate().toString() + "\r\n"; } }
+		 */
 
 		if (!oldConcessionContract.getGrave().getId()
 				.equals(concessionContract.getGrave().getId())) {
@@ -207,9 +219,22 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	@Transactional(readOnly = true)
 	public boolean checkDuplicate(ConcessionContract concessionContract) {
 		ConcessionContract existingConcessionContract = concessionContractDAO
+				.getByNrContractAndCNP(concessionContract.getReceiptNr(),
+						concessionContract.getCnp());
+		if (existingConcessionContract != null
+				&& (existingConcessionContract.getId() != concessionContract
+						.getId())) {
+			return false;
+		}
+		return true;
+	}
+
+	@Transactional(readOnly = true)
+	private boolean checkFreeGrave(ConcessionContract concessionContract) {
+		ConcessionContract existingConcessionContract = concessionContractDAO
 				.getByExpirationDateGrave(concessionContract.getGrave().getId());
-		System.out.println("Contract pentru"+concessionContract.getGrave().getId());
-		System.out.println("EXISTING : "+ existingConcessionContract.getId() +"  DADA" +concessionContract.getId());
+		System.out.println("ID EXISTENT: " + existingConcessionContract.getId()
+				+ "ID PRIMIT:" + concessionContract.getId());
 		if (existingConcessionContract != null
 				&& (existingConcessionContract.getId() != concessionContract
 						.getId())) {

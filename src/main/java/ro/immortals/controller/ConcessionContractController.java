@@ -104,18 +104,25 @@ public class ConcessionContractController extends MainController {
 		}
 		String username = request.getUserPrincipal().getName();
 		int errorCode = contractService.add(contract, username);
-		if (errorCode == 1) {
+		if (errorCode != 0) {
 			ModelAndView modelAndView = new ModelAndView(ADD_CONTRACT_JSP);
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-					"message.contract.already.exists",
-					new Object[] { contract.getReceiptNr() },
-					Locale.getDefault()));
 			modelAndView.addObject(CONTRACT, contract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
 			modelAndView.addObject(GRAVES, graveService.getAll());
+			if (errorCode == 1) { // existing contract
+				modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+						"message.contract.already.exists",
+						new Object[] { contract.getReceiptNr() },
+						Locale.getDefault()));
+			} else if (errorCode == 2) {// grave is not free
+				modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+						"message.contract.not.available", null,
+						Locale.getDefault()));
+			}
 			return modelAndView;
 		}
+
 		return contractRegister(1, null, null, request);
 	}
 
@@ -123,9 +130,10 @@ public class ConcessionContractController extends MainController {
 	public ModelAndView edit(@PathVariable Integer id) {
 		ModelAndView modelAndView = new ModelAndView(EDIT_CONTRACT_JSP);
 		ConcessionContract c = contractService.getById(id);
-		System.out.println(c.getGrave().getNrGrave()+ " ID "+ c.getGrave().getId());
+		System.out.println(c.getGrave().getNrGrave() + " ID "
+				+ c.getGrave().getId());
 		modelAndView.addObject(CONTRACT, c);
-		
+
 		modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 		modelAndView.addObject(PLOTS, plotService.getAll());
 		modelAndView.addObject(GRAVES, graveService.getAll());
@@ -159,16 +167,22 @@ public class ConcessionContractController extends MainController {
 		Integer errorCode = contractService.update(contract, username,
 				updateDate);
 
-		if (errorCode == 1) {
+		if (errorCode != 0) {
 			ModelAndView modelAndView = new ModelAndView(EDIT_CONTRACT_JSP);
-			modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
-					"message.contract.already.exists",
-					new Object[] { contract.getReceiptNr() },
-					Locale.getDefault()));
 			modelAndView.addObject(CONTRACT, contract);
 			modelAndView.addObject(CEMETERIES, cemeteryService.getAll());
 			modelAndView.addObject(PLOTS, plotService.getAll());
 			modelAndView.addObject(GRAVES, graveService.getAll());
+			if (errorCode == 1) { // existing contract
+				modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+						"message.contract.already.exists",
+						new Object[] { contract.getReceiptNr() },
+						Locale.getDefault()));
+			} else if (errorCode == 2) {// grave is not free
+				modelAndView.addObject(ERROR_MESSAGE, messageSource.getMessage(
+						"message.contract.not.available", null,
+						Locale.getDefault()));
+			}
 			return modelAndView;
 		}
 		return contractRegister(1, null, null, request);

@@ -81,7 +81,7 @@
 					<tr></tr>
 					<tr>
 						<td><label>Perioada</label></td>
-						<td><form:input type="number" path="period"
+						<td><form:input type="number" path="period" min="1" value="20"
 								required="required" placeholder="Perioada"></form:input></td>
 						<td><form:errors path="period" cssClass="error" id="redError"/></td>
 					</tr>

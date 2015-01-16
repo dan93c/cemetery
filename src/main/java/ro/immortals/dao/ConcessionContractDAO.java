@@ -16,6 +16,8 @@ public interface ConcessionContractDAO {
 	public List<ConcessionContract> getAll();
 
 	public ConcessionContract getById(Integer id);
+	
+	public ConcessionContract getByNrContractAndCNP(String nrContract,String cnp);
 
 	public ConcessionContract getByExpirationDateGrave(Integer graveId);
 

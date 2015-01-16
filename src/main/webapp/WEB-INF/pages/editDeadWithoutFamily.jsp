@@ -15,7 +15,8 @@
 		<%@include file="menu.jsp"%>
 		<div id="center">
 			<h2>Date despre decedat</h2>
-			<form:form name="editDeadWithoutFamily" modelAttribute="deadWithoutFamily"
+			<form:form name="editDeadWithoutFamily"
+				modelAttribute="deadWithoutFamily"
 				action="${CONTEXT_PATH}/dead2/edit" method="POST">
 				<s:bind path="*">
 					<c:if test="${status.error}">
@@ -42,47 +43,78 @@
 						<td><form:input type="text" path="funeralCertificate"
 								required="required" placeholder="Adeverinta inhumare"
 								maxLengh="45"></form:input></td>
-						<td><form:errors path="funeralCertificate" cssClass="error" id="redError"/></td>
+						<td><form:errors path="funeralCertificate" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Solicitare IML</label></td>
 						<td><form:input type="text" path="imlRequest"
 								required="required" placeholder="Solicitare IML" maxLengh="45"></form:input></td>
-						<td><form:errors path="imlRequest" cssClass="error" id="redError"/></td>
+						<td><form:errors path="imlRequest" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Cimitirul</label></td>
-						<td><select name="cemeterySelect">
+						<td><form:select path="grave.plot.cemetery.id">
 								<c:forEach var="cemetery" items="${cemeteries}">
-									<option value="${cemetery.id}">
-										<c:out value="${cemetery.name}" />
-									</option>
+									<c:choose>
+										<c:when
+											test="${deadWithoutFamily.grave.plot.cemetery.id == cemetery.id}">
+											<option value="${cemetery.id}" selected="selected">
+												<c:out value="${cemetery.name}" />
+											</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${cemetery.id}">
+												<c:out value="${cemetery.name}" />
+											</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
-						</select></td>
+							</form:select></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Parcela</label></td>
-						<td><select name="plotSelect">
+						<td><form:select path="grave.plot.id">
 								<c:forEach var="plot" items="${plots}">
-									<option value="${plot.id}">
-										<c:out value="${plot.name}" />
-									</option>
+									<c:choose>
+										<c:when test="${deadWithoutFamily.grave.plot.id == plot.id}">
+											<option value="${plot.id}" selected="selected">
+												<c:out value="${plot.name}" />
+											</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${plot.id}">
+												<c:out value="${plot.name}" />
+											</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
-						</select></td>
+							</form:select></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Mormantul</label></td>
 						<td><form:select path="grave.id">
 								<c:forEach var="grave" items="${graves}">
-									<option value="${grave.id}">
-										<c:out value="${grave.nrGrave}" />
-									</option>
+									<c:choose>
+										<c:when test="${deadWithoutFamily.grave.id == grave.id}">
+											<option value="${grave.id}" selected="selected">
+												<c:out value="${grave.nrGrave}" />
+											</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${grave.id}">
+												<c:out value="${grave.nrGrave}" />
+											</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</form:select></td>
+						<td><form:errors path="grave" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>

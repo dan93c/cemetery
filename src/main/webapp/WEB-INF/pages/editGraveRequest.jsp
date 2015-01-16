@@ -42,21 +42,33 @@
 						<td><label>Numar infocet</label></td>
 						<td><form:input type="text" path="nrInfocet"
 								required="required" placeholder="Numar infocet" maxLengh="45"></form:input></td>
-						<td><form:errors path="nrInfocet" cssClass="error" id="redError"/></td>
+						<td><form:errors path="nrInfocet" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Stadiu de solutionare</label></td>
 						<td><form:select path="solvingStage">
-								<option value="Cerere inregistrata">Cerere inregistrata
-								</option>
+								<c:choose>
+									<c:when
+										test="${graveRequest.solvingStage == 'Cerere inregistrata'}">
+										<option value="Cerere inregistrata" selected="selected">Cerere
+											inregistrata</option>
+									</c:when>
+									<c:otherwise>
+										<option value="Cerere inregistrata">Cerere
+											inregistrata</option>
+									</c:otherwise>
+								</c:choose>
+
 								<option value="Cerere in curs de solutionare">Cerere in
 									curs de solutionare</option>
 								<option value="Cerere solutionata">Cerere solutionata</option>
 								<option value="Cerere nesolutionata">Cerere
 									nesolutionata</option>
 							</form:select></td>
-						<td><form:errors path="solvingStage" cssClass="error" id="redError"/></td>
+						<td><form:errors path="solvingStage" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="left"><input type="submit"

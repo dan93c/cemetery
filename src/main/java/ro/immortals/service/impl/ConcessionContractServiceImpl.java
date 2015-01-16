@@ -5,12 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 
 import ro.immortals.dao.ConcessionContractDAO;
 import ro.immortals.dao.HistoryDAO;
@@ -18,8 +14,6 @@ import ro.immortals.dao.UserDAO;
 import ro.immortals.model.ConcessionContract;
 import ro.immortals.model.History;
 import ro.immortals.service.ConcessionContractService;
-import ro.immortals.validator.ConcessionContractValidator;
-import ro.immortals.controller.MainController;
 
 @Service
 public class ConcessionContractServiceImpl implements ConcessionContractService {
@@ -233,8 +227,6 @@ public class ConcessionContractServiceImpl implements ConcessionContractService 
 	private boolean checkFreeGrave(ConcessionContract concessionContract) {
 		ConcessionContract existingConcessionContract = concessionContractDAO
 				.getByExpirationDateGrave(concessionContract.getGrave().getId());
-		System.out.println("ID EXISTENT: " + existingConcessionContract.getId()
-				+ "ID PRIMIT:" + concessionContract.getId());
 		if (existingConcessionContract != null
 				&& (existingConcessionContract.getId() != concessionContract
 						.getId())) {

@@ -20,8 +20,6 @@ public class GraveValidator implements Validator {
 				"error.grave.surface.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nrGrave",
 				"error.grave.nrGrave.required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "type",
-				"error.grave.type.required");
 
 		Grave grave = (Grave) target;
 
@@ -58,14 +56,6 @@ public class GraveValidator implements Validator {
 			errors.rejectValue("type", "longText",
 					new Object[] { "Tip.Mormant" },
 					"Campul 'Tip.Mormant' este prea lung.");
-		}
-
-		if (grave.getType() != null && !grave.getType().isEmpty()) {
-			if (Character.isWhitespace(grave.getType().charAt(0))) {
-				errors.rejectValue("type", "whitespace",
-						new Object[] { "Tip.Mormant" },
-						"Campul 'Tip.Mormant' nu poate incepe cu spatiu.");
-			}
 		}
 
 		if (grave.getSurface().length() >= 45) {

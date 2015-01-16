@@ -8,7 +8,7 @@
 <head>
 <jsp:include page="sources.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Adauga mormant</title>
+<title>Modifica mormant</title>
 </head>
 <body>
 	<div id="container">
@@ -20,9 +20,9 @@
 				<s:bind path="*">
 					<c:if test="${status.error}">
 						<div class="alert alert-danger" role="alert">
-							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-							<span class="sr-only">Error:</span>
-								Error.Invalid data.
+							<span class="glyphicon glyphicon-exclamation-sign"
+								aria-hidden="true"></span> <span class="sr-only">Error:</span>
+							Error.Invalid data.
 						</div>
 					</c:if>
 					<c:if test="${not empty errorMessage}">
@@ -41,35 +41,46 @@
 						<td><label>Numarul</label></td>
 						<td><form:input type="text" path="nrGrave"
 								required="required" placeholder="Numar mormant" maxLengh="45"></form:input></td>
-						<td><form:errors path="nrGrave" cssClass="error" id="redError"/></td>
+						<td><form:errors path="nrGrave" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Tipul</label></td>
-						<td><form:input type="text" path="type" placeholder="Tipul"
-								maxLengh="45"></form:input></td>
-						<td><form:errors path="type" cssClass="error" id="redError"/></td>
+						<td><c:choose>
+								<c:when test="${not empty grave.type}">
+									<input type="checkbox" name="type" value="Monument"
+										checked="checked">Monument
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" name="type" value="Monument">Monument
+								</c:otherwise>
+							</c:choose> <input type="hidden" name="type" value=""></td>
+						<td><form:errors path="type" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Suprafata</label></td>
 						<td><form:input type="text" path="surface"
 								required="required" placeholder="Suprafata"></form:input></td>
-						<td><form:errors path="surface" cssClass="error" id="redError"/></td>
+						<td><form:errors path="surface" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Poza scanata</label></td>
 						<td><form:input type="text" path="photoScanned"
 								maxLengh="200"></form:input></td>
-						<td><form:errors path="photoScanned" cssClass="error" id="redError"/></td>
+						<td><form:errors path="photoScanned" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
 						<td><label>Observatii</label></td>
 						<td><form:input type="text" path="observations"
 								placeholder="Observatii" maxLengh="100"></form:input></td>
-						<td><form:errors path="observations" cssClass="error" id="redError"/></td>
+						<td><form:errors path="observations" cssClass="error"
+								id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -85,7 +96,7 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-						</form:select></td>
+							</form:select></td>
 					</tr>
 					<tr></tr>
 					<tr>
@@ -102,7 +113,7 @@
 									</c:choose>
 								</c:forEach>
 							</form:select></td>
-						<td><form:errors path="plot" cssClass="error" id="redError"/></td>
+						<td><form:errors path="plot" cssClass="error" id="redError" /></td>
 					</tr>
 					<tr></tr>
 					<tr>

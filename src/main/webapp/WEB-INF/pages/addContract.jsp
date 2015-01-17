@@ -113,7 +113,7 @@
 						<td><form:select path="grave.id">
 								<c:forEach var="grave" items="${graves}">
 									<option value="${grave.id}">
-										<c:out value="${grave.nrGrave}" />
+										<c:out value="${grave.nrGrave}- ${grave.plot.name }" />
 									</option>
 								</c:forEach>
 							</form:select></td>

@@ -211,4 +211,10 @@ public class GraveServiceImpl implements GraveService {
 	public Integer getAllMonumentsSearchBySize(String search) {
 		return graveDAO.getAllMonumentsSearchBySize(search);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Grave> getAllByPlotId(Integer id) {
+		return graveDAO.getAllByPlotId(id);
+	}
 }

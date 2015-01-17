@@ -147,7 +147,7 @@
 										</c:when>
 										<c:otherwise>
 											<option value="${grave.id}">
-												<c:out value="${grave.nrGrave}" />
+												<c:out value="${grave.nrGrave}- ${grave.plot.name }" />
 											</option>
 										</c:otherwise>
 									</c:choose>

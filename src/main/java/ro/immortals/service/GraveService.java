@@ -20,6 +20,8 @@ public interface GraveService {
 
 	boolean checkGraveExistence(Grave grave, Integer plotId, Integer cemeteryId);
 
+	public List<Grave> getAllByPlotId(Integer id);
+
 	public List<Grave> getAllByPage(Integer offset, Integer nrOfRecords);
 
 	public List<Grave> getAllByPageWithContractsAndDeads(Integer offset,

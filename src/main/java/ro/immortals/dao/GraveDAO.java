@@ -15,6 +15,8 @@ public interface GraveDAO {
 	public List<Grave> getAll();
 
 	public Grave getById(Integer id);
+	
+	public List<Grave> getAllByPlotId(Integer id);
 
 	public Grave getByNumberAndPlot (String number ,Integer plotId);
 

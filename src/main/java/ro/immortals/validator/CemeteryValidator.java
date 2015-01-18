@@ -17,7 +17,7 @@ public class CemeteryValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",
 				"error.cemetery.name.required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "adress",
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address",
 				"error.cemetery.adress.required");
 		
 		Cemetery cemetery = (Cemetery) target;

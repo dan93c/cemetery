@@ -110,8 +110,8 @@
 						<td>${contract.emailAddress}</td>
 						<td>${contract.grave.nrGrave}</td>
 						<td>${contract.grave.plot.name}</td>
-						<td>${contract.grave.plot.cemetery.name}<a
-							href="${CONTEXT_PATH}/contract/edit/${contract.id}"><button
+						<td>${contract.grave.plot.cemetery.name}</td>
+						<td><a href="${CONTEXT_PATH}/contract/edit/${contract.id}"><button
 									class="btn-table">Modifica</button></a></td>
 					</tr>
 				</c:forEach>

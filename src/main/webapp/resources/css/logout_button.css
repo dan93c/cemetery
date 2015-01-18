@@ -8,7 +8,7 @@
 #logout_header img {
 	display: table-cell;
 	vertical-align: middle;
-	width: 30px;
+	width: 70px;
 	height: 30px;
 	margin-right: 5px;
 	margin-top:5px;
@@ -17,7 +17,7 @@
 
 #logout_header img:hover {
 	height: 35px;
-	width: 35px;
+	width: 75px;
 	margin-right: 3px;
 	margin-top: 3px;
 }

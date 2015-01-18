@@ -17,7 +17,9 @@ public class PlotValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",
 				"error.plot.name.required");
-
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name",
+				"error.field.required", new Object[] { "Denumire" },
+				"Denumirea este necesara");
 		Plot plot = (Plot) target;
 
 		if (plot.getName().length() >= 45) {
